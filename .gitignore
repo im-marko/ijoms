@@ -10,6 +10,7 @@ venv/
 env/
 *.sqlite3
 db.sqlite3
+!backend/db.sqlite3
 
 # Django
 backend/media/

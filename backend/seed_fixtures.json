@@ -1,0 +1,4231 @@
+[
+{
+  "model": "accounts.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$qrzwPt5xIDpGN4VkX85eDB$kiABMNkyJImc7hWh557j8dgdOlYuN7LY4OgKxLhdYB4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "mark101",
+    "first_name": "Mark",
+    "last_name": "Magweregwede",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-13T22:23:10.498Z",
+    "email": "iammark263@gmail.com",
+    "role": "managing_director",
+    "phone": "0784705316",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$y48bs8zCSAu84QOtOu9DwO$FR0zr72b0OVUkGsjK3VzhA9uPFgRuiEoIbpWPI3jvtk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "director",
+    "first_name": "James",
+    "last_name": "Mwangi",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-14T06:18:16.619Z",
+    "email": "director@ijoms.com",
+    "role": "managing_director",
+    "phone": "+254700100100",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$G9doBynstaoGbDlePOZoVR$yEciq/DFS1wXMWsOnMnhkYUtdsvgHSEXQZVCJ3yo4Jc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "opsmanager",
+    "first_name": "Sarah",
+    "last_name": "Ochieng",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-14T06:18:17.337Z",
+    "email": "opsmanager@ijoms.com",
+    "role": "operations_manager",
+    "phone": "+254700200200",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$kjBmbOuZLtxtdF6Syc3Qcp$Vb08aoDxLd3+OhqXinns/+5rzTVmgI4VjroXP5FbC2I=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "supervisor1",
+    "first_name": "Peter",
+    "last_name": "Kamau",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-14T06:18:17.972Z",
+    "email": "supervisor1@ijoms.com",
+    "role": "supervisor",
+    "phone": "+254700300300",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$3erQoYSkm71IQvg21Nm5Nv$8nbbWK66iwl8hD6B2KiMcJZ11DPD5AoAYZzjow+uggA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "supervisor2",
+    "first_name": "Grace",
+    "last_name": "Wanjiku",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-14T06:18:18.692Z",
+    "email": "supervisor2@ijoms.com",
+    "role": "supervisor",
+    "phone": "+254700300301",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$axJq7ly8NPDm7yaQqQJ3jO$A6j/Eu4l1HhDMUAE/basOpfguTqPuO2dOIDAGQCF7KU=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "tech1",
+    "first_name": "David",
+    "last_name": "Njoroge",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-14T06:18:19.446Z",
+    "email": "tech1@ijoms.com",
+    "role": "technician",
+    "phone": "+254700400400",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$R82lrXJn1AXCRbZ405cDsG$rW1D+BWrGKPZzWmQg4PhJPMd4QP8AyhrkBUTnCwO7ZA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "tech2",
+    "first_name": "Mary",
+    "last_name": "Akinyi",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-14T06:18:20.140Z",
+    "email": "tech2@ijoms.com",
+    "role": "technician",
+    "phone": "+254700400401",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$g4nTNYQNIoKUxBepFEFoJb$sozTajt23x6eTI4ILAtY0azKIlB8/iz0QtoKoyUzWxE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "tech3",
+    "first_name": "John",
+    "last_name": "Otieno",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-14T06:18:20.944Z",
+    "email": "tech3@ijoms.com",
+    "role": "technician",
+    "phone": "+254700400402",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 9,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$FtEaPOJ8bDpND9S7j3YunY$kV3IGHADQe95erS1PHUxN3ofmjZfbj48qgekxajOZJI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "tech4",
+    "first_name": "Ann",
+    "last_name": "Muthoni",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-14T06:18:22.163Z",
+    "email": "tech4@ijoms.com",
+    "role": "technician",
+    "phone": "+254700400403",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 10,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$OnvtpmZAc1xZ3Lqpknw6F5$DuiFhIW0jKwLVylaG05jcgqrsnZ2KD0i68br5J7GPCw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "tech5",
+    "first_name": "Brian",
+    "last_name": "Kiprop",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-14T06:18:24.128Z",
+    "email": "tech5@ijoms.com",
+    "role": "technician",
+    "phone": "+254700400404",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 11,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$2uEUYunrvU8qBevaK2zT5M$wpEBGhfcpC8G80TCvy9H5OTo5C4UYBXVafiMuBXlP7E=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "finance",
+    "first_name": "Lucy",
+    "last_name": "Chebet",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-14T06:18:26.045Z",
+    "email": "finance@ijoms.com",
+    "role": "finance_officer",
+    "phone": "+254700500500",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "jobs.jobcategory",
+  "pk": 1,
+  "fields": {
+    "name": "Network Installation",
+    "sla_hours": 48,
+    "description": "New network infrastructure setup and cabling",
+    "is_active": true,
+    "created_at": "2026-04-14T06:18:28.297Z"
+  }
+},
+{
+  "model": "jobs.jobcategory",
+  "pk": 2,
+  "fields": {
+    "name": "Hardware Repair",
+    "sla_hours": 24,
+    "description": "Repair of physical hardware components",
+    "is_active": true,
+    "created_at": "2026-04-14T06:18:28.308Z"
+  }
+},
+{
+  "model": "jobs.jobcategory",
+  "pk": 3,
+  "fields": {
+    "name": "Software Installation",
+    "sla_hours": 12,
+    "description": "Installation and configuration of software systems",
+    "is_active": true,
+    "created_at": "2026-04-14T06:18:28.317Z"
+  }
+},
+{
+  "model": "jobs.jobcategory",
+  "pk": 4,
+  "fields": {
+    "name": "Preventive Maintenance",
+    "sla_hours": 72,
+    "description": "Scheduled maintenance of equipment and systems",
+    "is_active": true,
+    "created_at": "2026-04-14T06:18:28.327Z"
+  }
+},
+{
+  "model": "jobs.jobcategory",
+  "pk": 5,
+  "fields": {
+    "name": "Emergency Repair",
+    "sla_hours": 4,
+    "description": "Critical system failures requiring immediate attention",
+    "is_active": true,
+    "created_at": "2026-04-14T06:18:28.337Z"
+  }
+},
+{
+  "model": "jobs.jobcategory",
+  "pk": 6,
+  "fields": {
+    "name": "Security System",
+    "sla_hours": 24,
+    "description": "CCTV, access control, and alarm system work",
+    "is_active": true,
+    "created_at": "2026-04-14T06:18:28.345Z"
+  }
+},
+{
+  "model": "jobs.jobcategory",
+  "pk": 7,
+  "fields": {
+    "name": "Server Maintenance",
+    "sla_hours": 8,
+    "description": "Server hardware and OS maintenance tasks",
+    "is_active": true,
+    "created_at": "2026-04-14T06:18:28.354Z"
+  }
+},
+{
+  "model": "jobs.jobcategory",
+  "pk": 8,
+  "fields": {
+    "name": "Electrical Work",
+    "sla_hours": 36,
+    "description": "Electrical installations and fault resolution",
+    "is_active": true,
+    "created_at": "2026-04-14T06:18:28.364Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 1,
+  "fields": {
+    "reference_number": "JOB-A1721FC8",
+    "title": "Monitor replacement - cracked screen - Uhuru Gardens",
+    "description": "Job requested by Uhuru Gardens. Repair of physical hardware components. Contact: +254799999999. Priority: medium.",
+    "category": 2,
+    "priority": "medium",
+    "status": "in_progress",
+    "assigned_to": 9,
+    "created_by": 5,
+    "customer_name": "Uhuru Gardens",
+    "customer_contact": "+254799999999",
+    "customer_email": "maintenance@uhurugardens.go.ke",
+    "sla_deadline": "2026-02-02T03:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-02-01T03:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:28.382Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 2,
+  "fields": {
+    "reference_number": "JOB-4533929E",
+    "title": "RAID array rebuild - Equity Bank HQ",
+    "description": "Job requested by Equity Bank HQ. Server hardware and OS maintenance tasks. Contact: +254755555555. Priority: medium.",
+    "category": 7,
+    "priority": "medium",
+    "status": "closed",
+    "assigned_to": 7,
+    "created_by": 5,
+    "customer_name": "Equity Bank HQ",
+    "customer_contact": "+254755555555",
+    "customer_email": "it@equitybank.co.ke",
+    "sla_deadline": "2026-03-31T18:18:28.372Z",
+    "resolution_notes": "Completed installation. Customer signed off.",
+    "created_at": "2026-03-31T10:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:28.430Z",
+    "closed_at": "2026-04-01T02:18:28.372Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 3,
+  "fields": {
+    "reference_number": "JOB-F1FEFC3A",
+    "title": "Access control card reader install - Strathmore University",
+    "description": "Job requested by Strathmore University. CCTV, access control, and alarm system work. Contact: +254720202020. Priority: medium.",
+    "category": 6,
+    "priority": "medium",
+    "status": "escalated",
+    "assigned_to": 8,
+    "created_by": 5,
+    "customer_name": "Strathmore University",
+    "customer_contact": "+254720202020",
+    "customer_email": "support@strathmore.edu",
+    "sla_deadline": "2026-03-31T14:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-30T14:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:28.483Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 4,
+  "fields": {
+    "reference_number": "JOB-F2A3DBB1",
+    "title": "Desktop PC motherboard replacement - Strathmore University",
+    "description": "Job requested by Strathmore University. Repair of physical hardware components. Contact: +254720202020. Priority: medium.",
+    "category": 2,
+    "priority": "medium",
+    "status": "closed",
+    "assigned_to": 9,
+    "created_by": 3,
+    "customer_name": "Strathmore University",
+    "customer_contact": "+254720202020",
+    "customer_email": "support@strathmore.edu",
+    "sla_deadline": "2026-04-01T08:18:28.372Z",
+    "resolution_notes": "Root cause identified and addressed. Monitoring for recurrence.",
+    "created_at": "2026-03-31T08:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:28.521Z",
+    "closed_at": "2026-04-01T03:18:28.372Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 5,
+  "fields": {
+    "reference_number": "JOB-96D7827C",
+    "title": "Access control card reader install - Safari Hotels Group",
+    "description": "Job requested by Safari Hotels Group. CCTV, access control, and alarm system work. Contact: +254744444444. Priority: high.",
+    "category": 6,
+    "priority": "high",
+    "status": "closed",
+    "assigned_to": 6,
+    "created_by": 4,
+    "customer_name": "Safari Hotels Group",
+    "customer_contact": "+254744444444",
+    "customer_email": "maintenance@safarihotels.com",
+    "sla_deadline": "2026-02-20T10:18:28.372Z",
+    "resolution_notes": "Replaced faulty component. Tested and verified working.",
+    "created_at": "2026-02-19T10:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:28.572Z",
+    "closed_at": "2026-02-20T02:18:28.372Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 6,
+  "fields": {
+    "reference_number": "JOB-BA397B19",
+    "title": "ERP system installation - Garden City Mall",
+    "description": "Job requested by Garden City Mall. Installation and configuration of software systems. Contact: +254760606060. Priority: high.",
+    "category": 3,
+    "priority": "high",
+    "status": "assigned",
+    "assigned_to": 8,
+    "created_by": 5,
+    "customer_name": "Garden City Mall",
+    "customer_contact": "+254760606060",
+    "customer_email": "ops@gardencity.co.ke",
+    "sla_deadline": "2026-03-04T23:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-04T11:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:28.624Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 7,
+  "fields": {
+    "reference_number": "JOB-8E37F311",
+    "title": "Domain controller patching - Nairobi Business Park",
+    "description": "Job requested by Nairobi Business Park. Server hardware and OS maintenance tasks. Contact: +254711111111. Priority: high.",
+    "category": 7,
+    "priority": "high",
+    "status": "in_progress",
+    "assigned_to": 8,
+    "created_by": 5,
+    "customer_name": "Nairobi Business Park",
+    "customer_contact": "+254711111111",
+    "customer_email": "admin@nbp.co.ke",
+    "sla_deadline": "2026-03-27T09:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-27T01:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:28.651Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 8,
+  "fields": {
+    "reference_number": "JOB-2FC1BAA7",
+    "title": "Alarm system upgrade - Nairobi Business Park",
+    "description": "Job requested by Nairobi Business Park. CCTV, access control, and alarm system work. Contact: +254711111111. Priority: high.",
+    "category": 6,
+    "priority": "high",
+    "status": "escalated",
+    "assigned_to": 9,
+    "created_by": 4,
+    "customer_name": "Nairobi Business Park",
+    "customer_contact": "+254711111111",
+    "customer_email": "admin@nbp.co.ke",
+    "sla_deadline": "2026-02-21T19:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-02-20T19:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:28.694Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 9,
+  "fields": {
+    "reference_number": "JOB-4412F391",
+    "title": "Power outage affecting data center - Strathmore University",
+    "description": "Job requested by Strathmore University. Critical system failures requiring immediate attention. Contact: +254720202020. Priority: high.",
+    "category": 5,
+    "priority": "high",
+    "status": "assigned",
+    "assigned_to": 6,
+    "created_by": 5,
+    "customer_name": "Strathmore University",
+    "customer_contact": "+254720202020",
+    "customer_email": "support@strathmore.edu",
+    "sla_deadline": "2026-04-09T07:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-04-09T03:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:28.744Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 10,
+  "fields": {
+    "reference_number": "JOB-336F1226",
+    "title": "Alarm system upgrade - Westlands Mall",
+    "description": "Job requested by Westlands Mall. CCTV, access control, and alarm system work. Contact: +254722222222. Priority: high.",
+    "category": 6,
+    "priority": "high",
+    "status": "assigned",
+    "assigned_to": 9,
+    "created_by": 4,
+    "customer_name": "Westlands Mall",
+    "customer_contact": "+254722222222",
+    "customer_email": "ops@westlandsmall.com",
+    "sla_deadline": "2026-04-01T16:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-31T16:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:28.778Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 11,
+  "fields": {
+    "reference_number": "JOB-6649D094",
+    "title": "POS system software update - Aga Khan Hospital",
+    "description": "Job requested by Aga Khan Hospital. Installation and configuration of software systems. Contact: +254710101010. Priority: high.",
+    "category": 3,
+    "priority": "high",
+    "status": "closed",
+    "assigned_to": 6,
+    "created_by": 5,
+    "customer_name": "Aga Khan Hospital",
+    "customer_contact": "+254710101010",
+    "customer_email": "ict@agakhan.org",
+    "sla_deadline": "2026-02-14T00:18:28.372Z",
+    "resolution_notes": "Temporary fix applied. Permanent solution scheduled for next maintenance window.",
+    "created_at": "2026-02-13T12:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:28.807Z",
+    "closed_at": "2026-02-14T06:18:28.372Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 12,
+  "fields": {
+    "reference_number": "JOB-CB18BAC4",
+    "title": "Power distribution unit installation - Strathmore University",
+    "description": "Job requested by Strathmore University. Electrical installations and fault resolution. Contact: +254720202020. Priority: medium.",
+    "category": 8,
+    "priority": "medium",
+    "status": "closed",
+    "assigned_to": 9,
+    "created_by": 5,
+    "customer_name": "Strathmore University",
+    "customer_contact": "+254720202020",
+    "customer_email": "support@strathmore.edu",
+    "sla_deadline": "2026-03-22T05:18:28.372Z",
+    "resolution_notes": "Root cause identified and addressed. Monitoring for recurrence.",
+    "created_at": "2026-03-20T17:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:28.866Z",
+    "closed_at": "2026-03-21T17:18:28.372Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 13,
+  "fields": {
+    "reference_number": "JOB-DBF18244",
+    "title": "Fibre optic termination - Floor 3 - Two Rivers Mall",
+    "description": "Job requested by Two Rivers Mall. New network infrastructure setup and cabling. Contact: +254730303030. Priority: medium.",
+    "category": 1,
+    "priority": "medium",
+    "status": "assigned",
+    "assigned_to": 7,
+    "created_by": 4,
+    "customer_name": "Two Rivers Mall",
+    "customer_contact": "+254730303030",
+    "customer_email": "facilities@tworivers.co.ke",
+    "sla_deadline": "2026-03-26T00:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-24T00:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:28.924Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 14,
+  "fields": {
+    "reference_number": "JOB-09DDCF48",
+    "title": "Alarm system upgrade - JKIA Terminal 2",
+    "description": "Job requested by JKIA Terminal 2. CCTV, access control, and alarm system work. Contact: +254777777777. Priority: high.",
+    "category": 6,
+    "priority": "high",
+    "status": "closed",
+    "assigned_to": 7,
+    "created_by": 4,
+    "customer_name": "JKIA Terminal 2",
+    "customer_contact": "+254777777777",
+    "customer_email": "ops@jkia.go.ke",
+    "sla_deadline": "2026-01-16T00:18:28.372Z",
+    "resolution_notes": "Replaced faulty component. Tested and verified working.",
+    "created_at": "2026-01-15T00:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:28.952Z",
+    "closed_at": "2026-01-15T09:18:28.372Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 15,
+  "fields": {
+    "reference_number": "JOB-CA6ED03B",
+    "title": "Ransomware incident response - Nation Media Group",
+    "description": "Job requested by Nation Media Group. Critical system failures requiring immediate attention. Contact: +254740404040. Priority: low.",
+    "category": 5,
+    "priority": "low",
+    "status": "in_progress",
+    "assigned_to": 10,
+    "created_by": 3,
+    "customer_name": "Nation Media Group",
+    "customer_contact": "+254740404040",
+    "customer_email": "it@nationmedia.com",
+    "sla_deadline": "2026-02-22T09:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-02-22T05:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.013Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 16,
+  "fields": {
+    "reference_number": "JOB-510748E5",
+    "title": "POS system software update - Strathmore University",
+    "description": "Job requested by Strathmore University. Installation and configuration of software systems. Contact: +254720202020. Priority: critical.",
+    "category": 3,
+    "priority": "critical",
+    "status": "assigned",
+    "assigned_to": 10,
+    "created_by": 5,
+    "customer_name": "Strathmore University",
+    "customer_contact": "+254720202020",
+    "customer_email": "support@strathmore.edu",
+    "sla_deadline": "2026-03-09T07:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-08T19:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.063Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 17,
+  "fields": {
+    "reference_number": "JOB-5500B1B9",
+    "title": "Power distribution unit installation - Two Rivers Mall",
+    "description": "Job requested by Two Rivers Mall. Electrical installations and fault resolution. Contact: +254730303030. Priority: high.",
+    "category": 8,
+    "priority": "high",
+    "status": "in_progress",
+    "assigned_to": 8,
+    "created_by": 5,
+    "customer_name": "Two Rivers Mall",
+    "customer_contact": "+254730303030",
+    "customer_email": "facilities@tworivers.co.ke",
+    "sla_deadline": "2026-01-20T19:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-01-19T07:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.099Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 18,
+  "fields": {
+    "reference_number": "JOB-47D5CB2D",
+    "title": "Server RAM upgrade - Two Rivers Mall",
+    "description": "Job requested by Two Rivers Mall. Server hardware and OS maintenance tasks. Contact: +254730303030. Priority: high.",
+    "category": 7,
+    "priority": "high",
+    "status": "in_progress",
+    "assigned_to": 10,
+    "created_by": 5,
+    "customer_name": "Two Rivers Mall",
+    "customer_contact": "+254730303030",
+    "customer_email": "facilities@tworivers.co.ke",
+    "sla_deadline": "2026-04-07T20:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-04-07T12:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.147Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 19,
+  "fields": {
+    "reference_number": "JOB-4E9EE1E6",
+    "title": "Socket installation - new workstations - Aga Khan Hospital",
+    "description": "Job requested by Aga Khan Hospital. Electrical installations and fault resolution. Contact: +254710101010. Priority: medium.",
+    "category": 8,
+    "priority": "medium",
+    "status": "in_progress",
+    "assigned_to": 10,
+    "created_by": 4,
+    "customer_name": "Aga Khan Hospital",
+    "customer_contact": "+254710101010",
+    "customer_email": "ict@agakhan.org",
+    "sla_deadline": "2026-02-19T14:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-02-18T02:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.196Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 20,
+  "fields": {
+    "reference_number": "JOB-06CB847F",
+    "title": "Emergency lighting repair - JKIA Terminal 2",
+    "description": "Job requested by JKIA Terminal 2. Electrical installations and fault resolution. Contact: +254777777777. Priority: medium.",
+    "category": 8,
+    "priority": "medium",
+    "status": "in_progress",
+    "assigned_to": 6,
+    "created_by": 5,
+    "customer_name": "JKIA Terminal 2",
+    "customer_contact": "+254777777777",
+    "customer_email": "ops@jkia.go.ke",
+    "sla_deadline": "2026-03-26T10:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-24T22:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.245Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 21,
+  "fields": {
+    "reference_number": "JOB-F16ED15F",
+    "title": "Wi-Fi access point deployment - Westlands Mall",
+    "description": "Job requested by Westlands Mall. New network infrastructure setup and cabling. Contact: +254722222222. Priority: high.",
+    "category": 1,
+    "priority": "high",
+    "status": "escalated",
+    "assigned_to": 10,
+    "created_by": 3,
+    "customer_name": "Westlands Mall",
+    "customer_contact": "+254722222222",
+    "customer_email": "ops@westlandsmall.com",
+    "sla_deadline": "2026-02-23T06:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-02-21T06:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.296Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 22,
+  "fields": {
+    "reference_number": "JOB-01A95EF9",
+    "title": "Quarterly server room inspection - JKIA Terminal 2",
+    "description": "Job requested by JKIA Terminal 2. Scheduled maintenance of equipment and systems. Contact: +254777777777. Priority: high.",
+    "category": 4,
+    "priority": "high",
+    "status": "assigned",
+    "assigned_to": 6,
+    "created_by": 3,
+    "customer_name": "JKIA Terminal 2",
+    "customer_contact": "+254777777777",
+    "customer_email": "ops@jkia.go.ke",
+    "sla_deadline": "2026-01-29T23:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-01-26T23:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.356Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 23,
+  "fields": {
+    "reference_number": "JOB-F1D4E0FD",
+    "title": "Power distribution unit installation - KCA University",
+    "description": "Job requested by KCA University. Electrical installations and fault resolution. Contact: +254733333333. Priority: critical.",
+    "category": 8,
+    "priority": "critical",
+    "status": "in_progress",
+    "assigned_to": 6,
+    "created_by": 4,
+    "customer_name": "KCA University",
+    "customer_contact": "+254733333333",
+    "customer_email": "ict@kca.ac.ke",
+    "sla_deadline": "2026-01-27T21:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-01-26T09:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.401Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 24,
+  "fields": {
+    "reference_number": "JOB-15840953",
+    "title": "Quarterly server room inspection - Aga Khan Hospital",
+    "description": "Job requested by Aga Khan Hospital. Scheduled maintenance of equipment and systems. Contact: +254710101010. Priority: high.",
+    "category": 4,
+    "priority": "high",
+    "status": "closed",
+    "assigned_to": 10,
+    "created_by": 4,
+    "customer_name": "Aga Khan Hospital",
+    "customer_contact": "+254710101010",
+    "customer_email": "ict@agakhan.org",
+    "sla_deadline": "2026-04-06T11:18:28.372Z",
+    "resolution_notes": "Temporary fix applied. Permanent solution scheduled for next maintenance window.",
+    "created_at": "2026-04-03T11:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.455Z",
+    "closed_at": "2026-04-07T11:18:28.372Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 25,
+  "fields": {
+    "reference_number": "JOB-842C691C",
+    "title": "POS system software update - Equity Bank HQ",
+    "description": "Job requested by Equity Bank HQ. Installation and configuration of software systems. Contact: +254755555555. Priority: high.",
+    "category": 3,
+    "priority": "high",
+    "status": "escalated",
+    "assigned_to": 9,
+    "created_by": 5,
+    "customer_name": "Equity Bank HQ",
+    "customer_contact": "+254755555555",
+    "customer_email": "it@equitybank.co.ke",
+    "sla_deadline": "2026-01-24T08:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-01-23T20:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.524Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 26,
+  "fields": {
+    "reference_number": "JOB-11FD8280",
+    "title": "Network backbone failure - Karen Country Club",
+    "description": "Job requested by Karen Country Club. Critical system failures requiring immediate attention. Contact: +254788888888. Priority: medium.",
+    "category": 5,
+    "priority": "medium",
+    "status": "closed",
+    "assigned_to": 8,
+    "created_by": 4,
+    "customer_name": "Karen Country Club",
+    "customer_contact": "+254788888888",
+    "customer_email": "admin@karenclub.co.ke",
+    "sla_deadline": "2026-04-13T07:18:28.372Z",
+    "resolution_notes": "Software patched and reconfigured. Customer confirmed fix.",
+    "created_at": "2026-04-13T03:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.570Z",
+    "closed_at": "2026-04-13T13:18:28.372Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 27,
+  "fields": {
+    "reference_number": "JOB-A58697A5",
+    "title": "Domain controller patching - Nairobi Business Park",
+    "description": "Job requested by Nairobi Business Park. Server hardware and OS maintenance tasks. Contact: +254711111111. Priority: medium.",
+    "category": 7,
+    "priority": "medium",
+    "status": "assigned",
+    "assigned_to": 6,
+    "created_by": 5,
+    "customer_name": "Nairobi Business Park",
+    "customer_contact": "+254711111111",
+    "customer_email": "admin@nbp.co.ke",
+    "sla_deadline": "2026-01-25T13:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-01-25T05:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.630Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 28,
+  "fields": {
+    "reference_number": "JOB-F55FD528",
+    "title": "Windows Server 2022 deployment - Westlands Mall",
+    "description": "Job requested by Westlands Mall. Installation and configuration of software systems. Contact: +254722222222. Priority: medium.",
+    "category": 3,
+    "priority": "medium",
+    "status": "assigned",
+    "assigned_to": 7,
+    "created_by": 5,
+    "customer_name": "Westlands Mall",
+    "customer_contact": "+254722222222",
+    "customer_email": "ops@westlandsmall.com",
+    "sla_deadline": "2026-01-31T09:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-01-30T21:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.662Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 29,
+  "fields": {
+    "reference_number": "JOB-45737DB2",
+    "title": "Biometric scanner installation - Equity Bank HQ",
+    "description": "Job requested by Equity Bank HQ. CCTV, access control, and alarm system work. Contact: +254755555555. Priority: medium.",
+    "category": 6,
+    "priority": "medium",
+    "status": "open",
+    "assigned_to": null,
+    "created_by": 3,
+    "customer_name": "Equity Bank HQ",
+    "customer_contact": "+254755555555",
+    "customer_email": "it@equitybank.co.ke",
+    "sla_deadline": "2026-03-17T10:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-16T10:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.695Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 30,
+  "fields": {
+    "reference_number": "JOB-F24E58CC",
+    "title": "Network backbone failure - Two Rivers Mall",
+    "description": "Job requested by Two Rivers Mall. Critical system failures requiring immediate attention. Contact: +254730303030. Priority: medium.",
+    "category": 5,
+    "priority": "medium",
+    "status": "escalated",
+    "assigned_to": 6,
+    "created_by": 5,
+    "customer_name": "Two Rivers Mall",
+    "customer_contact": "+254730303030",
+    "customer_email": "facilities@tworivers.co.ke",
+    "sla_deadline": "2026-02-26T10:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-02-26T06:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.709Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 31,
+  "fields": {
+    "reference_number": "JOB-630B6601",
+    "title": "CCTV camera replacement - parking lot - Karen Country Club",
+    "description": "Job requested by Karen Country Club. CCTV, access control, and alarm system work. Contact: +254788888888. Priority: high.",
+    "category": 6,
+    "priority": "high",
+    "status": "escalated",
+    "assigned_to": 8,
+    "created_by": 5,
+    "customer_name": "Karen Country Club",
+    "customer_contact": "+254788888888",
+    "customer_email": "admin@karenclub.co.ke",
+    "sla_deadline": "2026-02-03T02:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-02-02T02:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.750Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 32,
+  "fields": {
+    "reference_number": "JOB-66FBDAA3",
+    "title": "Laptop keyboard replacement - Equity Bank HQ",
+    "description": "Job requested by Equity Bank HQ. Repair of physical hardware components. Contact: +254755555555. Priority: medium.",
+    "category": 2,
+    "priority": "medium",
+    "status": "open",
+    "assigned_to": null,
+    "created_by": 4,
+    "customer_name": "Equity Bank HQ",
+    "customer_contact": "+254755555555",
+    "customer_email": "it@equitybank.co.ke",
+    "sla_deadline": "2026-03-14T05:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-13T05:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.794Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 33,
+  "fields": {
+    "reference_number": "JOB-AE89E0FD",
+    "title": "Main server down - critical failure - Nation Media Group",
+    "description": "Job requested by Nation Media Group. Critical system failures requiring immediate attention. Contact: +254740404040. Priority: critical.",
+    "category": 5,
+    "priority": "critical",
+    "status": "escalated",
+    "assigned_to": 7,
+    "created_by": 5,
+    "customer_name": "Nation Media Group",
+    "customer_contact": "+254740404040",
+    "customer_email": "it@nationmedia.com",
+    "sla_deadline": "2026-03-30T00:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-29T20:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.811Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 34,
+  "fields": {
+    "reference_number": "JOB-3B200A26",
+    "title": "UPS battery health check - Two Rivers Mall",
+    "description": "Job requested by Two Rivers Mall. Scheduled maintenance of equipment and systems. Contact: +254730303030. Priority: high.",
+    "category": 4,
+    "priority": "high",
+    "status": "assigned",
+    "assigned_to": 6,
+    "created_by": 3,
+    "customer_name": "Two Rivers Mall",
+    "customer_contact": "+254730303030",
+    "customer_email": "facilities@tworivers.co.ke",
+    "sla_deadline": "2026-01-24T06:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-01-21T06:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.857Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 35,
+  "fields": {
+    "reference_number": "JOB-1FAC8C49",
+    "title": "Office 365 migration - Uhuru Gardens",
+    "description": "Job requested by Uhuru Gardens. Installation and configuration of software systems. Contact: +254799999999. Priority: high.",
+    "category": 3,
+    "priority": "high",
+    "status": "closed",
+    "assigned_to": 10,
+    "created_by": 5,
+    "customer_name": "Uhuru Gardens",
+    "customer_contact": "+254799999999",
+    "customer_email": "maintenance@uhurugardens.go.ke",
+    "sla_deadline": "2026-01-30T03:18:28.372Z",
+    "resolution_notes": "Root cause identified and addressed. Monitoring for recurrence.",
+    "created_at": "2026-01-29T15:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.887Z",
+    "closed_at": "2026-01-30T11:18:28.372Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 36,
+  "fields": {
+    "reference_number": "JOB-829870B0",
+    "title": "Antivirus rollout - 50 workstations - JKIA Terminal 2",
+    "description": "Job requested by JKIA Terminal 2. Installation and configuration of software systems. Contact: +254777777777. Priority: medium.",
+    "category": 3,
+    "priority": "medium",
+    "status": "closed",
+    "assigned_to": 9,
+    "created_by": 3,
+    "customer_name": "JKIA Terminal 2",
+    "customer_contact": "+254777777777",
+    "customer_email": "ops@jkia.go.ke",
+    "sla_deadline": "2026-04-06T12:18:28.372Z",
+    "resolution_notes": "Issue resolved. All systems operational.",
+    "created_at": "2026-04-06T00:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.940Z",
+    "closed_at": "2026-04-06T10:18:28.372Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 37,
+  "fields": {
+    "reference_number": "JOB-A063599C",
+    "title": "Fibre optic termination - Floor 3 - KCA University",
+    "description": "Job requested by KCA University. New network infrastructure setup and cabling. Contact: +254733333333. Priority: high.",
+    "category": 1,
+    "priority": "high",
+    "status": "closed",
+    "assigned_to": 8,
+    "created_by": 3,
+    "customer_name": "KCA University",
+    "customer_contact": "+254733333333",
+    "customer_email": "ict@kca.ac.ke",
+    "sla_deadline": "2026-04-10T20:18:28.372Z",
+    "resolution_notes": "Replaced faulty component. Tested and verified working.",
+    "created_at": "2026-04-08T20:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:29.997Z",
+    "closed_at": "2026-04-11T12:18:28.372Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 38,
+  "fields": {
+    "reference_number": "JOB-6AC1A580",
+    "title": "Socket installation - new workstations - KCA University",
+    "description": "Job requested by KCA University. Electrical installations and fault resolution. Contact: +254733333333. Priority: low.",
+    "category": 8,
+    "priority": "low",
+    "status": "in_progress",
+    "assigned_to": 10,
+    "created_by": 5,
+    "customer_name": "KCA University",
+    "customer_contact": "+254733333333",
+    "customer_email": "ict@kca.ac.ke",
+    "sla_deadline": "2026-01-16T05:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-01-14T17:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.054Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 39,
+  "fields": {
+    "reference_number": "JOB-74EF545A",
+    "title": "Antivirus rollout - 50 workstations - Nairobi Business Park",
+    "description": "Job requested by Nairobi Business Park. Installation and configuration of software systems. Contact: +254711111111. Priority: critical.",
+    "category": 3,
+    "priority": "critical",
+    "status": "assigned",
+    "assigned_to": 10,
+    "created_by": 5,
+    "customer_name": "Nairobi Business Park",
+    "customer_contact": "+254711111111",
+    "customer_email": "admin@nbp.co.ke",
+    "sla_deadline": "2026-04-14T06:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-04-13T18:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.092Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 40,
+  "fields": {
+    "reference_number": "JOB-44A2F3BE",
+    "title": "ERP system installation - JKIA Terminal 2",
+    "description": "Job requested by JKIA Terminal 2. Installation and configuration of software systems. Contact: +254777777777. Priority: medium.",
+    "category": 3,
+    "priority": "medium",
+    "status": "in_progress",
+    "assigned_to": 6,
+    "created_by": 4,
+    "customer_name": "JKIA Terminal 2",
+    "customer_contact": "+254777777777",
+    "customer_email": "ops@jkia.go.ke",
+    "sla_deadline": "2026-02-13T09:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-02-12T21:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.118Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 41,
+  "fields": {
+    "reference_number": "JOB-2C3E282D",
+    "title": "Office 365 migration - KCA University",
+    "description": "Job requested by KCA University. Installation and configuration of software systems. Contact: +254733333333. Priority: critical.",
+    "category": 3,
+    "priority": "critical",
+    "status": "assigned",
+    "assigned_to": 7,
+    "created_by": 4,
+    "customer_name": "KCA University",
+    "customer_contact": "+254733333333",
+    "customer_email": "ict@kca.ac.ke",
+    "sla_deadline": "2026-01-29T15:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-01-29T03:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.157Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 42,
+  "fields": {
+    "reference_number": "JOB-F339DFFD",
+    "title": "Fire suppression system test - Nairobi Business Park",
+    "description": "Job requested by Nairobi Business Park. Scheduled maintenance of equipment and systems. Contact: +254711111111. Priority: critical.",
+    "category": 4,
+    "priority": "critical",
+    "status": "in_progress",
+    "assigned_to": 7,
+    "created_by": 4,
+    "customer_name": "Nairobi Business Park",
+    "customer_contact": "+254711111111",
+    "customer_email": "admin@nbp.co.ke",
+    "sla_deadline": "2026-04-06T07:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-04-03T07:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.183Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 43,
+  "fields": {
+    "reference_number": "JOB-AEAA8A16",
+    "title": "Office 365 migration - Westlands Mall",
+    "description": "Job requested by Westlands Mall. Installation and configuration of software systems. Contact: +254722222222. Priority: critical.",
+    "category": 3,
+    "priority": "critical",
+    "status": "closed",
+    "assigned_to": 10,
+    "created_by": 4,
+    "customer_name": "Westlands Mall",
+    "customer_contact": "+254722222222",
+    "customer_email": "ops@westlandsmall.com",
+    "sla_deadline": "2026-02-10T20:18:28.372Z",
+    "resolution_notes": "Temporary fix applied. Permanent solution scheduled for next maintenance window.",
+    "created_at": "2026-02-10T08:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.220Z",
+    "closed_at": "2026-02-10T22:18:28.372Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 44,
+  "fields": {
+    "reference_number": "JOB-20419B19",
+    "title": "Network switch rack installation - Kenyatta Hospital",
+    "description": "Job requested by Kenyatta Hospital. New network infrastructure setup and cabling. Contact: +254766666666. Priority: medium.",
+    "category": 1,
+    "priority": "medium",
+    "status": "assigned",
+    "assigned_to": 9,
+    "created_by": 3,
+    "customer_name": "Kenyatta Hospital",
+    "customer_contact": "+254766666666",
+    "customer_email": "tech@knhospital.go.ke",
+    "sla_deadline": "2026-01-15T08:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-01-13T08:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.267Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 45,
+  "fields": {
+    "reference_number": "JOB-B9573E4F",
+    "title": "Backup system configuration - Safaricom HQ",
+    "description": "Job requested by Safaricom HQ. Server hardware and OS maintenance tasks. Contact: +254750505050. Priority: high.",
+    "category": 7,
+    "priority": "high",
+    "status": "closed",
+    "assigned_to": 9,
+    "created_by": 3,
+    "customer_name": "Safaricom HQ",
+    "customer_contact": "+254750505050",
+    "customer_email": "infra@safaricom.co.ke",
+    "sla_deadline": "2026-01-14T05:18:28.372Z",
+    "resolution_notes": "Root cause identified and addressed. Monitoring for recurrence.",
+    "created_at": "2026-01-13T21:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.289Z",
+    "closed_at": "2026-01-14T20:18:28.372Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 46,
+  "fields": {
+    "reference_number": "JOB-190D02BD",
+    "title": "Laptop keyboard replacement - Karen Country Club",
+    "description": "Job requested by Karen Country Club. Repair of physical hardware components. Contact: +254788888888. Priority: medium.",
+    "category": 2,
+    "priority": "medium",
+    "status": "closed",
+    "assigned_to": 10,
+    "created_by": 3,
+    "customer_name": "Karen Country Club",
+    "customer_contact": "+254788888888",
+    "customer_email": "admin@karenclub.co.ke",
+    "sla_deadline": "2026-02-02T10:18:28.372Z",
+    "resolution_notes": "Issue resolved. All systems operational.",
+    "created_at": "2026-02-01T10:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.333Z",
+    "closed_at": "2026-02-02T15:18:28.372Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 47,
+  "fields": {
+    "reference_number": "JOB-37E4D0AD",
+    "title": "Main server down - critical failure - Nairobi Business Park",
+    "description": "Job requested by Nairobi Business Park. Critical system failures requiring immediate attention. Contact: +254711111111. Priority: high.",
+    "category": 5,
+    "priority": "high",
+    "status": "in_progress",
+    "assigned_to": 8,
+    "created_by": 3,
+    "customer_name": "Nairobi Business Park",
+    "customer_contact": "+254711111111",
+    "customer_email": "admin@nbp.co.ke",
+    "sla_deadline": "2026-03-23T08:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-23T04:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.380Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 48,
+  "fields": {
+    "reference_number": "JOB-80725811",
+    "title": "Fibre optic termination - Floor 3 - Uhuru Gardens",
+    "description": "Job requested by Uhuru Gardens. New network infrastructure setup and cabling. Contact: +254799999999. Priority: critical.",
+    "category": 1,
+    "priority": "critical",
+    "status": "assigned",
+    "assigned_to": 9,
+    "created_by": 3,
+    "customer_name": "Uhuru Gardens",
+    "customer_contact": "+254799999999",
+    "customer_email": "maintenance@uhurugardens.go.ke",
+    "sla_deadline": "2026-03-12T11:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-10T11:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.420Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 49,
+  "fields": {
+    "reference_number": "JOB-8A30BAE6",
+    "title": "UPS battery health check - Safaricom HQ",
+    "description": "Job requested by Safaricom HQ. Scheduled maintenance of equipment and systems. Contact: +254750505050. Priority: low.",
+    "category": 4,
+    "priority": "low",
+    "status": "in_progress",
+    "assigned_to": 6,
+    "created_by": 5,
+    "customer_name": "Safaricom HQ",
+    "customer_contact": "+254750505050",
+    "customer_email": "infra@safaricom.co.ke",
+    "sla_deadline": "2026-02-25T03:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-02-22T03:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.446Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 50,
+  "fields": {
+    "reference_number": "JOB-ED7543A3",
+    "title": "Surge protector installation - Safari Hotels Group",
+    "description": "Job requested by Safari Hotels Group. Electrical installations and fault resolution. Contact: +254744444444. Priority: high.",
+    "category": 8,
+    "priority": "high",
+    "status": "open",
+    "assigned_to": null,
+    "created_by": 5,
+    "customer_name": "Safari Hotels Group",
+    "customer_contact": "+254744444444",
+    "customer_email": "maintenance@safarihotels.com",
+    "sla_deadline": "2026-02-25T08:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-02-23T20:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.483Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 51,
+  "fields": {
+    "reference_number": "JOB-BD076911",
+    "title": "Monitor replacement - cracked screen - Safaricom HQ",
+    "description": "Job requested by Safaricom HQ. Repair of physical hardware components. Contact: +254750505050. Priority: high.",
+    "category": 2,
+    "priority": "high",
+    "status": "in_progress",
+    "assigned_to": 10,
+    "created_by": 3,
+    "customer_name": "Safaricom HQ",
+    "customer_contact": "+254750505050",
+    "customer_email": "infra@safaricom.co.ke",
+    "sla_deadline": "2026-03-20T20:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-19T20:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.495Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 52,
+  "fields": {
+    "reference_number": "JOB-65FFF583",
+    "title": "Fire suppression system test - KCA University",
+    "description": "Job requested by KCA University. Scheduled maintenance of equipment and systems. Contact: +254733333333. Priority: medium.",
+    "category": 4,
+    "priority": "medium",
+    "status": "closed",
+    "assigned_to": 8,
+    "created_by": 4,
+    "customer_name": "KCA University",
+    "customer_contact": "+254733333333",
+    "customer_email": "ict@kca.ac.ke",
+    "sla_deadline": "2026-04-14T11:18:28.372Z",
+    "resolution_notes": "Replaced faulty component. Tested and verified working.",
+    "created_at": "2026-04-11T11:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.533Z",
+    "closed_at": "2026-04-14T07:18:28.372Z"
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 53,
+  "fields": {
+    "reference_number": "JOB-9F3C2C50",
+    "title": "Monitor replacement - cracked screen - KCA University",
+    "description": "Job requested by KCA University. Repair of physical hardware components. Contact: +254733333333. Priority: low.",
+    "category": 2,
+    "priority": "low",
+    "status": "escalated",
+    "assigned_to": 7,
+    "created_by": 3,
+    "customer_name": "KCA University",
+    "customer_contact": "+254733333333",
+    "customer_email": "ict@kca.ac.ke",
+    "sla_deadline": "2026-04-05T13:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-04-04T13:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.577Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 54,
+  "fields": {
+    "reference_number": "JOB-8A350223",
+    "title": "LAN cabling for new office wing - JKIA Terminal 2",
+    "description": "Job requested by JKIA Terminal 2. New network infrastructure setup and cabling. Contact: +254777777777. Priority: high.",
+    "category": 1,
+    "priority": "high",
+    "status": "escalated",
+    "assigned_to": 6,
+    "created_by": 3,
+    "customer_name": "JKIA Terminal 2",
+    "customer_contact": "+254777777777",
+    "customer_email": "ops@jkia.go.ke",
+    "sla_deadline": "2026-04-14T02:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-04-12T02:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.616Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 55,
+  "fields": {
+    "reference_number": "JOB-D938AD06",
+    "title": "Server RAM upgrade - Strathmore University",
+    "description": "Job requested by Strathmore University. Server hardware and OS maintenance tasks. Contact: +254720202020. Priority: medium.",
+    "category": 7,
+    "priority": "medium",
+    "status": "assigned",
+    "assigned_to": 7,
+    "created_by": 5,
+    "customer_name": "Strathmore University",
+    "customer_contact": "+254720202020",
+    "customer_email": "support@strathmore.edu",
+    "sla_deadline": "2026-03-02T05:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-01T21:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.665Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 56,
+  "fields": {
+    "reference_number": "JOB-11BEA577",
+    "title": "Biometric scanner installation - Nation Media Group",
+    "description": "Job requested by Nation Media Group. CCTV, access control, and alarm system work. Contact: +254740404040. Priority: low.",
+    "category": 6,
+    "priority": "low",
+    "status": "escalated",
+    "assigned_to": 7,
+    "created_by": 5,
+    "customer_name": "Nation Media Group",
+    "customer_contact": "+254740404040",
+    "customer_email": "it@nationmedia.com",
+    "sla_deadline": "2026-03-23T03:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-22T03:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.698Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 57,
+  "fields": {
+    "reference_number": "JOB-4304F1A0",
+    "title": "RAID array rebuild - KCA University",
+    "description": "Job requested by KCA University. Server hardware and OS maintenance tasks. Contact: +254733333333. Priority: medium.",
+    "category": 7,
+    "priority": "medium",
+    "status": "open",
+    "assigned_to": null,
+    "created_by": 4,
+    "customer_name": "KCA University",
+    "customer_contact": "+254733333333",
+    "customer_email": "ict@kca.ac.ke",
+    "sla_deadline": "2026-01-24T19:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-01-24T11:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.741Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 58,
+  "fields": {
+    "reference_number": "JOB-28ABBE0D",
+    "title": "Socket installation - new workstations - Equity Bank HQ",
+    "description": "Job requested by Equity Bank HQ. Electrical installations and fault resolution. Contact: +254755555555. Priority: low.",
+    "category": 8,
+    "priority": "low",
+    "status": "in_progress",
+    "assigned_to": 8,
+    "created_by": 5,
+    "customer_name": "Equity Bank HQ",
+    "customer_contact": "+254755555555",
+    "customer_email": "it@equitybank.co.ke",
+    "sla_deadline": "2026-01-24T05:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-01-22T17:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.756Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 59,
+  "fields": {
+    "reference_number": "JOB-288E5347",
+    "title": "Structured cabling for conference rooms - Westlands Mall",
+    "description": "Job requested by Westlands Mall. New network infrastructure setup and cabling. Contact: +254722222222. Priority: medium.",
+    "category": 1,
+    "priority": "medium",
+    "status": "open",
+    "assigned_to": null,
+    "created_by": 3,
+    "customer_name": "Westlands Mall",
+    "customer_contact": "+254722222222",
+    "customer_email": "ops@westlandsmall.com",
+    "sla_deadline": "2026-02-15T00:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-02-13T00:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.797Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 60,
+  "fields": {
+    "reference_number": "JOB-5A3A11FF",
+    "title": "Windows Server 2022 deployment - Safaricom HQ",
+    "description": "Job requested by Safaricom HQ. Installation and configuration of software systems. Contact: +254750505050. Priority: medium.",
+    "category": 3,
+    "priority": "medium",
+    "status": "open",
+    "assigned_to": null,
+    "created_by": 5,
+    "customer_name": "Safaricom HQ",
+    "customer_contact": "+254750505050",
+    "customer_email": "infra@safaricom.co.ke",
+    "sla_deadline": "2026-03-16T20:18:28.372Z",
+    "resolution_notes": "",
+    "created_at": "2026-03-16T08:18:28.372Z",
+    "updated_at": "2026-04-14T06:18:30.812Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 1,
+  "fields": {
+    "job": 1,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-02-01T04:46:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 2,
+  "fields": {
+    "job": 1,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 9,
+    "notes": "Work started on site",
+    "created_at": "2026-02-01T06:40:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 3,
+  "fields": {
+    "job": 2,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-31T11:48:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 4,
+  "fields": {
+    "job": 2,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 7,
+    "notes": "Work started on site",
+    "created_at": "2026-03-31T17:17:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 5,
+  "fields": {
+    "job": 2,
+    "from_status": "in_progress",
+    "to_status": "closed",
+    "changed_by": 7,
+    "notes": "Job completed and closed",
+    "created_at": "2026-04-02T07:17:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 6,
+  "fields": {
+    "job": 3,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-30T15:58:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 7,
+  "fields": {
+    "job": 3,
+    "from_status": "assigned",
+    "to_status": "escalated",
+    "changed_by": 8,
+    "notes": "Parts unavailable. Escalating to procurement.",
+    "created_at": "2026-03-30T19:20:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 8,
+  "fields": {
+    "job": 4,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 3,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-31T09:15:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 9,
+  "fields": {
+    "job": 4,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 9,
+    "notes": "Work started on site",
+    "created_at": "2026-03-31T13:50:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 10,
+  "fields": {
+    "job": 4,
+    "from_status": "in_progress",
+    "to_status": "closed",
+    "changed_by": 9,
+    "notes": "Job completed and closed",
+    "created_at": "2026-04-01T14:50:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 11,
+  "fields": {
+    "job": 5,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 4,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-02-19T10:50:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 12,
+  "fields": {
+    "job": 5,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 6,
+    "notes": "Work started on site",
+    "created_at": "2026-02-19T14:56:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 13,
+  "fields": {
+    "job": 5,
+    "from_status": "in_progress",
+    "to_status": "closed",
+    "changed_by": 6,
+    "notes": "Job completed and closed",
+    "created_at": "2026-02-19T19:56:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 14,
+  "fields": {
+    "job": 6,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-04T11:42:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 15,
+  "fields": {
+    "job": 7,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-27T02:43:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 16,
+  "fields": {
+    "job": 7,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 8,
+    "notes": "Work started on site",
+    "created_at": "2026-03-27T04:57:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 17,
+  "fields": {
+    "job": 8,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 4,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-02-20T20:29:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 18,
+  "fields": {
+    "job": 8,
+    "from_status": "assigned",
+    "to_status": "escalated",
+    "changed_by": 9,
+    "notes": "Customer escalation - high priority response required.",
+    "created_at": "2026-02-21T03:57:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 19,
+  "fields": {
+    "job": 9,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-04-09T03:40:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 20,
+  "fields": {
+    "job": 10,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 4,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-31T16:42:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 21,
+  "fields": {
+    "job": 11,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-02-13T12:39:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 22,
+  "fields": {
+    "job": 11,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 6,
+    "notes": "Work started on site",
+    "created_at": "2026-02-13T13:46:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 23,
+  "fields": {
+    "job": 11,
+    "from_status": "in_progress",
+    "to_status": "closed",
+    "changed_by": 6,
+    "notes": "Job completed and closed",
+    "created_at": "2026-02-15T07:46:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 24,
+  "fields": {
+    "job": 12,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-20T18:08:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 25,
+  "fields": {
+    "job": 12,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 9,
+    "notes": "Work started on site",
+    "created_at": "2026-03-20T23:26:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 26,
+  "fields": {
+    "job": 12,
+    "from_status": "in_progress",
+    "to_status": "closed",
+    "changed_by": 9,
+    "notes": "Job completed and closed",
+    "created_at": "2026-03-22T00:26:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 27,
+  "fields": {
+    "job": 13,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 4,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-24T01:53:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 28,
+  "fields": {
+    "job": 14,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 4,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-01-15T02:05:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 29,
+  "fields": {
+    "job": 14,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 7,
+    "notes": "Work started on site",
+    "created_at": "2026-01-15T06:02:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 30,
+  "fields": {
+    "job": 14,
+    "from_status": "in_progress",
+    "to_status": "closed",
+    "changed_by": 7,
+    "notes": "Job completed and closed",
+    "created_at": "2026-01-15T14:02:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 31,
+  "fields": {
+    "job": 15,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 3,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-02-22T06:22:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 32,
+  "fields": {
+    "job": 15,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 10,
+    "notes": "Work started on site",
+    "created_at": "2026-02-22T12:22:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 33,
+  "fields": {
+    "job": 16,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-08T20:44:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 34,
+  "fields": {
+    "job": 17,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-01-19T07:47:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 35,
+  "fields": {
+    "job": 17,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 8,
+    "notes": "Work started on site",
+    "created_at": "2026-01-19T14:47:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 36,
+  "fields": {
+    "job": 18,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-04-07T13:05:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 37,
+  "fields": {
+    "job": 18,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 10,
+    "notes": "Work started on site",
+    "created_at": "2026-04-07T19:05:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 38,
+  "fields": {
+    "job": 19,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 4,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-02-18T03:35:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 39,
+  "fields": {
+    "job": 19,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 10,
+    "notes": "Work started on site",
+    "created_at": "2026-02-18T07:30:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 40,
+  "fields": {
+    "job": 20,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-24T22:43:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 41,
+  "fields": {
+    "job": 20,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 6,
+    "notes": "Work started on site",
+    "created_at": "2026-03-25T06:10:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 42,
+  "fields": {
+    "job": 21,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 3,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-02-21T08:02:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 43,
+  "fields": {
+    "job": 21,
+    "from_status": "assigned",
+    "to_status": "escalated",
+    "changed_by": 10,
+    "notes": "Unable to resolve with current resources. Needs senior technician.",
+    "created_at": "2026-02-21T14:17:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 44,
+  "fields": {
+    "job": 22,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 3,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-01-26T23:57:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 45,
+  "fields": {
+    "job": 23,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 4,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-01-26T11:05:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 46,
+  "fields": {
+    "job": 23,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 6,
+    "notes": "Work started on site",
+    "created_at": "2026-01-26T11:49:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 47,
+  "fields": {
+    "job": 24,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 4,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-04-03T12:39:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 48,
+  "fields": {
+    "job": 24,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 10,
+    "notes": "Work started on site",
+    "created_at": "2026-04-03T15:06:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 49,
+  "fields": {
+    "job": 24,
+    "from_status": "in_progress",
+    "to_status": "closed",
+    "changed_by": 10,
+    "notes": "Job completed and closed",
+    "created_at": "2026-04-04T23:06:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 50,
+  "fields": {
+    "job": 25,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-01-23T20:56:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 51,
+  "fields": {
+    "job": 25,
+    "from_status": "assigned",
+    "to_status": "escalated",
+    "changed_by": 9,
+    "notes": "Customer escalation - high priority response required.",
+    "created_at": "2026-01-24T00:22:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 52,
+  "fields": {
+    "job": 26,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 4,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-04-13T04:14:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 53,
+  "fields": {
+    "job": 26,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 8,
+    "notes": "Work started on site",
+    "created_at": "2026-04-13T10:36:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 54,
+  "fields": {
+    "job": 26,
+    "from_status": "in_progress",
+    "to_status": "closed",
+    "changed_by": 8,
+    "notes": "Job completed and closed",
+    "created_at": "2026-04-14T21:36:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 55,
+  "fields": {
+    "job": 27,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-01-25T06:25:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 56,
+  "fields": {
+    "job": 28,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-01-30T21:32:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 57,
+  "fields": {
+    "job": 30,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-02-26T06:24:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 58,
+  "fields": {
+    "job": 30,
+    "from_status": "assigned",
+    "to_status": "escalated",
+    "changed_by": 6,
+    "notes": "SLA deadline approaching, escalating for priority attention.",
+    "created_at": "2026-02-26T07:17:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 59,
+  "fields": {
+    "job": 31,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-02-02T02:48:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 60,
+  "fields": {
+    "job": 31,
+    "from_status": "assigned",
+    "to_status": "escalated",
+    "changed_by": 8,
+    "notes": "Parts unavailable. Escalating to procurement.",
+    "created_at": "2026-02-02T10:28:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 61,
+  "fields": {
+    "job": 33,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-29T21:47:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 62,
+  "fields": {
+    "job": 33,
+    "from_status": "assigned",
+    "to_status": "escalated",
+    "changed_by": 7,
+    "notes": "Parts unavailable. Escalating to procurement.",
+    "created_at": "2026-03-30T05:11:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 63,
+  "fields": {
+    "job": 34,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 3,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-01-21T07:56:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 64,
+  "fields": {
+    "job": 35,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-01-29T16:07:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 65,
+  "fields": {
+    "job": 35,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 10,
+    "notes": "Work started on site",
+    "created_at": "2026-01-29T17:15:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 66,
+  "fields": {
+    "job": 35,
+    "from_status": "in_progress",
+    "to_status": "closed",
+    "changed_by": 10,
+    "notes": "Job completed and closed",
+    "created_at": "2026-01-30T00:15:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 67,
+  "fields": {
+    "job": 36,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 3,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-04-06T02:03:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 68,
+  "fields": {
+    "job": 36,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 9,
+    "notes": "Work started on site",
+    "created_at": "2026-04-06T06:29:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 69,
+  "fields": {
+    "job": 36,
+    "from_status": "in_progress",
+    "to_status": "closed",
+    "changed_by": 9,
+    "notes": "Job completed and closed",
+    "created_at": "2026-04-07T22:29:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 70,
+  "fields": {
+    "job": 37,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 3,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-04-08T22:07:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 71,
+  "fields": {
+    "job": 37,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 8,
+    "notes": "Work started on site",
+    "created_at": "2026-04-08T22:41:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 72,
+  "fields": {
+    "job": 37,
+    "from_status": "in_progress",
+    "to_status": "closed",
+    "changed_by": 8,
+    "notes": "Job completed and closed",
+    "created_at": "2026-04-08T23:41:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 73,
+  "fields": {
+    "job": 38,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-01-14T19:04:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 74,
+  "fields": {
+    "job": 38,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 10,
+    "notes": "Work started on site",
+    "created_at": "2026-01-14T21:54:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 75,
+  "fields": {
+    "job": 39,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-04-13T18:29:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 76,
+  "fields": {
+    "job": 40,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 4,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-02-12T23:13:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 77,
+  "fields": {
+    "job": 40,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 6,
+    "notes": "Work started on site",
+    "created_at": "2026-02-13T07:13:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 78,
+  "fields": {
+    "job": 41,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 4,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-01-29T05:08:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 79,
+  "fields": {
+    "job": 42,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 4,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-04-03T07:23:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 80,
+  "fields": {
+    "job": 42,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 7,
+    "notes": "Work started on site",
+    "created_at": "2026-04-03T10:28:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 81,
+  "fields": {
+    "job": 43,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 4,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-02-10T10:17:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 82,
+  "fields": {
+    "job": 43,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 10,
+    "notes": "Work started on site",
+    "created_at": "2026-02-10T16:39:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 83,
+  "fields": {
+    "job": 43,
+    "from_status": "in_progress",
+    "to_status": "closed",
+    "changed_by": 10,
+    "notes": "Job completed and closed",
+    "created_at": "2026-02-12T02:39:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 84,
+  "fields": {
+    "job": 44,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 3,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-01-13T09:47:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 85,
+  "fields": {
+    "job": 45,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 3,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-01-13T23:01:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 86,
+  "fields": {
+    "job": 45,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 9,
+    "notes": "Work started on site",
+    "created_at": "2026-01-14T04:15:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 87,
+  "fields": {
+    "job": 45,
+    "from_status": "in_progress",
+    "to_status": "closed",
+    "changed_by": 9,
+    "notes": "Job completed and closed",
+    "created_at": "2026-01-15T18:15:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 88,
+  "fields": {
+    "job": 46,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 3,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-02-01T11:33:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 89,
+  "fields": {
+    "job": 46,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 10,
+    "notes": "Work started on site",
+    "created_at": "2026-02-01T19:13:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 90,
+  "fields": {
+    "job": 46,
+    "from_status": "in_progress",
+    "to_status": "closed",
+    "changed_by": 10,
+    "notes": "Job completed and closed",
+    "created_at": "2026-02-02T14:13:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 91,
+  "fields": {
+    "job": 47,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 3,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-23T05:32:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 92,
+  "fields": {
+    "job": 47,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 8,
+    "notes": "Work started on site",
+    "created_at": "2026-03-23T10:08:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 93,
+  "fields": {
+    "job": 48,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 3,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-10T11:29:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 94,
+  "fields": {
+    "job": 49,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-02-22T05:17:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 95,
+  "fields": {
+    "job": 49,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 6,
+    "notes": "Work started on site",
+    "created_at": "2026-02-22T12:17:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 96,
+  "fields": {
+    "job": 51,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 3,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-19T22:11:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 97,
+  "fields": {
+    "job": 51,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 10,
+    "notes": "Work started on site",
+    "created_at": "2026-03-19T23:44:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 98,
+  "fields": {
+    "job": 52,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 4,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-04-11T11:48:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 99,
+  "fields": {
+    "job": 52,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 8,
+    "notes": "Work started on site",
+    "created_at": "2026-04-11T15:04:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 100,
+  "fields": {
+    "job": 52,
+    "from_status": "in_progress",
+    "to_status": "closed",
+    "changed_by": 8,
+    "notes": "Job completed and closed",
+    "created_at": "2026-04-12T21:04:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 101,
+  "fields": {
+    "job": 53,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 3,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-04-04T14:00:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 102,
+  "fields": {
+    "job": 53,
+    "from_status": "assigned",
+    "to_status": "escalated",
+    "changed_by": 7,
+    "notes": "Customer escalation - high priority response required.",
+    "created_at": "2026-04-04T20:30:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 103,
+  "fields": {
+    "job": 54,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 3,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-04-12T04:03:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 104,
+  "fields": {
+    "job": 54,
+    "from_status": "assigned",
+    "to_status": "escalated",
+    "changed_by": 6,
+    "notes": "Customer escalation - high priority response required.",
+    "created_at": "2026-04-12T08:27:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 105,
+  "fields": {
+    "job": 55,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-01T21:31:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 106,
+  "fields": {
+    "job": 56,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-03-22T04:05:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 107,
+  "fields": {
+    "job": 56,
+    "from_status": "assigned",
+    "to_status": "escalated",
+    "changed_by": 7,
+    "notes": "Customer escalation - high priority response required.",
+    "created_at": "2026-03-22T09:51:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 108,
+  "fields": {
+    "job": 58,
+    "from_status": "open",
+    "to_status": "assigned",
+    "changed_by": 5,
+    "notes": "Job assigned to technician",
+    "created_at": "2026-01-22T18:42:28.372Z"
+  }
+},
+{
+  "model": "jobs.jobstatushistory",
+  "pk": 109,
+  "fields": {
+    "job": 58,
+    "from_status": "assigned",
+    "to_status": "in_progress",
+    "changed_by": 8,
+    "notes": "Work started on site",
+    "created_at": "2026-01-22T22:32:28.372Z"
+  }
+},
+{
+  "model": "noticeboard.notice",
+  "pk": 1,
+  "fields": {
+    "title": "test",
+    "content": "testt",
+    "priority": "medium",
+    "target_roles": [],
+    "expiry_date": null,
+    "is_active": true,
+    "created_by": 1,
+    "created_at": "2026-04-13T22:24:57.779Z",
+    "updated_at": "2026-04-13T22:24:57.780Z"
+  }
+},
+{
+  "model": "noticeboard.notice",
+  "pk": 2,
+  "fields": {
+    "title": "System Maintenance Window - April 19",
+    "content": "The iJOMS system will undergo scheduled maintenance on Saturday, April 19 from 02:00 to 06:00 EAT. Please ensure all critical jobs are updated before the maintenance window. The system will be unavailable during this period.",
+    "priority": "high",
+    "target_roles": [],
+    "expiry_date": "2026-04-19T06:18:30.830Z",
+    "is_active": true,
+    "created_by": 2,
+    "created_at": "2026-04-14T06:18:30.832Z",
+    "updated_at": "2026-04-14T06:18:30.832Z"
+  }
+},
+{
+  "model": "noticeboard.notice",
+  "pk": 3,
+  "fields": {
+    "title": "New SLA Policy Effective May 1",
+    "content": "Effective May 1, 2026, all Emergency Repair jobs must be acknowledged within 30 minutes of assignment. Failure to acknowledge within the window will trigger automatic escalation. Please review the updated SLA guidelines in the shared drive.",
+    "priority": "critical",
+    "target_roles": [
+      "technician",
+      "supervisor"
+    ],
+    "expiry_date": "2026-05-14T06:18:30.830Z",
+    "is_active": true,
+    "created_by": 3,
+    "created_at": "2026-04-14T06:18:30.842Z",
+    "updated_at": "2026-04-14T06:18:30.842Z"
+  }
+},
+{
+  "model": "noticeboard.notice",
+  "pk": 4,
+  "fields": {
+    "title": "Quarterly Performance Review Schedule",
+    "content": "Q1 2026 performance reviews will be conducted from April 21-25. All technicians should prepare their job completion reports. Supervisors will schedule individual review sessions.",
+    "priority": "medium",
+    "target_roles": [
+      "technician",
+      "supervisor"
+    ],
+    "expiry_date": "2026-04-28T06:18:30.830Z",
+    "is_active": true,
+    "created_by": 3,
+    "created_at": "2026-04-14T06:18:30.852Z",
+    "updated_at": "2026-04-14T06:18:30.852Z"
+  }
+},
+{
+  "model": "noticeboard.notice",
+  "pk": 5,
+  "fields": {
+    "title": "Welcome New Team Members",
+    "content": "We are pleased to welcome Brian Kiprop and Ann Muthoni to our technician team. They bring extensive experience in network infrastructure and security systems respectively. Please join us in welcoming them to the iJOMS family.",
+    "priority": "low",
+    "target_roles": [],
+    "expiry_date": "2026-04-21T06:18:30.830Z",
+    "is_active": true,
+    "created_by": 2,
+    "created_at": "2026-04-14T06:18:30.860Z",
+    "updated_at": "2026-04-14T06:18:30.860Z"
+  }
+},
+{
+  "model": "noticeboard.notice",
+  "pk": 6,
+  "fields": {
+    "title": "Safety Briefing - Electrical Work Protocol",
+    "content": "All technicians assigned to electrical work must complete the updated safety certification before May 15. Training sessions are available every Tuesday at 09:00 in the main conference room. Contact your supervisor to register.",
+    "priority": "high",
+    "target_roles": [
+      "technician"
+    ],
+    "expiry_date": "2026-05-15T06:18:30.830Z",
+    "is_active": true,
+    "created_by": 5,
+    "created_at": "2026-04-14T06:18:30.867Z",
+    "updated_at": "2026-04-14T06:18:30.867Z"
+  }
+},
+{
+  "model": "noticeboard.notice",
+  "pk": 7,
+  "fields": {
+    "title": "Monthly Team Meeting - April 30",
+    "content": "The monthly all-hands meeting will be held on April 30 at 14:00 in the boardroom. Agenda includes Q1 performance review, Q2 targets, and the upcoming system upgrade roadmap. Attendance is mandatory for all supervisors and above.",
+    "priority": "medium",
+    "target_roles": [
+      "managing_director",
+      "operations_manager",
+      "supervisor"
+    ],
+    "expiry_date": "2026-04-30T06:18:30.830Z",
+    "is_active": true,
+    "created_by": 2,
+    "created_at": "2026-04-14T06:18:30.875Z",
+    "updated_at": "2026-04-14T06:18:30.875Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "action": "update",
+    "entity_type": "Job",
+    "entity_id": "29",
+    "changes": {},
+    "ip_address": "192.168.1.23",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-07T09:13:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 2,
+  "fields": {
+    "user": 10,
+    "action": "create",
+    "entity_type": "Job",
+    "entity_id": "60",
+    "changes": {},
+    "ip_address": "192.168.1.157",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-22T18:51:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 3,
+  "fields": {
+    "user": 10,
+    "action": "assignment",
+    "entity_type": "Job",
+    "entity_id": "39",
+    "changes": {
+      "assigned_to": "Mary Akinyi"
+    },
+    "ip_address": "192.168.1.39",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-18T12:34:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 4,
+  "fields": {
+    "user": 2,
+    "action": "login",
+    "entity_type": "User",
+    "entity_id": "7",
+    "changes": {},
+    "ip_address": "192.168.1.44",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-15T06:14:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 5,
+  "fields": {
+    "user": 6,
+    "action": "update",
+    "entity_type": "User",
+    "entity_id": "2",
+    "changes": {},
+    "ip_address": "192.168.1.203",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-23T02:59:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 6,
+  "fields": {
+    "user": 1,
+    "action": "login",
+    "entity_type": "User",
+    "entity_id": "1",
+    "changes": {},
+    "ip_address": "192.168.1.131",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-26T12:43:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 7,
+  "fields": {
+    "user": 10,
+    "action": "create",
+    "entity_type": "Notice",
+    "entity_id": "3",
+    "changes": {},
+    "ip_address": "192.168.1.27",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-04-08T03:02:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 8,
+  "fields": {
+    "user": 5,
+    "action": "create",
+    "entity_type": "Job",
+    "entity_id": "48",
+    "changes": {},
+    "ip_address": "192.168.1.194",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-19T11:28:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 9,
+  "fields": {
+    "user": 1,
+    "action": "assignment",
+    "entity_type": "Job",
+    "entity_id": "16",
+    "changes": {
+      "assigned_to": "Ann Muthoni"
+    },
+    "ip_address": "192.168.1.225",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-29T04:22:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 10,
+  "fields": {
+    "user": 9,
+    "action": "status_change",
+    "entity_type": "Job",
+    "entity_id": "52",
+    "changes": {
+      "from": "open",
+      "to": "assigned",
+      "notes": "Job assigned"
+    },
+    "ip_address": "192.168.1.53",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-25T20:10:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 11,
+  "fields": {
+    "user": 6,
+    "action": "update",
+    "entity_type": "User",
+    "entity_id": "11",
+    "changes": {},
+    "ip_address": "192.168.1.99",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-12T21:14:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 12,
+  "fields": {
+    "user": 4,
+    "action": "escalation",
+    "entity_type": "Job",
+    "entity_id": "33",
+    "changes": {},
+    "ip_address": "192.168.1.137",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-27T17:49:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 13,
+  "fields": {
+    "user": 7,
+    "action": "create",
+    "entity_type": "Job",
+    "entity_id": "20",
+    "changes": {},
+    "ip_address": "192.168.1.166",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-16T06:06:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 14,
+  "fields": {
+    "user": 8,
+    "action": "create",
+    "entity_type": "Job",
+    "entity_id": "20",
+    "changes": {},
+    "ip_address": "192.168.1.221",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-04-12T06:41:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 15,
+  "fields": {
+    "user": 10,
+    "action": "update",
+    "entity_type": "Job",
+    "entity_id": "6",
+    "changes": {},
+    "ip_address": "192.168.1.202",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-18T19:22:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 16,
+  "fields": {
+    "user": 3,
+    "action": "login",
+    "entity_type": "User",
+    "entity_id": "2",
+    "changes": {},
+    "ip_address": "192.168.1.197",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-04-03T20:50:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 17,
+  "fields": {
+    "user": 3,
+    "action": "status_change",
+    "entity_type": "Job",
+    "entity_id": "33",
+    "changes": {
+      "from": "open",
+      "to": "assigned",
+      "notes": "Job assigned"
+    },
+    "ip_address": "192.168.1.202",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-25T23:07:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 18,
+  "fields": {
+    "user": 10,
+    "action": "escalation",
+    "entity_type": "Job",
+    "entity_id": "24",
+    "changes": {},
+    "ip_address": "192.168.1.150",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-08T13:06:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 19,
+  "fields": {
+    "user": 9,
+    "action": "update",
+    "entity_type": "User",
+    "entity_id": "5",
+    "changes": {},
+    "ip_address": "192.168.1.20",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-04-09T02:48:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 20,
+  "fields": {
+    "user": 7,
+    "action": "status_change",
+    "entity_type": "Job",
+    "entity_id": "9",
+    "changes": {
+      "from": "open",
+      "to": "assigned",
+      "notes": "Job assigned"
+    },
+    "ip_address": "192.168.1.247",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-22T10:43:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 21,
+  "fields": {
+    "user": 3,
+    "action": "create",
+    "entity_type": "Job",
+    "entity_id": "42",
+    "changes": {},
+    "ip_address": "192.168.1.169",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-21T09:35:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 22,
+  "fields": {
+    "user": 5,
+    "action": "update",
+    "entity_type": "User",
+    "entity_id": "10",
+    "changes": {},
+    "ip_address": "192.168.1.225",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-21T18:05:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 23,
+  "fields": {
+    "user": 5,
+    "action": "update",
+    "entity_type": "User",
+    "entity_id": "5",
+    "changes": {},
+    "ip_address": "192.168.1.121",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-26T17:18:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 24,
+  "fields": {
+    "user": 9,
+    "action": "create",
+    "entity_type": "Notice",
+    "entity_id": "6",
+    "changes": {},
+    "ip_address": "192.168.1.234",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-04-13T16:05:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 25,
+  "fields": {
+    "user": 9,
+    "action": "escalation",
+    "entity_type": "Job",
+    "entity_id": "2",
+    "changes": {},
+    "ip_address": "192.168.1.105",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-15T21:20:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 26,
+  "fields": {
+    "user": 4,
+    "action": "create",
+    "entity_type": "Job",
+    "entity_id": "4",
+    "changes": {},
+    "ip_address": "192.168.1.228",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-08T19:26:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 27,
+  "fields": {
+    "user": 6,
+    "action": "status_change",
+    "entity_type": "Job",
+    "entity_id": "39",
+    "changes": {
+      "from": "open",
+      "to": "assigned",
+      "notes": "Job assigned"
+    },
+    "ip_address": "192.168.1.175",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-14T18:34:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 28,
+  "fields": {
+    "user": 9,
+    "action": "escalation",
+    "entity_type": "Job",
+    "entity_id": "29",
+    "changes": {},
+    "ip_address": "192.168.1.106",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-22T00:32:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 29,
+  "fields": {
+    "user": 7,
+    "action": "create",
+    "entity_type": "Notice",
+    "entity_id": "3",
+    "changes": {},
+    "ip_address": "192.168.1.235",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-04-03T19:46:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 30,
+  "fields": {
+    "user": 4,
+    "action": "create",
+    "entity_type": "Job",
+    "entity_id": "24",
+    "changes": {},
+    "ip_address": "192.168.1.113",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-24T02:19:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 31,
+  "fields": {
+    "user": 2,
+    "action": "escalation",
+    "entity_type": "Job",
+    "entity_id": "37",
+    "changes": {},
+    "ip_address": "192.168.1.52",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-19T08:59:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 32,
+  "fields": {
+    "user": 9,
+    "action": "create",
+    "entity_type": "Notice",
+    "entity_id": "3",
+    "changes": {},
+    "ip_address": "192.168.1.123",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-19T07:29:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 33,
+  "fields": {
+    "user": 2,
+    "action": "escalation",
+    "entity_type": "Job",
+    "entity_id": "2",
+    "changes": {},
+    "ip_address": "192.168.1.23",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-29T20:25:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 34,
+  "fields": {
+    "user": 7,
+    "action": "status_change",
+    "entity_type": "Job",
+    "entity_id": "9",
+    "changes": {
+      "from": "open",
+      "to": "assigned",
+      "notes": "Job assigned"
+    },
+    "ip_address": "192.168.1.52",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-04-12T17:44:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 35,
+  "fields": {
+    "user": 4,
+    "action": "status_change",
+    "entity_type": "Job",
+    "entity_id": "4",
+    "changes": {
+      "from": "open",
+      "to": "assigned",
+      "notes": "Job assigned"
+    },
+    "ip_address": "192.168.1.169",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-04-02T22:23:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 36,
+  "fields": {
+    "user": 10,
+    "action": "create",
+    "entity_type": "Notice",
+    "entity_id": "3",
+    "changes": {},
+    "ip_address": "192.168.1.211",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-17T05:14:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 37,
+  "fields": {
+    "user": 3,
+    "action": "escalation",
+    "entity_type": "Job",
+    "entity_id": "53",
+    "changes": {},
+    "ip_address": "192.168.1.36",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-28T03:46:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 38,
+  "fields": {
+    "user": 11,
+    "action": "create",
+    "entity_type": "Notice",
+    "entity_id": "6",
+    "changes": {},
+    "ip_address": "192.168.1.203",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-15T17:34:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 39,
+  "fields": {
+    "user": 5,
+    "action": "create",
+    "entity_type": "Job",
+    "entity_id": "53",
+    "changes": {},
+    "ip_address": "192.168.1.24",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-15T06:31:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 40,
+  "fields": {
+    "user": 4,
+    "action": "escalation",
+    "entity_type": "Job",
+    "entity_id": "20",
+    "changes": {},
+    "ip_address": "192.168.1.60",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-19T02:14:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 41,
+  "fields": {
+    "user": 7,
+    "action": "assignment",
+    "entity_type": "Job",
+    "entity_id": "56",
+    "changes": {
+      "assigned_to": "John Otieno"
+    },
+    "ip_address": "192.168.1.76",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-04-07T06:25:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 42,
+  "fields": {
+    "user": 5,
+    "action": "assignment",
+    "entity_type": "Job",
+    "entity_id": "9",
+    "changes": {
+      "assigned_to": "Ann Muthoni"
+    },
+    "ip_address": "192.168.1.165",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-04-11T01:40:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 43,
+  "fields": {
+    "user": 8,
+    "action": "escalation",
+    "entity_type": "Job",
+    "entity_id": "53",
+    "changes": {},
+    "ip_address": "192.168.1.58",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-04-11T11:54:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 44,
+  "fields": {
+    "user": 10,
+    "action": "update",
+    "entity_type": "User",
+    "entity_id": "4",
+    "changes": {},
+    "ip_address": "192.168.1.188",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-02T23:57:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 45,
+  "fields": {
+    "user": 7,
+    "action": "update",
+    "entity_type": "Job",
+    "entity_id": "47",
+    "changes": {},
+    "ip_address": "192.168.1.58",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-14T19:44:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 46,
+  "fields": {
+    "user": 10,
+    "action": "create",
+    "entity_type": "Notice",
+    "entity_id": "3",
+    "changes": {},
+    "ip_address": "192.168.1.71",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-04-05T00:22:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 47,
+  "fields": {
+    "user": 9,
+    "action": "update",
+    "entity_type": "User",
+    "entity_id": "11",
+    "changes": {},
+    "ip_address": "192.168.1.12",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-03T07:43:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 48,
+  "fields": {
+    "user": 5,
+    "action": "assignment",
+    "entity_type": "Job",
+    "entity_id": "42",
+    "changes": {
+      "assigned_to": "David Njoroge"
+    },
+    "ip_address": "192.168.1.184",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-04T04:01:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 49,
+  "fields": {
+    "user": 4,
+    "action": "update",
+    "entity_type": "Job",
+    "entity_id": "55",
+    "changes": {},
+    "ip_address": "192.168.1.108",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-08T03:08:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 50,
+  "fields": {
+    "user": 1,
+    "action": "assignment",
+    "entity_type": "Job",
+    "entity_id": "47",
+    "changes": {
+      "assigned_to": "John Otieno"
+    },
+    "ip_address": "192.168.1.191",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-17T23:33:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 51,
+  "fields": {
+    "user": 3,
+    "action": "update",
+    "entity_type": "User",
+    "entity_id": "11",
+    "changes": {},
+    "ip_address": "192.168.1.212",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-01T03:27:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 52,
+  "fields": {
+    "user": 8,
+    "action": "update",
+    "entity_type": "Job",
+    "entity_id": "16",
+    "changes": {},
+    "ip_address": "192.168.1.79",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-24T23:18:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 53,
+  "fields": {
+    "user": 11,
+    "action": "update",
+    "entity_type": "User",
+    "entity_id": "7",
+    "changes": {},
+    "ip_address": "192.168.1.241",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-17T01:11:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 54,
+  "fields": {
+    "user": 5,
+    "action": "assignment",
+    "entity_type": "Job",
+    "entity_id": "6",
+    "changes": {
+      "assigned_to": "Ann Muthoni"
+    },
+    "ip_address": "192.168.1.78",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-02T15:31:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 55,
+  "fields": {
+    "user": 11,
+    "action": "create",
+    "entity_type": "Notice",
+    "entity_id": "3",
+    "changes": {},
+    "ip_address": "192.168.1.151",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-04-05T13:06:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 56,
+  "fields": {
+    "user": 7,
+    "action": "create",
+    "entity_type": "Job",
+    "entity_id": "32",
+    "changes": {},
+    "ip_address": "192.168.1.127",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-27T09:56:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 57,
+  "fields": {
+    "user": 2,
+    "action": "update",
+    "entity_type": "Job",
+    "entity_id": "52",
+    "changes": {},
+    "ip_address": "192.168.1.205",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-30T16:18:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 58,
+  "fields": {
+    "user": 2,
+    "action": "status_change",
+    "entity_type": "Job",
+    "entity_id": "56",
+    "changes": {
+      "from": "open",
+      "to": "assigned",
+      "notes": "Job assigned"
+    },
+    "ip_address": "192.168.1.97",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-06T06:10:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 59,
+  "fields": {
+    "user": 10,
+    "action": "assignment",
+    "entity_type": "Job",
+    "entity_id": "6",
+    "changes": {
+      "assigned_to": "Brian Kiprop"
+    },
+    "ip_address": "192.168.1.203",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-25T09:23:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 60,
+  "fields": {
+    "user": 8,
+    "action": "login",
+    "entity_type": "User",
+    "entity_id": "7",
+    "changes": {},
+    "ip_address": "192.168.1.84",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-05T18:59:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 61,
+  "fields": {
+    "user": 11,
+    "action": "login",
+    "entity_type": "User",
+    "entity_id": "11",
+    "changes": {},
+    "ip_address": "192.168.1.196",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-23T01:44:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 62,
+  "fields": {
+    "user": 8,
+    "action": "update",
+    "entity_type": "User",
+    "entity_id": "6",
+    "changes": {},
+    "ip_address": "192.168.1.92",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-28T01:24:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 63,
+  "fields": {
+    "user": 9,
+    "action": "create",
+    "entity_type": "Notice",
+    "entity_id": "5",
+    "changes": {},
+    "ip_address": "192.168.1.148",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-18T14:26:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 64,
+  "fields": {
+    "user": 8,
+    "action": "create",
+    "entity_type": "Job",
+    "entity_id": "26",
+    "changes": {},
+    "ip_address": "192.168.1.242",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-26T20:21:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 65,
+  "fields": {
+    "user": 6,
+    "action": "escalation",
+    "entity_type": "Job",
+    "entity_id": "10",
+    "changes": {},
+    "ip_address": "192.168.1.53",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-03T20:45:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 66,
+  "fields": {
+    "user": 9,
+    "action": "create",
+    "entity_type": "Notice",
+    "entity_id": "3",
+    "changes": {},
+    "ip_address": "192.168.1.24",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-06T04:39:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 67,
+  "fields": {
+    "user": 7,
+    "action": "update",
+    "entity_type": "User",
+    "entity_id": "10",
+    "changes": {},
+    "ip_address": "192.168.1.184",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-26T00:19:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 68,
+  "fields": {
+    "user": 4,
+    "action": "escalation",
+    "entity_type": "Job",
+    "entity_id": "37",
+    "changes": {},
+    "ip_address": "192.168.1.210",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-29T23:46:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 69,
+  "fields": {
+    "user": 5,
+    "action": "status_change",
+    "entity_type": "Job",
+    "entity_id": "47",
+    "changes": {
+      "from": "open",
+      "to": "assigned",
+      "notes": "Job assigned"
+    },
+    "ip_address": "192.168.1.17",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-27T04:09:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 70,
+  "fields": {
+    "user": 3,
+    "action": "create",
+    "entity_type": "Notice",
+    "entity_id": "2",
+    "changes": {},
+    "ip_address": "192.168.1.187",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-16T17:01:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 71,
+  "fields": {
+    "user": 3,
+    "action": "create",
+    "entity_type": "Notice",
+    "entity_id": "3",
+    "changes": {},
+    "ip_address": "192.168.1.233",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-06T17:04:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 72,
+  "fields": {
+    "user": 11,
+    "action": "update",
+    "entity_type": "User",
+    "entity_id": "7",
+    "changes": {},
+    "ip_address": "192.168.1.82",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-31T11:40:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 73,
+  "fields": {
+    "user": 10,
+    "action": "status_change",
+    "entity_type": "Job",
+    "entity_id": "47",
+    "changes": {
+      "from": "open",
+      "to": "assigned",
+      "notes": "Job assigned"
+    },
+    "ip_address": "192.168.1.250",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-04-03T07:46:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 74,
+  "fields": {
+    "user": 10,
+    "action": "create",
+    "entity_type": "Job",
+    "entity_id": "39",
+    "changes": {},
+    "ip_address": "192.168.1.81",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-16T15:45:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 75,
+  "fields": {
+    "user": 5,
+    "action": "assignment",
+    "entity_type": "Job",
+    "entity_id": "7",
+    "changes": {
+      "assigned_to": "Ann Muthoni"
+    },
+    "ip_address": "192.168.1.203",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-07T18:47:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 76,
+  "fields": {
+    "user": 2,
+    "action": "escalation",
+    "entity_type": "Job",
+    "entity_id": "56",
+    "changes": {},
+    "ip_address": "192.168.1.205",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-26T04:42:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 77,
+  "fields": {
+    "user": 11,
+    "action": "create",
+    "entity_type": "Notice",
+    "entity_id": "5",
+    "changes": {},
+    "ip_address": "192.168.1.73",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-04-10T09:28:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 78,
+  "fields": {
+    "user": 6,
+    "action": "assignment",
+    "entity_type": "Job",
+    "entity_id": "53",
+    "changes": {
+      "assigned_to": "David Njoroge"
+    },
+    "ip_address": "192.168.1.173",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-02-17T10:39:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 79,
+  "fields": {
+    "user": 3,
+    "action": "create",
+    "entity_type": "Notice",
+    "entity_id": "1",
+    "changes": {},
+    "ip_address": "192.168.1.98",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-10T17:49:30.881Z"
+  }
+},
+{
+  "model": "auditlog.auditlog",
+  "pk": 80,
+  "fields": {
+    "user": 7,
+    "action": "create",
+    "entity_type": "Notice",
+    "entity_id": "3",
+    "changes": {},
+    "ip_address": "192.168.1.240",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/135.0",
+    "created_at": "2026-03-15T14:07:30.881Z"
+  }
+}
+]
