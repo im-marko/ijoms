@@ -12,7 +12,7 @@ DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 if not DEBUG and SECRET_KEY == _INSECURE_DEV_KEY:
     raise RuntimeError('DJANGO_SECRET_KEY must be set when DEBUG is false.')
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,.onrender.com').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,.vercel.app').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -168,9 +168,20 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+# On Vercel, static files are published to the CDN at /static/ by the build
+# step (see vercel.json) and the serverless bundle has no staticfiles dir, so
+# manifest-based storage would crash at render time. Whitenoise's manifest
+# storage is used everywhere else (e.g. gunicorn-based hosts).
+_on_vercel = bool(os.environ.get('VERCEL'))
 STORAGES = {
     'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
-    'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'},
+    'staticfiles': {
+        'BACKEND': (
+            'django.contrib.staticfiles.storage.StaticFilesStorage'
+            if _on_vercel
+            else 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+        )
+    },
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
