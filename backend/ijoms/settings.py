@@ -4,14 +4,15 @@ from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get(
-    'DJANGO_SECRET_KEY',
-    'django-insecure-xeyu6*k8cea3fya*#cw$cgz=jk-mhg^9&z868x&7nm+!-g&kz3'
-)
+_INSECURE_DEV_KEY = 'django-insecure-xeyu6*k8cea3fya*#cw$cgz=jk-mhg^9&z868x&7nm+!-g&kz3'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', _INSECURE_DEV_KEY)
 
 DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,.vercel.app').split(',')
+if not DEBUG and SECRET_KEY == _INSECURE_DEV_KEY:
+    raise RuntimeError('DJANGO_SECRET_KEY must be set when DEBUG is false.')
+
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,.onrender.com').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -36,6 +37,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -43,7 +45,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'auditlog.middleware.AuditLogMiddleware',
 ]
 
 ROOT_URLCONF = 'ijoms.urls'
@@ -65,17 +66,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ijoms.wsgi.application'
 
-# Database — defaults to SQLite for dev, set DATABASE_URL for PostgreSQL
-DATABASES = {
-    'default': {
-        'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3'),
-        'NAME': os.environ.get('DB_NAME', str(BASE_DIR / 'db.sqlite3')),
-        'USER': os.environ.get('DB_USER', ''),
-        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-        'HOST': os.environ.get('DB_HOST', ''),
-        'PORT': os.environ.get('DB_PORT', ''),
+# Database — DATABASE_URL (production Postgres) takes precedence; otherwise
+# DB_* env vars, defaulting to SQLite for local dev.
+if os.environ.get('DATABASE_URL'):
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=600, ssl_require=True),
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3'),
+            'NAME': os.environ.get('DB_NAME', str(BASE_DIR / 'db.sqlite3')),
+            'USER': os.environ.get('DB_USER', ''),
+            'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+            'HOST': os.environ.get('DB_HOST', ''),
+            'PORT': os.environ.get('DB_PORT', ''),
+        }
+    }
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -99,8 +107,12 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter',
     ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_PAGINATION_CLASS': 'ijoms.pagination.DefaultPagination',
     'PAGE_SIZE': 20,
+    'DEFAULT_THROTTLE_RATES': {
+        'login': '20/min',
+        'register': '10/hour',
+    },
 }
 
 # JWT
@@ -134,6 +146,20 @@ WHATSAPP_API_URL = os.environ.get(
 )
 WHATSAPP_PHONE_NUMBER_ID = os.environ.get('WHATSAPP_PHONE_NUMBER_ID', '')
 WHATSAPP_ACCESS_TOKEN = os.environ.get('WHATSAPP_ACCESS_TOKEN', '')
+# 'auto' enables WhatsApp when credentials are present; 'true'/'false' force it.
+_whatsapp_flag = os.environ.get('WHATSAPP_ENABLED', 'auto').lower()
+WHATSAPP_ENABLED = (
+    bool(WHATSAPP_PHONE_NUMBER_ID and WHATSAPP_ACCESS_TOKEN)
+    if _whatsapp_flag == 'auto' else _whatsapp_flag == 'true'
+)
+# Business-initiated messages outside the 24h service window require an
+# approved template. Set the template name to use template sends; leave empty
+# to send free-form text (only delivered within an open service window).
+WHATSAPP_TEMPLATE_NAME = os.environ.get('WHATSAPP_TEMPLATE_NAME', '')
+WHATSAPP_TEMPLATE_LANGUAGE = os.environ.get('WHATSAPP_TEMPLATE_LANGUAGE', 'en_US')
+
+# Shared secret for the production SLA cron endpoint (/api/jobs/run-sla-check/)
+CRON_SECRET = os.environ.get('CRON_SECRET', '')
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
@@ -141,4 +167,22 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STORAGES = {
+    'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
+    'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'},
+}
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Production security
+CSRF_TRUSTED_ORIGINS = [
+    o for o in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',') if o
+]
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 60 * 60 * 24 * 30
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True

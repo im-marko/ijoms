@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import api from '@/lib/api';
+import api, { getApiError } from '@/lib/api';
+import { useAuth } from '@/lib/auth';
+import { isManagerOrAbove } from '@/lib/roles';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -10,27 +12,53 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line, PieChart, Pie, Cell,
 } from 'recharts';
+import { toast } from 'sonner';
 
 const COLORS = ['#3b82f6', '#f59e0b', '#8b5cf6', '#ef4444', '#22c55e', '#06b6d4'];
 
+interface TechPerf {
+  technician_id: number;
+  name: string;
+  total_jobs: number;
+  completed: number;
+  in_progress: number;
+  avg_resolution_hours: number | null;
+}
+
+interface AnalyticsSummary {
+  job_summary: { total: number; by_status: Record<string, number>; by_priority: Record<string, number> };
+  sla_compliance: { total_closed: number; met_sla: number; breached_sla: number; compliance_rate: number; open_breached: number };
+}
+
 export default function AnalyticsPage() {
-  const [techPerf, setTechPerf] = useState<any[]>([]);
-  const [jobVolume, setJobVolume] = useState<any[]>([]);
-  const [escalations, setEscalations] = useState<any[]>([]);
-  const [summary, setSummary] = useState<any>(null);
+  const { user } = useAuth();
+  const [techPerf, setTechPerf] = useState<TechPerf[]>([]);
+  const [jobVolume, setJobVolume] = useState<{ period: string; count: number }[]>([]);
+  const [escalations, setEscalations] = useState<{ date: string; count: number }[]>([]);
+  const [summary, setSummary] = useState<AnalyticsSummary | null>(null);
   const [period, setPeriod] = useState('daily');
   const [days, setDays] = useState('30');
 
+  // technician-performance and CSV export are manager-and-above on the backend
+  const managerView = !!user && isManagerOrAbove(user.role);
+
   useEffect(() => {
-    api.get('/analytics/summary/').then((r) => setSummary(r.data)).catch(() => {});
-    api.get('/analytics/technician-performance/').then((r) => setTechPerf(r.data)).catch(() => {});
-    api.get('/analytics/escalation-trends/').then((r) => setEscalations(r.data)).catch(() => {});
+    api.get('/analytics/summary/').then((r) => setSummary(r.data))
+      .catch((err) => toast.error(getApiError(err, 'Failed to load summary')));
+    api.get('/analytics/escalation-trends/').then((r) => setEscalations(r.data))
+      .catch((err) => toast.error(getApiError(err, 'Failed to load escalation trends')));
   }, []);
+
+  useEffect(() => {
+    if (!managerView) return;
+    api.get('/analytics/technician-performance/').then((r) => setTechPerf(r.data))
+      .catch((err) => toast.error(getApiError(err, 'Failed to load technician performance')));
+  }, [managerView]);
 
   useEffect(() => {
     api.get(`/analytics/job-volume/?period=${period}&days=${days}`)
       .then((r) => setJobVolume(r.data))
-      .catch(() => {});
+      .catch((err) => toast.error(getApiError(err, 'Failed to load job volume')));
   }, [period, days]);
 
   const exportCSV = async () => {
@@ -41,20 +69,24 @@ export default function AnalyticsPage() {
       a.href = url;
       a.download = 'jobs_export.csv';
       a.click();
-    } catch {}
+    } catch (err) {
+      toast.error(getApiError(err, 'Failed to export CSV'));
+    }
   };
 
-  const statusData = summary?.job_summary?.by_status
-    ? Object.entries(summary.job_summary.by_status).map(([name, value]) => ({ name, value }))
+  const statusData: { name: string; value: number }[] = summary?.job_summary?.by_status
+    ? Object.entries(summary.job_summary.by_status as Record<string, number>).map(([name, value]) => ({ name, value }))
     : [];
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-900">Analytics & Reports</h1>
-        <Button variant="outline" onClick={exportCSV}>
-          <Download className="mr-2 h-4 w-4" />Export CSV
-        </Button>
+        {managerView && (
+          <Button variant="outline" onClick={exportCSV}>
+            <Download className="mr-2 h-4 w-4" />Export CSV
+          </Button>
+        )}
       </div>
 
       {/* SLA & Summary */}
@@ -125,7 +157,7 @@ export default function AnalyticsPage() {
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie data={statusData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
-                  {statusData.map((_: any, i: number) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  {statusData.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                 </Pie>
                 <Tooltip />
               </PieChart>
@@ -149,12 +181,13 @@ export default function AnalyticsPage() {
           </CardContent>
         </Card>
 
-        {/* Technician Performance */}
+        {/* Technician Performance (manager+ only) */}
+        {managerView && (
         <Card>
           <CardHeader><CardTitle>Technician Performance</CardTitle></CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {techPerf.map((t: any) => (
+              {techPerf.map((t) => (
                 <div key={t.technician_id} className="flex items-center justify-between rounded-lg border p-3">
                   <div>
                     <p className="text-sm font-medium">{t.name}</p>
@@ -172,6 +205,7 @@ export default function AnalyticsPage() {
             </div>
           </CardContent>
         </Card>
+        )}
       </div>
     </div>
   );

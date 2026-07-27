@@ -14,3 +14,13 @@ class NoticeSerializer(serializers.ModelSerializer):
             'created_at', 'updated_at',
         ]
         read_only_fields = ['created_by']
+
+    def validate_target_roles(self, value):
+        from django.contrib.auth import get_user_model
+        valid_roles = set(get_user_model().Role.values)
+        if not isinstance(value, list):
+            raise serializers.ValidationError('target_roles must be a list of role names.')
+        invalid = [r for r in value if r not in valid_roles]
+        if invalid:
+            raise serializers.ValidationError(f'Invalid roles: {", ".join(invalid)}')
+        return value

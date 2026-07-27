@@ -3,27 +3,18 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import api from '@/lib/api';
+import api, { getApiError } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Briefcase } from 'lucide-react';
-
-const ROLES = [
-  { value: 'technician', label: 'Technician' },
-  { value: 'supervisor', label: 'Supervisor' },
-  { value: 'operations_manager', label: 'Operations Manager' },
-  { value: 'managing_director', label: 'Managing Director' },
-  { value: 'finance_officer', label: 'Finance Officer' },
-];
 
 export default function RegisterPage() {
   const router = useRouter();
   const [form, setForm] = useState({
     email: '', username: '', first_name: '', last_name: '',
-    role: 'technician', phone: '', password: '', password_confirm: '',
+    phone: '', password: '', password_confirm: '',
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -35,12 +26,8 @@ export default function RegisterPage() {
     try {
       await api.post('/auth/register/', form);
       router.push('/login');
-    } catch (err: any) {
-      const data = err.response?.data;
-      const msg = data
-        ? Object.values(data).flat().join(' ')
-        : 'Registration failed.';
-      setError(msg);
+    } catch (err) {
+      setError(getApiError(err, 'Registration failed.'));
     } finally {
       setLoading(false);
     }
@@ -81,23 +68,13 @@ export default function RegisterPage() {
               <Label>Username</Label>
               <Input required value={form.username} onChange={(e) => update('username', e.target.value)} />
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>Role</Label>
-                <Select value={form.role} onValueChange={(v) => v && update('role', v)}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
-                  <SelectContent>
-                    {ROLES.map((r) => (
-                      <SelectItem key={r.value} value={r.value}>{r.label}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label>Phone</Label>
-                <Input value={form.phone} onChange={(e) => update('phone', e.target.value)} />
-              </div>
+            <div className="space-y-2">
+              <Label>Phone</Label>
+              <Input value={form.phone} onChange={(e) => update('phone', e.target.value)} />
             </div>
+            <p className="text-xs text-gray-500">
+              New accounts are created as Technicians. Contact your Managing Director for elevated access.
+            </p>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Password</Label>

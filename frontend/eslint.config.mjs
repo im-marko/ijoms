@@ -12,7 +12,16 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Plain-JS Windows dev shim, not part of the app source.
+    "start-dev.js",
   ]),
+  {
+    rules: {
+      // React-compiler heuristic; fires on the idiomatic fetch-on-mount
+      // pattern used throughout this app. Keep visible as a warning.
+      "react-hooks/set-state-in-effect": "warn",
+    },
+  },
 ]);
 
 export default eslintConfig;

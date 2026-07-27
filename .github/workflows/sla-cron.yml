@@ -1,0 +1,16 @@
+name: SLA check
+
+on:
+  schedule:
+    - cron: "*/15 * * * *" # every 15 minutes; also keeps the free Render instance warm
+  workflow_dispatch: {}
+
+jobs:
+  run-sla-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger SLA escalation
+        run: |
+          curl --fail-with-body -s -X POST \
+            -H "X-Cron-Secret: ${{ secrets.CRON_SECRET }}" \
+            "${{ vars.BACKEND_URL }}/api/jobs/run-sla-check/"

@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import api from '@/lib/api';
+import api, { getApiError } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
-import { Job, JobCategory, PaginatedResponse } from '@/types';
+import { JobListItem, JobCategory, User, PaginatedResponse } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -33,9 +33,9 @@ const STATUS_COLORS: Record<string, string> = {
 
 export default function JobsPage() {
   const { user } = useAuth();
-  const [jobs, setJobs] = useState<Job[]>([]);
+  const [jobs, setJobs] = useState<JobListItem[]>([]);
   const [categories, setCategories] = useState<JobCategory[]>([]);
-  const [technicians, setTechnicians] = useState<any[]>([]);
+  const [technicians, setTechnicians] = useState<User[]>([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
@@ -50,14 +50,16 @@ export default function JobsPage() {
   const canCreate = user && ['operations_manager', 'supervisor'].includes(user.role);
 
   const fetchJobs = async () => {
-    const params: any = { page, search };
+    const params: Record<string, string | number> = { page, search };
     if (statusFilter !== 'all') params.status = statusFilter;
     if (priorityFilter !== 'all') params.priority = priorityFilter;
     try {
-      const res = await api.get<PaginatedResponse<Job>>('/jobs/', { params });
+      const res = await api.get<PaginatedResponse<JobListItem>>('/jobs/', { params });
       setJobs(res.data.results);
       setTotal(res.data.count);
-    } catch {}
+    } catch (err) {
+      toast.error(getApiError(err, 'Failed to load jobs'));
+    }
   };
 
   useEffect(() => {
@@ -65,26 +67,32 @@ export default function JobsPage() {
   }, [page, statusFilter, priorityFilter]);
 
   useEffect(() => {
-    api.get('/jobs/categories/').then((r) => setCategories(r.data.results || r.data)).catch(() => {});
-    api.get('/auth/technicians/').then((r) => setTechnicians(r.data.results || r.data)).catch(() => {});
-  }, []);
+    api.get('/jobs/categories/').then((r) => setCategories(r.data.results || r.data))
+      .catch((err) => toast.error(getApiError(err, 'Failed to load categories')));
+    if (canCreate) {
+      api.get('/auth/technicians/').then((r) => setTechnicians(r.data.results || r.data))
+        .catch((err) => toast.error(getApiError(err, 'Failed to load technicians')));
+    }
+  }, [canCreate]);
 
   const handleSearch = () => { setPage(1); fetchJobs(); };
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const payload: any = { ...form };
-      if (payload.category) payload.category = parseInt(payload.category);
-      if (payload.assigned_to) payload.assigned_to = parseInt(payload.assigned_to);
+      const payload: Record<string, string | number> = {
+        ...form,
+        category: parseInt(form.category),
+      };
+      if (form.assigned_to) payload.assigned_to = parseInt(form.assigned_to);
       else delete payload.assigned_to;
       await api.post('/jobs/create/', payload);
       toast.success('Job created successfully');
       setDialogOpen(false);
       setForm({ title: '', description: '', category: '', priority: 'medium', assigned_to: '', customer_name: '', customer_contact: '', customer_email: '' });
       fetchJobs();
-    } catch (err: any) {
-      toast.error(err.response?.data?.detail || 'Failed to create job');
+    } catch (err) {
+      toast.error(getApiError(err, 'Failed to create job'));
     }
   };
 

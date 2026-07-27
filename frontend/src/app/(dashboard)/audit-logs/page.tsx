@@ -32,7 +32,7 @@ export default function AuditLogsPage() {
   const [endDate, setEndDate] = useState('');
 
   const fetchLogs = async () => {
-    const params: any = { page, search };
+    const params: Record<string, string | number> = { page, search };
     if (actionFilter !== 'all') params.action = actionFilter;
     if (entityFilter) params.entity_type = entityFilter;
     if (startDate) params.start_date = new Date(startDate).toISOString();

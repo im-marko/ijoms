@@ -1,10 +1,24 @@
+import json
+
+from django.core.serializers.json import DjangoJSONEncoder
+from django.db.models import Model
+
 from .models import AuditLog
-from .middleware import get_current_request
+
+
+def _json_safe(data):
+    """Coerce audit payloads (may contain model instances, datetimes, Decimals)
+    into plain JSON-serializable structures."""
+    if isinstance(data, Model):
+        return data.pk
+    if isinstance(data, dict):
+        return {key: _json_safe(value) for key, value in data.items()}
+    if isinstance(data, (list, tuple, set)):
+        return [_json_safe(item) for item in data]
+    return json.loads(json.dumps(data, cls=DjangoJSONEncoder, default=str))
 
 
 def log_action(user, action, entity_type, entity_id='', changes=None, request=None):
-    if request is None:
-        request = get_current_request()
     ip = ''
     user_agent = ''
     if request:
@@ -15,7 +29,7 @@ def log_action(user, action, entity_type, entity_id='', changes=None, request=No
         action=action,
         entity_type=entity_type,
         entity_id=str(entity_id),
-        changes=changes or {},
+        changes=_json_safe(changes or {}),
         ip_address=ip or None,
         user_agent=user_agent,
     )

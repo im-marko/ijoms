@@ -18,21 +18,39 @@ export type UserRole =
   | 'technician'
   | 'finance_officer';
 
+/** Shape returned by GET /jobs/ (JobListSerializer). */
+export interface JobListItem {
+  id: number;
+  reference_number: string;
+  title: string;
+  category: number;
+  category_name?: string;
+  priority: 'low' | 'medium' | 'high' | 'critical';
+  status: JobStatus;
+  assigned_to: number | null;
+  assigned_to_name: string | null;
+  created_by: number;
+  created_by_name: string | null;
+  customer_name: string;
+  sla_deadline: string | null;
+  is_sla_breached: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+/** Shape returned by GET /jobs/<id>/ (JobDetailSerializer). */
 export interface Job {
   id: number;
   reference_number: string;
   title: string;
   description: string;
   category: number;
-  category_name?: string;
   category_detail?: JobCategory;
   priority: 'low' | 'medium' | 'high' | 'critical';
   status: JobStatus;
   assigned_to: number | null;
-  assigned_to_name?: string;
-  assigned_to_detail?: User;
+  assigned_to_detail?: User | null;
   created_by: number;
-  created_by_name?: string;
   created_by_detail?: User;
   customer_name: string;
   customer_contact: string;
@@ -44,6 +62,7 @@ export interface Job {
   updated_at: string;
   closed_at: string | null;
   status_history?: JobStatusHistory[];
+  allowed_transitions: JobStatus[];
 }
 
 export type JobStatus = 'open' | 'assigned' | 'in_progress' | 'escalated' | 'closed';
@@ -60,8 +79,8 @@ export interface JobStatusHistory {
   id: number;
   from_status: string;
   to_status: string;
-  changed_by: number;
-  changed_by_detail?: User;
+  changed_by: number | null;
+  changed_by_detail?: User | null;
   notes: string;
   created_at: string;
 }

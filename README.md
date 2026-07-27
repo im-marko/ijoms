@@ -91,7 +91,35 @@ EMAIL_HOST_USER=your@email.com
 EMAIL_HOST_PASSWORD=yourpassword
 WHATSAPP_PHONE_NUMBER_ID=your_phone_id
 WHATSAPP_ACCESS_TOKEN=your_token
+WHATSAPP_TEMPLATE_NAME=your_approved_template   # required for messages outside the 24h service window
+WHATSAPP_TEMPLATE_LANGUAGE=en_US
+WHATSAPP_ENABLED=auto        # auto = on when credentials present; or true/false
+CRON_SECRET=some-long-random-string   # protects POST /api/jobs/run-sla-check/
 ```
+
+### WhatsApp notifications
+
+WhatsApp sends use the Meta WhatsApp Business Cloud API and activate automatically
+once `WHATSAPP_PHONE_NUMBER_ID` and `WHATSAPP_ACCESS_TOKEN` are set. Notifications
+go out on job assignment, status changes, and SLA escalations, to users with a
+phone number on their profile. Business-initiated messages outside an open 24-hour
+customer service window require a Meta-**approved template** — create one with a
+single body parameter (`{{1}}`) and set `WHATSAPP_TEMPLATE_NAME`; without a
+template, free-form text is only delivered inside an open service window.
+
+### SLA auto-escalation
+
+Jobs past their SLA deadline are automatically moved to **Escalated**, with a
+status-history entry, an audit record, and notifications to the assignee, the
+job creator, and all managers/supervisors.
+
+```bash
+python manage.py check_sla              # run once
+python manage.py check_sla --loop 300   # dev watcher: re-check every 5 minutes
+```
+
+In production, schedule `POST /api/jobs/run-sla-check/` (e.g. GitHub Actions cron)
+with header `X-Cron-Secret: $CRON_SECRET`.
 
 ## Demo Accounts
 
@@ -109,13 +137,20 @@ After running `python manage.py seed_data`, these accounts are available (passwo
 
 | Endpoint | Description |
 |----------|-------------|
-| `POST /api/auth/login/` | JWT login |
-| `POST /api/auth/register/` | User registration |
-| `GET /api/auth/me/` | Current user profile |
+| `POST /api/auth/login/` | JWT login (audited) |
+| `POST /api/auth/register/` | Self-registration (always creates a Technician) |
+| `GET/PATCH /api/auth/me/` | Current user profile (role/email immutable) |
+| `POST /api/auth/change-password/` | Change own password |
+| `GET/POST /api/auth/users/` | List/create users (Managing Director only) |
+| `PATCH /api/auth/users/<id>/` | Update a user (Managing Director only) |
+| `POST /api/auth/users/<id>/set-password/` | Admin password reset (Managing Director only) |
 | `GET /api/jobs/` | List jobs (filtered, paginated) |
 | `POST /api/jobs/create/` | Create a new job |
-| `GET /api/jobs/<id>/` | Job detail with status history |
-| `POST /api/jobs/<id>/status/` | Update job status |
+| `GET /api/jobs/<id>/` | Job detail with status history + allowed transitions |
+| `PATCH /api/jobs/<id>/` | Edit job fields (status/assignee excluded) |
+| `POST /api/jobs/<id>/status/` | Update job status (state machine enforced) |
+| `POST /api/jobs/<id>/assign/` | Assign/reassign a technician |
+| `POST /api/jobs/run-sla-check/` | Cron endpoint: escalate overdue jobs (X-Cron-Secret) |
 | `GET /api/jobs/categories/` | Job categories |
 | `GET /api/notifications/` | User notifications |
 | `GET /api/noticeboard/` | Active notices |
@@ -130,9 +165,11 @@ After running `python manage.py seed_data`, these accounts are available (passwo
 
 | Feature | Director | Ops Manager | Supervisor | Technician | Finance |
 |---------|:--------:|:-----------:|:----------:|:----------:|:-------:|
-| View all jobs | Yes | Yes | Yes | Own only | No |
-| Create/assign jobs | No | Yes | Yes | No | No |
-| Update job status | No | Yes | Yes | Own only | No |
+| View all jobs | Yes | Yes | Yes | Own only | Read-only |
+| Create/edit/assign jobs | No | Yes | Yes | No | No |
+| Update job status | Yes | Yes | Yes | Own only | No |
+| Reopen closed jobs | Yes | Yes | Yes | No | No |
+| Dashboard summary | Yes | Yes | Yes | Own stats | Yes |
 | View analytics | Yes | Yes | Limited | No | No |
 | Manage users | Yes | No | No | No | No |
 | Create notices | Yes | Yes | Yes | No | No |

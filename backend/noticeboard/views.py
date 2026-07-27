@@ -2,7 +2,7 @@ from django.utils import timezone
 from rest_framework import generics
 
 from accounts.permissions import IsSupervisorOrAbove
-from auditlog.mixins import AuditMixin
+from auditlog.mixins import AuditMixin, log_action
 from .models import Notice
 from .serializers import NoticeSerializer
 
@@ -29,7 +29,13 @@ class NoticeCreateView(AuditMixin, generics.CreateAPIView):
     audit_entity_type = 'Notice'
 
     def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
+        instance = serializer.save(created_by=self.request.user)
+        log_action(
+            user=self.request.user, action='create', entity_type='Notice',
+            entity_id=instance.pk, changes=serializer.validated_data,
+            request=self.request,
+        )
+        return instance
 
 
 class NoticeDetailView(AuditMixin, generics.RetrieveUpdateDestroyAPIView):

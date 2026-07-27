@@ -38,7 +38,8 @@ class Job(models.Model):
         Status.ASSIGNED: [Status.IN_PROGRESS, Status.ESCALATED, Status.CLOSED],
         Status.IN_PROGRESS: [Status.ESCALATED, Status.CLOSED, Status.ASSIGNED],
         Status.ESCALATED: [Status.ASSIGNED, Status.IN_PROGRESS, Status.CLOSED],
-        Status.CLOSED: [],
+        # Reopening is restricted to supervisors and above in the view layer.
+        Status.CLOSED: [Status.OPEN],
     }
 
     reference_number = models.CharField(max_length=20, unique=True, editable=False)

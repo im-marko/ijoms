@@ -6,61 +6,85 @@ from django.utils import timezone
 from jobs.models import Job, JobStatusHistory
 
 
-def get_job_summary():
-    """Counts of jobs by status and priority."""
+def get_job_summary(assigned_to=None):
+    """Counts of jobs by status and priority, optionally scoped to one assignee."""
+    qs = Job.objects.all()
+    if assigned_to is not None:
+        qs = qs.filter(assigned_to=assigned_to)
     by_status = dict(
-        Job.objects.values_list('status').annotate(count=Count('id')).values_list('status', 'count')
+        qs.values_list('status').annotate(count=Count('id')).values_list('status', 'count')
     )
     by_priority = dict(
-        Job.objects.values_list('priority').annotate(count=Count('id')).values_list('priority', 'count')
+        qs.values_list('priority').annotate(count=Count('id')).values_list('priority', 'count')
     )
-    total = Job.objects.count()
-    return {'total': total, 'by_status': by_status, 'by_priority': by_priority}
+    return {'total': qs.count(), 'by_status': by_status, 'by_priority': by_priority}
 
 
-def get_sla_compliance():
-    """Percentage of closed jobs that met SLA."""
-    closed = Job.objects.filter(status='closed')
+def get_sla_compliance(assigned_to=None):
+    """Percentage of closed jobs that met SLA, plus open jobs currently past deadline."""
+    base = Job.objects.all()
+    if assigned_to is not None:
+        base = base.filter(assigned_to=assigned_to)
+    open_breached = (
+        base.exclude(status='closed')
+        .filter(sla_deadline__lt=timezone.now())
+        .count()
+    )
+    closed = base.filter(status='closed')
     total_closed = closed.count()
     if total_closed == 0:
-        return {'total_closed': 0, 'met_sla': 0, 'breached_sla': 0, 'compliance_rate': 0}
+        return {
+            'total_closed': 0, 'met_sla': 0, 'breached_sla': 0,
+            'compliance_rate': 0, 'open_breached': open_breached,
+        }
     met = closed.filter(closed_at__lte=F('sla_deadline')).count()
     return {
         'total_closed': total_closed,
         'met_sla': met,
         'breached_sla': total_closed - met,
         'compliance_rate': round(met / total_closed * 100, 1),
+        'open_breached': open_breached,
     }
 
 
 def get_technician_performance():
     """Jobs per technician with avg resolution time."""
     from django.contrib.auth import get_user_model
+    from django.db.models import DurationField, ExpressionWrapper
     User = get_user_model()
-    technicians = User.objects.filter(role='technician', is_active=True)
-    results = []
-    for tech in technicians:
-        assigned = Job.objects.filter(assigned_to=tech)
-        closed = assigned.filter(status='closed', closed_at__isnull=False)
-        total = assigned.count()
-        completed = closed.count()
-        # Avg resolution time in hours
-        avg_hours = None
-        if completed > 0:
-            durations = []
-            for job in closed:
-                if job.closed_at and job.created_at:
-                    durations.append((job.closed_at - job.created_at).total_seconds() / 3600)
-            avg_hours = round(sum(durations) / len(durations), 1) if durations else None
-        results.append({
+    closed_q = Q(assigned_jobs__status='closed', assigned_jobs__closed_at__isnull=False)
+    technicians = (
+        User.objects.filter(role='technician', is_active=True)
+        .annotate(
+            total_jobs=Count('assigned_jobs'),
+            completed=Count('assigned_jobs', filter=closed_q),
+            in_progress_count=Count(
+                'assigned_jobs',
+                filter=Q(assigned_jobs__status__in=['assigned', 'in_progress']),
+            ),
+            avg_resolution=Avg(
+                ExpressionWrapper(
+                    F('assigned_jobs__closed_at') - F('assigned_jobs__created_at'),
+                    output_field=DurationField(),
+                ),
+                filter=closed_q,
+            ),
+        )
+    )
+    return [
+        {
             'technician_id': tech.id,
             'name': tech.get_full_name(),
-            'total_jobs': total,
-            'completed': completed,
-            'in_progress': assigned.filter(status__in=['assigned', 'in_progress']).count(),
-            'avg_resolution_hours': avg_hours,
-        })
-    return results
+            'total_jobs': tech.total_jobs,
+            'completed': tech.completed,
+            'in_progress': tech.in_progress_count,
+            'avg_resolution_hours': (
+                round(tech.avg_resolution.total_seconds() / 3600, 1)
+                if tech.avg_resolution else None
+            ),
+        }
+        for tech in technicians
+    ]
 
 
 def get_job_volume_over_time(period='daily', days=30):

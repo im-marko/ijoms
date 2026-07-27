@@ -1,4 +1,4 @@
-from rest_framework.permissions import BasePermission
+from rest_framework.permissions import SAFE_METHODS, BasePermission
 
 
 class IsManagingDirector(BasePermission):
@@ -45,12 +45,13 @@ class IsSupervisorOrAbove(BasePermission):
 
 
 class CanViewJobs(BasePermission):
-    """All roles except Finance Officer can view jobs"""
+    """All roles can view jobs; Finance Officer is read-only."""
     def has_permission(self, request, view):
-        return (
-            request.user.is_authenticated
-            and request.user.role != 'finance_officer'
-        )
+        if not request.user.is_authenticated:
+            return False
+        if request.user.role == 'finance_officer':
+            return request.method in SAFE_METHODS
+        return True
 
 
 class CanManageJobs(BasePermission):

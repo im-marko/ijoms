@@ -51,6 +51,7 @@ class JobDetailSerializer(serializers.ModelSerializer):
     created_by_detail = UserSerializer(source='created_by', read_only=True)
     status_history = JobStatusHistorySerializer(many=True, read_only=True)
     is_sla_breached = serializers.SerializerMethodField()
+    allowed_transitions = serializers.SerializerMethodField()
 
     class Meta:
         model = Job
@@ -62,6 +63,7 @@ class JobDetailSerializer(serializers.ModelSerializer):
             'customer_name', 'customer_contact', 'customer_email',
             'sla_deadline', 'is_sla_breached', 'resolution_notes',
             'created_at', 'updated_at', 'closed_at', 'status_history',
+            'allowed_transitions',
         ]
         read_only_fields = ['reference_number', 'created_by', 'closed_at']
 
@@ -71,8 +73,26 @@ class JobDetailSerializer(serializers.ModelSerializer):
             return timezone.now() > obj.sla_deadline
         return False
 
+    def get_allowed_transitions(self, obj):
+        transitions = list(Job.VALID_TRANSITIONS.get(obj.status, []))
+        request = self.context.get('request')
+        if request and obj.status == Job.Status.CLOSED:
+            # Reopening a closed job is supervisor-and-above only
+            if request.user.role not in ('managing_director', 'operations_manager', 'supervisor'):
+                transitions = []
+        return transitions
+
+
+def _active_technicians():
+    from django.contrib.auth import get_user_model
+    return get_user_model().objects.filter(role='technician', is_active=True)
+
 
 class JobCreateSerializer(serializers.ModelSerializer):
+    assigned_to = serializers.PrimaryKeyRelatedField(
+        queryset=_active_technicians(), required=False, allow_null=True,
+    )
+
     class Meta:
         model = Job
         fields = [
@@ -81,19 +101,41 @@ class JobCreateSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        validated_data['created_by'] = self.context['request'].user
+        request_user = self.context['request'].user
+        validated_data['created_by'] = request_user
         job = Job.objects.create(**validated_data)
         if job.assigned_to:
             job.status = Job.Status.ASSIGNED
             job.save()
             JobStatusHistory.objects.create(
                 job=job, from_status=Job.Status.OPEN, to_status=Job.Status.ASSIGNED,
-                changed_by=self.context['request'].user, notes='Initial assignment',
+                changed_by=request_user, notes='Initial assignment',
             )
+            from notifications.services import notify_job_assigned
+            notify_job_assigned(job, assigned_by=request_user)
         return job
+
+
+class JobUpdateSerializer(serializers.ModelSerializer):
+    """Editable job fields only — status and assignment go through their
+    dedicated endpoints so the state machine and audit trail hold."""
+
+    class Meta:
+        model = Job
+        fields = [
+            'title', 'description', 'category', 'priority',
+            'customer_name', 'customer_contact', 'customer_email',
+            'resolution_notes',
+        ]
 
 
 class JobStatusUpdateSerializer(serializers.Serializer):
     status = serializers.ChoiceField(choices=Job.Status.choices)
-    notes = serializers.CharField(required=False, default='')
-    assigned_to = serializers.IntegerField(required=False, allow_null=True)
+    notes = serializers.CharField(required=False, allow_blank=True, default='')
+    assigned_to = serializers.PrimaryKeyRelatedField(
+        queryset=_active_technicians(), required=False, allow_null=True,
+    )
+
+
+class JobAssignSerializer(serializers.Serializer):
+    assigned_to = serializers.PrimaryKeyRelatedField(queryset=_active_technicians())

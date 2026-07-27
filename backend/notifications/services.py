@@ -25,18 +25,50 @@ def send_email_notification(recipient, subject, message, related_job=None):
     return notification
 
 
-def send_whatsapp_notification(recipient, message, related_job=None):
+def _whatsapp_number(user):
+    """Normalize a stored phone number to WhatsApp's E.164-without-plus format."""
+    if not user.phone:
+        return None
+    digits = ''.join(ch for ch in user.phone if ch.isdigit())
+    return digits or None
+
+
+def _whatsapp_payload(to, message):
+    """Template send when a template is configured (required for
+    business-initiated messages outside the 24h service window),
+    free-form text otherwise."""
+    if settings.WHATSAPP_TEMPLATE_NAME:
+        return {
+            'messaging_product': 'whatsapp',
+            'to': to,
+            'type': 'template',
+            'template': {
+                'name': settings.WHATSAPP_TEMPLATE_NAME,
+                'language': {'code': settings.WHATSAPP_TEMPLATE_LANGUAGE},
+                'components': [{
+                    'type': 'body',
+                    'parameters': [{'type': 'text', 'text': message}],
+                }],
+            },
+        }
+    return {
+        'messaging_product': 'whatsapp',
+        'to': to,
+        'type': 'text',
+        'text': {'body': message},
+    }
+
+
+def send_whatsapp_notification(recipient, message, related_job=None, subject='WhatsApp Notification'):
+    if not settings.WHATSAPP_ENABLED:
+        return None
+
     notification = Notification.objects.create(
         recipient=recipient, type=Notification.Type.WHATSAPP,
-        subject='WhatsApp Notification', message=message, related_job=related_job,
+        subject=subject, message=message, related_job=related_job,
     )
-    if not settings.WHATSAPP_PHONE_NUMBER_ID or not settings.WHATSAPP_ACCESS_TOKEN:
-        logger.warning("WhatsApp not configured, skipping.")
-        notification.status = Notification.Status.FAILED
-        notification.save()
-        return notification
-
-    if not recipient.phone:
+    to = _whatsapp_number(recipient)
+    if not to:
         logger.warning(f"No phone number for {recipient.email}")
         notification.status = Notification.Status.FAILED
         notification.save()
@@ -48,13 +80,7 @@ def send_whatsapp_notification(recipient, message, related_job=None):
             'Authorization': f'Bearer {settings.WHATSAPP_ACCESS_TOKEN}',
             'Content-Type': 'application/json',
         }
-        payload = {
-            'messaging_product': 'whatsapp',
-            'to': recipient.phone,
-            'type': 'text',
-            'text': {'body': message},
-        }
-        resp = requests.post(url, json=payload, headers=headers, timeout=10)
+        resp = requests.post(url, json=_whatsapp_payload(to, message), headers=headers, timeout=10)
         resp.raise_for_status()
         notification.status = Notification.Status.SENT
         notification.sent_at = timezone.now()
@@ -92,6 +118,7 @@ def notify_job_status_change(job, old_status, new_status, changed_by):
     for recipient in recipients:
         send_in_app_notification(recipient, subject, message, related_job=job)
         send_email_notification(recipient, subject, message, related_job=job)
+        send_whatsapp_notification(recipient, message, related_job=job, subject=subject)
 
 
 def notify_job_assigned(job, assigned_by):
@@ -107,3 +134,21 @@ def notify_job_assigned(job, assigned_by):
     )
     send_in_app_notification(job.assigned_to, subject, message, related_job=job)
     send_email_notification(job.assigned_to, subject, message, related_job=job)
+    send_whatsapp_notification(job.assigned_to, message, related_job=job, subject=subject)
+
+
+def notify_job_escalated(job, recipients):
+    """Send notifications when a job is auto-escalated for SLA breach."""
+    subject = f"SLA BREACH — Job Escalated: {job.reference_number}"
+    message = (
+        f"Job: {job.title} ({job.reference_number})\n"
+        f"Auto-escalated: SLA deadline breached\n"
+        f"Deadline was: {job.sla_deadline:%Y-%m-%d %H:%M} UTC\n"
+        f"Priority: {job.get_priority_display()}\n"
+        f"Customer: {job.customer_name}\n"
+        f"Assigned to: {job.assigned_to.get_full_name() if job.assigned_to else 'Unassigned'}"
+    )
+    for recipient in recipients:
+        send_in_app_notification(recipient, subject, message, related_job=job)
+        send_email_notification(recipient, subject, message, related_job=job)
+        send_whatsapp_notification(recipient, message, related_job=job, subject=subject)

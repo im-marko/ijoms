@@ -1,12 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import api from '@/lib/api';
-import { useAuth } from '@/lib/auth';
+import api, { getApiError } from '@/lib/api';
+import { JobListItem } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Briefcase, Clock, AlertTriangle, CheckCircle } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { toast } from 'sonner';
 
 const STATUS_COLORS: Record<string, string> = {
   open: '#3b82f6',
@@ -16,22 +17,28 @@ const STATUS_COLORS: Record<string, string> = {
   closed: '#22c55e',
 };
 
+interface Summary {
+  job_summary: { total: number; by_status: Record<string, number>; by_priority: Record<string, number> };
+  sla_compliance: { total_closed: number; met_sla: number; breached_sla: number; compliance_rate: number; open_breached: number };
+}
+
 export default function DashboardPage() {
-  const { user } = useAuth();
-  const [summary, setSummary] = useState<any>(null);
-  const [recentJobs, setRecentJobs] = useState<any[]>([]);
+  const [summary, setSummary] = useState<Summary | null>(null);
+  const [recentJobs, setRecentJobs] = useState<JobListItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetch = async () => {
       try {
         const [summaryRes, jobsRes] = await Promise.all([
-          api.get('/analytics/summary/').catch(() => ({ data: null })),
+          api.get('/analytics/summary/'),
           api.get('/jobs/?page_size=5'),
         ]);
         setSummary(summaryRes.data);
         setRecentJobs(jobsRes.data.results || jobsRes.data || []);
-      } catch {} finally {
+      } catch (err) {
+        toast.error(getApiError(err, 'Failed to load dashboard'));
+      } finally {
         setLoading(false);
       }
     };
@@ -42,7 +49,7 @@ export default function DashboardPage() {
     return <div className="flex items-center justify-center py-20"><div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" /></div>;
   }
 
-  const statusData = summary?.job_summary?.by_status
+  const statusData: { name: string; value: number }[] = summary?.job_summary?.by_status
     ? Object.entries(summary.job_summary.by_status).map(([name, value]) => ({ name, value }))
     : [];
 
@@ -100,7 +107,7 @@ export default function DashboardPage() {
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie data={statusData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
-                  {statusData.map((entry: any, i: number) => (
+                  {statusData.map((entry, i) => (
                     <Cell key={i} fill={STATUS_COLORS[entry.name] || '#6b7280'} />
                   ))}
                 </Pie>
@@ -114,7 +121,7 @@ export default function DashboardPage() {
           <CardHeader><CardTitle>Recent Jobs</CardTitle></CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {recentJobs.map((job: any) => (
+              {recentJobs.map((job) => (
                 <div key={job.id} className="flex items-center justify-between rounded-lg border p-3">
                   <div>
                     <p className="text-sm font-medium">{job.title}</p>

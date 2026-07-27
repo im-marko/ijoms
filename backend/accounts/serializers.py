@@ -17,6 +17,13 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'date_joined']
 
 
+class MeSerializer(UserSerializer):
+    """Self-service profile serializer — identity/authorization fields locked."""
+
+    class Meta(UserSerializer.Meta):
+        read_only_fields = ['id', 'email', 'role', 'is_active', 'date_joined']
+
+
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, validators=[validate_password])
     password_confirm = serializers.CharField(write_only=True)
@@ -25,7 +32,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             'email', 'username', 'first_name', 'last_name',
-            'role', 'phone', 'password', 'password_confirm',
+            'phone', 'password', 'password_confirm',
         ]
 
     def validate(self, attrs):
@@ -34,7 +41,29 @@ class RegisterSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
+        # Self-registration is always technician; elevated roles are granted
+        # by the Managing Director via user management.
+        validated_data['role'] = User.Role.TECHNICIAN
         return User.objects.create_user(**validated_data)
+
+
+class AdminUserCreateSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, validators=[validate_password])
+
+    class Meta:
+        model = User
+        fields = [
+            'id', 'email', 'username', 'first_name', 'last_name',
+            'role', 'phone', 'is_active', 'password',
+        ]
+        read_only_fields = ['id']
+
+    def create(self, validated_data):
+        return User.objects.create_user(**validated_data)
+
+
+class AdminSetPasswordSerializer(serializers.Serializer):
+    new_password = serializers.CharField(validators=[validate_password])
 
 
 class ChangePasswordSerializer(serializers.Serializer):

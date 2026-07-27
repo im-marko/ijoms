@@ -8,12 +8,13 @@ from . import services
 
 
 class DashboardSummaryView(APIView):
-    permission_classes = [IsSupervisorOrAbove]
+    """Open to all roles; technicians see stats for their own jobs only."""
 
     def get(self, request):
+        scope = request.user if request.user.role == 'technician' else None
         return Response({
-            'job_summary': services.get_job_summary(),
-            'sla_compliance': services.get_sla_compliance(),
+            'job_summary': services.get_job_summary(assigned_to=scope),
+            'sla_compliance': services.get_sla_compliance(assigned_to=scope),
         })
 
 
@@ -24,12 +25,22 @@ class TechnicianPerformanceView(APIView):
         return Response(services.get_technician_performance())
 
 
+def _int_param(request, name, default, lo=1, hi=365):
+    try:
+        value = int(request.query_params.get(name, default))
+    except (TypeError, ValueError):
+        value = default
+    return max(lo, min(hi, value))
+
+
 class JobVolumeView(APIView):
     permission_classes = [IsSupervisorOrAbove]
 
     def get(self, request):
         period = request.query_params.get('period', 'daily')
-        days = int(request.query_params.get('days', '30'))
+        if period not in ('daily', 'weekly', 'monthly'):
+            period = 'daily'
+        days = _int_param(request, 'days', 30)
         return Response(services.get_job_volume_over_time(period, days))
 
 
@@ -37,7 +48,7 @@ class EscalationTrendsView(APIView):
     permission_classes = [IsSupervisorOrAbove]
 
     def get(self, request):
-        days = int(request.query_params.get('days', '90'))
+        days = _int_param(request, 'days', 90)
         return Response(services.get_escalation_trends(days))
 
 
