@@ -15,7 +15,7 @@ A centralized web platform for managing operational jobs, assigning technicians,
 
 ## Features
 
-- **Authentication & RBAC** - 5 roles: Managing Director, Operations Manager, Supervisor, Technician, Finance Officer
+- **Authentication & RBAC** - 5 roles: Admin, Operations Manager, Supervisor, Technician, Finance Officer
 - **Job Management** - Full lifecycle: create, assign, track, escalate, close with SLA deadlines
 - **Job Dashboard** - Real-time stats, status distribution charts, technician workload
 - **Notice Board** - Targeted announcements with priority levels and expiry dates
@@ -123,15 +123,21 @@ with header `X-Cron-Secret: $CRON_SECRET`.
 
 ## Demo Accounts
 
-After running `python manage.py seed_data`, these accounts are available (password: `Test@1234`):
+After running `python manage.py seed_data`, these mock accounts are available.
+**Password for every account: `Test@1234`**
 
-| Email | Role |
-|-------|------|
-| director@ijoms.com | Managing Director |
-| opsmanager@ijoms.com | Operations Manager |
-| supervisor1@ijoms.com | Supervisor |
-| tech1@ijoms.com | Technician |
-| finance@ijoms.com | Finance Officer |
+| Email | Password | Role |
+|-------|----------|------|
+| director@ijoms.com | Test@1234 | Admin |
+| opsmanager@ijoms.com | Test@1234 | Operations Manager |
+| supervisor1@ijoms.com | Test@1234 | Supervisor |
+| supervisor2@ijoms.com | Test@1234 | Supervisor |
+| tech1@ijoms.com | Test@1234 | Technician |
+| tech2@ijoms.com | Test@1234 | Technician |
+| tech3@ijoms.com | Test@1234 | Technician |
+| tech4@ijoms.com | Test@1234 | Technician |
+| tech5@ijoms.com | Test@1234 | Technician |
+| finance@ijoms.com | Test@1234 | Finance Officer |
 
 ## API Endpoints
 
@@ -141,9 +147,9 @@ After running `python manage.py seed_data`, these accounts are available (passwo
 | `POST /api/auth/register/` | Self-registration (always creates a Technician) |
 | `GET/PATCH /api/auth/me/` | Current user profile (role/email immutable) |
 | `POST /api/auth/change-password/` | Change own password |
-| `GET/POST /api/auth/users/` | List/create users (Managing Director only) |
-| `PATCH /api/auth/users/<id>/` | Update a user (Managing Director only) |
-| `POST /api/auth/users/<id>/set-password/` | Admin password reset (Managing Director only) |
+| `GET/POST /api/auth/users/` | List/create users (Admin only) |
+| `PATCH /api/auth/users/<id>/` | Update a user (Admin only) |
+| `POST /api/auth/users/<id>/set-password/` | Admin password reset (Admin only) |
 | `GET /api/jobs/` | List jobs (filtered, paginated) |
 | `POST /api/jobs/create/` | Create a new job |
 | `GET /api/jobs/<id>/` | Job detail with status history + allowed transitions |
@@ -163,7 +169,7 @@ After running `python manage.py seed_data`, these accounts are available (passwo
 
 ## Role Permissions
 
-| Feature | Director | Ops Manager | Supervisor | Technician | Finance |
+| Feature | Admin | Ops Manager | Supervisor | Technician | Finance |
 |---------|:--------:|:-----------:|:----------:|:----------:|:-------:|
 | View all jobs | Yes | Yes | Yes | Own only | Read-only |
 | Create/edit/assign jobs | No | Yes | Yes | No | No |

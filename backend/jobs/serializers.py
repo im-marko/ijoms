@@ -78,7 +78,7 @@ class JobDetailSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         if request and obj.status == Job.Status.CLOSED:
             # Reopening a closed job is supervisor-and-above only
-            if request.user.role not in ('managing_director', 'operations_manager', 'supervisor'):
+            if request.user.role not in ('admin', 'operations_manager', 'supervisor'):
                 transitions = []
         return transitions
 

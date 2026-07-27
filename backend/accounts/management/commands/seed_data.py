@@ -37,7 +37,7 @@ class Command(BaseCommand):
         self.stdout.write('  Creating users...')
         users_data = [
             {'email': 'director@ijoms.com', 'username': 'director', 'first_name': 'James',
-             'last_name': 'Mwangi', 'role': 'managing_director', 'phone': '+254700100100'},
+             'last_name': 'Mwangi', 'role': 'admin', 'phone': '+254700100100'},
             {'email': 'opsmanager@ijoms.com', 'username': 'opsmanager', 'first_name': 'Sarah',
              'last_name': 'Ochieng', 'role': 'operations_manager', 'phone': '+254700200200'},
             {'email': 'supervisor1@ijoms.com', 'username': 'supervisor1', 'first_name': 'Peter',
@@ -274,7 +274,7 @@ class Command(BaseCommand):
 
     def _create_notices(self):
         self.stdout.write('  Creating notices...')
-        director = User.objects.filter(role='managing_director').first()
+        director = User.objects.filter(role='admin').first()
         ops = User.objects.filter(role='operations_manager').first()
         supervisor = User.objects.filter(role='supervisor').first()
         now = timezone.now()
@@ -326,7 +326,7 @@ class Command(BaseCommand):
                            'Agenda includes Q1 performance review, Q2 targets, and the upcoming system upgrade roadmap. '
                            'Attendance is mandatory for all supervisors and above.',
                 'priority': 'medium',
-                'target_roles': ['managing_director', 'operations_manager', 'supervisor'],
+                'target_roles': ['admin', 'operations_manager', 'supervisor'],
                 'created_by': director, 'expiry_date': now + timedelta(days=16),
             },
         ]

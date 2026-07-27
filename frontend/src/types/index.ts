@@ -12,7 +12,7 @@ export interface User {
 }
 
 export type UserRole =
-  | 'managing_director'
+  | 'admin'
   | 'operations_manager'
   | 'supervisor'
   | 'technician'

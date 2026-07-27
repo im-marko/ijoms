@@ -4,7 +4,7 @@ from django.db import models
 
 class User(AbstractUser):
     class Role(models.TextChoices):
-        MANAGING_DIRECTOR = 'managing_director', 'Managing Director'
+        ADMIN = 'admin', 'Admin'
         OPERATIONS_MANAGER = 'operations_manager', 'Operations Manager'
         SUPERVISOR = 'supervisor', 'Supervisor'
         TECHNICIAN = 'technician', 'Technician'
@@ -25,12 +25,12 @@ class User(AbstractUser):
 
     @property
     def is_manager_or_above(self):
-        return self.role in (self.Role.MANAGING_DIRECTOR, self.Role.OPERATIONS_MANAGER)
+        return self.role in (self.Role.ADMIN, self.Role.OPERATIONS_MANAGER)
 
     @property
     def is_supervisor_or_above(self):
         return self.role in (
-            self.Role.MANAGING_DIRECTOR,
+            self.Role.ADMIN,
             self.Role.OPERATIONS_MANAGER,
             self.Role.SUPERVISOR,
         )

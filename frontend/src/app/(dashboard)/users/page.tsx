@@ -17,7 +17,7 @@ import { KeyRound, Pencil, Plus, Search } from 'lucide-react';
 import { toast } from 'sonner';
 
 const ROLE_BADGE_COLORS: Record<UserRole, string> = {
-  managing_director: 'bg-purple-100 text-purple-700',
+  admin: 'bg-purple-100 text-purple-700',
   operations_manager: 'bg-blue-100 text-blue-700',
   supervisor: 'bg-yellow-100 text-yellow-700',
   technician: 'bg-green-100 text-green-700',
@@ -113,7 +113,7 @@ export default function UsersPage() {
   };
 
   return (
-    <RequireRole roles={['managing_director']}>
+    <RequireRole roles={['admin']}>
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-gray-900">Users</h1>

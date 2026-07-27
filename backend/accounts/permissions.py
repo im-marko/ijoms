@@ -1,9 +1,9 @@
 from rest_framework.permissions import SAFE_METHODS, BasePermission
 
 
-class IsManagingDirector(BasePermission):
+class IsAdmin(BasePermission):
     def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.role == 'managing_director'
+        return request.user.is_authenticated and request.user.role == 'admin'
 
 
 class IsOperationsManager(BasePermission):
@@ -27,20 +27,20 @@ class IsFinanceOfficer(BasePermission):
 
 
 class IsManagerOrAbove(BasePermission):
-    """Managing Director or Operations Manager"""
+    """Admin or Operations Manager"""
     def has_permission(self, request, view):
         return (
             request.user.is_authenticated
-            and request.user.role in ('managing_director', 'operations_manager')
+            and request.user.role in ('admin', 'operations_manager')
         )
 
 
 class IsSupervisorOrAbove(BasePermission):
-    """Managing Director, Operations Manager, or Supervisor"""
+    """Admin, Operations Manager, or Supervisor"""
     def has_permission(self, request, view):
         return (
             request.user.is_authenticated
-            and request.user.role in ('managing_director', 'operations_manager', 'supervisor')
+            and request.user.role in ('admin', 'operations_manager', 'supervisor')
         )
 
 

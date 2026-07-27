@@ -25,7 +25,7 @@ def make_user(role, email, username):
 class JobsBaseTestCase(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.md = make_user('managing_director', 'md@example.com', 'md')
+        cls.md = make_user('admin', 'md@example.com', 'md')
         cls.om = make_user('operations_manager', 'om@example.com', 'om')
         cls.supervisor = make_user('supervisor', 'sup@example.com', 'sup')
         cls.technician = make_user('technician', 'tech@example.com', 'tech')

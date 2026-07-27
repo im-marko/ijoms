@@ -10,14 +10,14 @@ import {
 } from 'lucide-react';
 
 const navItems = [
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, roles: ['managing_director', 'operations_manager', 'supervisor', 'technician', 'finance_officer'] },
-  { href: '/jobs', label: 'Jobs', icon: Briefcase, roles: ['managing_director', 'operations_manager', 'supervisor', 'technician', 'finance_officer'] },
-  { href: '/noticeboard', label: 'Notice Board', icon: Megaphone, roles: ['managing_director', 'operations_manager', 'supervisor', 'technician', 'finance_officer'] },
-  { href: '/notifications', label: 'Notifications', icon: Bell, roles: ['managing_director', 'operations_manager', 'supervisor', 'technician', 'finance_officer'] },
-  { href: '/analytics', label: 'Analytics', icon: BarChart3, roles: ['managing_director', 'operations_manager', 'supervisor'] },
-  { href: '/audit-logs', label: 'Audit Logs', icon: ScrollText, roles: ['managing_director', 'operations_manager'] },
-  { href: '/users', label: 'Users', icon: Users, roles: ['managing_director'] },
-  { href: '/settings', label: 'Settings', icon: Settings, roles: ['managing_director', 'operations_manager', 'supervisor', 'technician', 'finance_officer'] },
+  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, roles: ['admin', 'operations_manager', 'supervisor', 'technician', 'finance_officer'] },
+  { href: '/jobs', label: 'Jobs', icon: Briefcase, roles: ['admin', 'operations_manager', 'supervisor', 'technician', 'finance_officer'] },
+  { href: '/noticeboard', label: 'Notice Board', icon: Megaphone, roles: ['admin', 'operations_manager', 'supervisor', 'technician', 'finance_officer'] },
+  { href: '/notifications', label: 'Notifications', icon: Bell, roles: ['admin', 'operations_manager', 'supervisor', 'technician', 'finance_officer'] },
+  { href: '/analytics', label: 'Analytics', icon: BarChart3, roles: ['admin', 'operations_manager', 'supervisor'] },
+  { href: '/audit-logs', label: 'Audit Logs', icon: ScrollText, roles: ['admin', 'operations_manager'] },
+  { href: '/users', label: 'Users', icon: Users, roles: ['admin'] },
+  { href: '/settings', label: 'Settings', icon: Settings, roles: ['admin', 'operations_manager', 'supervisor', 'technician', 'finance_officer'] },
 ];
 
 export default function Sidebar() {

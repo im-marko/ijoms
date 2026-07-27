@@ -1,7 +1,7 @@
 import { UserRole } from '@/types';
 
 export const ALL_ROLES: UserRole[] = [
-  'managing_director',
+  'admin',
   'operations_manager',
   'supervisor',
   'technician',
@@ -9,14 +9,14 @@ export const ALL_ROLES: UserRole[] = [
 ];
 
 export const ROLE_LABELS: Record<UserRole, string> = {
-  managing_director: 'Managing Director',
+  admin: 'Admin',
   operations_manager: 'Operations Manager',
   supervisor: 'Supervisor',
   technician: 'Technician',
   finance_officer: 'Finance Officer',
 };
 
-export const MANAGER_ROLES: UserRole[] = ['managing_director', 'operations_manager'];
+export const MANAGER_ROLES: UserRole[] = ['admin', 'operations_manager'];
 export const SUPERVISOR_AND_ABOVE: UserRole[] = [...MANAGER_ROLES, 'supervisor'];
 export const CAN_MANAGE_JOBS: UserRole[] = ['operations_manager', 'supervisor'];
 

@@ -73,7 +73,7 @@ export default function RegisterPage() {
               <Input value={form.phone} onChange={(e) => update('phone', e.target.value)} />
             </div>
             <p className="text-xs text-gray-500">
-              New accounts are created as Technicians. Contact your Managing Director for elevated access.
+              New accounts are created as Technicians. Contact your Admin for elevated access.
             </p>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">

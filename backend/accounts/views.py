@@ -10,7 +10,7 @@ from .serializers import (
     UserSerializer, MeSerializer, RegisterSerializer, ChangePasswordSerializer,
     AdminUserCreateSerializer, AdminSetPasswordSerializer,
 )
-from .permissions import IsManagingDirector
+from .permissions import IsAdmin
 
 User = get_user_model()
 
@@ -56,7 +56,7 @@ class ChangePasswordView(APIView):
 
 
 class UserListCreateView(generics.ListCreateAPIView):
-    permission_classes = [IsManagingDirector]
+    permission_classes = [IsAdmin]
     queryset = User.objects.all().order_by('id')
     filterset_fields = ['role', 'is_active']
     search_fields = ['first_name', 'last_name', 'email']
@@ -78,7 +78,7 @@ class UserListCreateView(generics.ListCreateAPIView):
 
 class UserDetailView(generics.RetrieveUpdateAPIView):
     serializer_class = UserSerializer
-    permission_classes = [IsManagingDirector]
+    permission_classes = [IsAdmin]
     queryset = User.objects.all()
 
     def perform_update(self, serializer):
@@ -98,7 +98,7 @@ class UserDetailView(generics.RetrieveUpdateAPIView):
 
 
 class SetPasswordView(APIView):
-    permission_classes = [IsManagingDirector]
+    permission_classes = [IsAdmin]
 
     def post(self, request, pk):
         try:

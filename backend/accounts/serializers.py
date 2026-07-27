@@ -42,7 +42,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         # Self-registration is always technician; elevated roles are granted
-        # by the Managing Director via user management.
+        # by the Admin via user management.
         validated_data['role'] = User.Role.TECHNICIAN
         return User.objects.create_user(**validated_data)
 

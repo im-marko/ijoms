@@ -101,7 +101,7 @@ class JobStatusUpdateView(APIView):
 
         # Reopening a closed job is supervisor-and-above only
         if job.status == Job.Status.CLOSED and request.user.role not in (
-            'managing_director', 'operations_manager', 'supervisor'
+            'admin', 'operations_manager', 'supervisor'
         ):
             return Response(
                 {'detail': 'Only supervisors and above can reopen a closed job.'},

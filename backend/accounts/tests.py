@@ -31,7 +31,7 @@ def make_user(role, email, username, **extra):
 class AccountsAPITests(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.md = make_user('managing_director', 'md@example.com', 'md')
+        cls.md = make_user('admin', 'md@example.com', 'md')
         cls.om = make_user('operations_manager', 'om@example.com', 'om')
         cls.supervisor = make_user('supervisor', 'sup@example.com', 'sup')
         cls.technician = make_user('technician', 'tech@example.com', 'tech')
@@ -48,7 +48,7 @@ class AccountsAPITests(APITestCase):
             'last_name': 'Guy',
             'password': PASSWORD,
             'password_confirm': PASSWORD,
-            'role': 'managing_director',  # must be ignored
+            'role': 'admin',  # must be ignored
         }
         response = self.client.post('/api/auth/register/', payload)
         self.assertEqual(response.status_code, 201, response.data)
@@ -61,7 +61,7 @@ class AccountsAPITests(APITestCase):
     def test_me_cannot_change_role_but_profile_fields_updatable(self):
         self.client.force_authenticate(self.technician)
         response = self.client.patch('/api/auth/me/', {
-            'role': 'managing_director',
+            'role': 'admin',
             'first_name': 'Updated',
             'phone': '0771234567',
         })
@@ -109,7 +109,7 @@ class AccountsAPITests(APITestCase):
         )
         self.assertEqual(response.status_code, 400)
         self.md.refresh_from_db()
-        self.assertEqual(self.md.role, 'managing_director')
+        self.assertEqual(self.md.role, 'admin')
 
     def test_md_cannot_deactivate_self(self):
         self.client.force_authenticate(self.md)
