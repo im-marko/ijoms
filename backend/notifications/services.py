@@ -38,6 +38,11 @@ def _whatsapp_payload(to, message):
     business-initiated messages outside the 24h service window),
     free-form text otherwise."""
     if settings.WHATSAPP_TEMPLATE_NAME:
+        # Meta rejects template parameters containing newlines, tabs,
+        # or runs of 4+ spaces — flatten the multi-line message.
+        flat = ' | '.join(
+            part.strip() for part in message.splitlines() if part.strip()
+        )
         return {
             'messaging_product': 'whatsapp',
             'to': to,
@@ -47,7 +52,7 @@ def _whatsapp_payload(to, message):
                 'language': {'code': settings.WHATSAPP_TEMPLATE_LANGUAGE},
                 'components': [{
                     'type': 'body',
-                    'parameters': [{'type': 'text', 'text': message}],
+                    'parameters': [{'type': 'text', 'text': flat}],
                 }],
             },
         }
