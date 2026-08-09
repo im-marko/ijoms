@@ -20,6 +20,18 @@ import {
 import { ArrowLeft, Clock, Pencil, UserPlus } from 'lucide-react';
 import { toast } from 'sonner';
 
+const PRIORITY_ITEMS = [
+  { value: 'low', label: 'Low' },
+  { value: 'medium', label: 'Medium' },
+  { value: 'high', label: 'High' },
+  { value: 'critical', label: 'Critical' },
+];
+
+const STATUS_LABELS: Record<string, string> = {
+  open: 'Open', assigned: 'Assigned', in_progress: 'In Progress',
+  escalated: 'Escalated', closed: 'Closed',
+};
+
 export default function JobDetailPage() {
   const { id } = useParams();
   const router = useRouter();
@@ -158,11 +170,15 @@ export default function JobDetailPage() {
                 </div>
                 <div className="space-y-2">
                   <Label>Priority</Label>
-                  <Select value={editForm.priority} onValueChange={(v) => v && setEditForm({ ...editForm, priority: String(v) })}>
+                  <Select
+                    value={editForm.priority}
+                    onValueChange={(v) => v && setEditForm({ ...editForm, priority: String(v) })}
+                    items={PRIORITY_ITEMS}
+                  >
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
-                      {['low', 'medium', 'high', 'critical'].map((p) => (
-                        <SelectItem key={p} value={p} className="capitalize">{p}</SelectItem>
+                      {PRIORITY_ITEMS.map((p) => (
+                        <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -264,7 +280,13 @@ export default function JobDetailPage() {
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label>Technician</Label>
-                  <Select value={assignTo} onValueChange={(v) => v && setAssignTo(String(v))}>
+                  <Select
+                    value={assignTo}
+                    onValueChange={(v) => v && setAssignTo(String(v))}
+                    items={technicians
+                      .filter((t) => t.id !== job.assigned_to)
+                      .map((t) => ({ value: String(t.id), label: `${t.first_name} ${t.last_name}` }))}
+                  >
                     <SelectTrigger><SelectValue placeholder="Select technician" /></SelectTrigger>
                     <SelectContent>
                       {technicians
@@ -290,11 +312,15 @@ export default function JobDetailPage() {
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label>New Status</Label>
-                  <Select value={newStatus} onValueChange={(v) => v && setNewStatus(String(v))}>
+                  <Select
+                    value={newStatus}
+                    onValueChange={(v) => v && setNewStatus(String(v))}
+                    items={transitions.map((s) => ({ value: s, label: STATUS_LABELS[s] ?? s }))}
+                  >
                     <SelectTrigger><SelectValue placeholder="Select status" /></SelectTrigger>
                     <SelectContent>
                       {transitions.map((s) => (
-                        <SelectItem key={s} value={s} className="capitalize">{s.replace('_', ' ')}</SelectItem>
+                        <SelectItem key={s} value={s}>{STATUS_LABELS[s] ?? s}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>

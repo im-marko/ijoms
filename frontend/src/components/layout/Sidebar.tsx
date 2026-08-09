@@ -35,10 +35,10 @@ export default function Sidebar() {
         {user.company_name ? (
           <div className="min-w-0">
             <p className="truncate text-base font-bold leading-tight text-blue-600">{user.company_name}</p>
-            <p className="text-[10px] font-medium uppercase tracking-wider text-gray-400">iJOMS</p>
+            <p className="text-[10px] font-medium uppercase tracking-wider text-gray-400">Job Pilot</p>
           </div>
         ) : (
-          <span className="text-xl font-bold text-blue-600">iJOMS</span>
+          <span className="text-xl font-bold text-blue-600">Job Pilot</span>
         )}
       </div>
 

@@ -1,4 +1,6 @@
-# iJOMS - Intelligent Job & Operations Management System
+# Job Pilot - Intelligent Job & Operations Management System
+
+> Formerly "iJOMS". Repository and deployment URLs retain the historical name.
 
 A centralized web platform for managing operational jobs, assigning technicians, tracking customer data, and delivering analytics for data-driven decisions.
 

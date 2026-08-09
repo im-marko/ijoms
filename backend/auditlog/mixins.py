@@ -8,9 +8,10 @@ from .models import AuditLog
 
 def _json_safe(data):
     """Coerce audit payloads (may contain model instances, datetimes, Decimals)
-    into plain JSON-serializable structures."""
+    into plain JSON-serializable structures. Model instances are rendered as
+    their string representation so audit entries read as names, not ids."""
     if isinstance(data, Model):
-        return data.pk
+        return str(data)
     if isinstance(data, dict):
         return {key: _json_safe(value) for key, value in data.items()}
     if isinstance(data, (list, tuple, set)):

@@ -74,7 +74,7 @@ function NoticeFormFields({ form, setForm }: { form: NoticeForm; setForm: (f: No
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label>Priority</Label>
-          <Select value={form.priority} onValueChange={(v) => v && setForm({ ...form, priority: String(v) })}>
+          <Select value={form.priority} onValueChange={(v) => v && setForm({ ...form, priority: String(v) })} items={[{ value: 'low', label: 'Low' }, { value: 'medium', label: 'Medium' }, { value: 'high', label: 'High' }, { value: 'critical', label: 'Critical' }]}>
             <SelectTrigger><SelectValue /></SelectTrigger>
             <SelectContent>
               <SelectItem value="low">Low</SelectItem>

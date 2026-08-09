@@ -226,7 +226,10 @@ class JobAssignView(APIView):
             user=request.user,
             action='reassignment' if previous else 'assignment',
             entity_type='Job', entity_id=job.pk,
-            changes={'from': previous.pk if previous else None, 'to': technician.pk},
+            changes={
+                'from': previous.get_full_name() if previous else None,
+                'to': technician.get_full_name(),
+            },
             request=request,
         )
         from notifications.services import notify_job_assigned

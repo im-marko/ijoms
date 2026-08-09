@@ -73,8 +73,8 @@ class JobCreateTests(JobsBaseTestCase):
         log = AuditLog.objects.get(action='create', entity_type='Job', entity_id=str(job.pk))
         self.assertEqual(log.user, self.om)
         json.dumps(log.changes)  # must not raise
-        self.assertEqual(log.changes['assigned_to'], self.technician.pk)
-        self.assertEqual(log.changes['category'], self.category.pk)
+        self.assertEqual(log.changes['assigned_to'], str(self.technician))
+        self.assertEqual(log.changes['category'], str(self.category))
 
         # Assignee notified
         self.assertTrue(
@@ -235,8 +235,8 @@ class JobAssignTests(JobsBaseTestCase):
         log = AuditLog.objects.get(
             action='reassignment', entity_type='Job', entity_id=str(job.pk)
         )
-        self.assertEqual(log.changes['from'], self.technician.pk)
-        self.assertEqual(log.changes['to'], self.technician2.pk)
+        self.assertEqual(log.changes['from'], self.technician.get_full_name())
+        self.assertEqual(log.changes['to'], self.technician2.get_full_name())
 
     def test_assign_as_technician_forbidden(self):
         job = self.make_job()

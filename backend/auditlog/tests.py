@@ -75,7 +75,7 @@ class LogActionSerializationTests(APITestCase):
         log = AuditLog.objects.get(entity_type='Job', entity_id='42')
         # Stored changes must be plain JSON-serializable data
         json.dumps(log.changes)
-        self.assertEqual(log.changes['assigned_to'], self.technician.pk)
-        self.assertEqual(log.changes['nested']['user'], self.om.pk)
-        self.assertEqual(log.changes['items'][0], self.technician.pk)
+        self.assertEqual(log.changes['assigned_to'], str(self.technician))
+        self.assertEqual(log.changes['nested']['user'], str(self.om))
+        self.assertEqual(log.changes['items'][0], str(self.technician))
         self.assertIsInstance(log.changes['deadline'], str)

@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "iJOMS - Job & Operations Management",
+  title: "Job Pilot - Job & Operations Management",
   description: "Intelligent Job & Operations Management System",
 };
 

@@ -17,6 +17,20 @@ import { Textarea } from '@/components/ui/textarea';
 import { Plus, Search } from 'lucide-react';
 import { toast } from 'sonner';
 
+const PRIORITY_ITEMS = [
+  { value: 'low', label: 'Low' },
+  { value: 'medium', label: 'Medium' },
+  { value: 'high', label: 'High' },
+  { value: 'critical', label: 'Critical' },
+];
+const STATUS_ITEMS = [
+  { value: 'open', label: 'Open' },
+  { value: 'assigned', label: 'Assigned' },
+  { value: 'in_progress', label: 'In Progress' },
+  { value: 'escalated', label: 'Escalated' },
+  { value: 'closed', label: 'Closed' },
+];
+
 const PRIORITY_COLORS: Record<string, string> = {
   low: 'bg-gray-100 text-gray-700',
   medium: 'bg-blue-100 text-blue-700',
@@ -117,7 +131,11 @@ export default function JobsPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label>Category</Label>
-                    <Select value={form.category} onValueChange={(v) => v && setForm({ ...form, category: v })}>
+                    <Select
+                      value={form.category}
+                      onValueChange={(v) => v && setForm({ ...form, category: String(v) })}
+                      items={categories.map((c) => ({ value: String(c.id), label: c.name }))}
+                    >
                       <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
                       <SelectContent>
                         {categories.map((c) => <SelectItem key={c.id} value={String(c.id)}>{c.name}</SelectItem>)}
@@ -126,20 +144,21 @@ export default function JobsPage() {
                   </div>
                   <div className="space-y-2">
                     <Label>Priority</Label>
-                    <Select value={form.priority} onValueChange={(v) => v && setForm({ ...form, priority: v })}>
+                    <Select value={form.priority} onValueChange={(v) => v && setForm({ ...form, priority: String(v) })} items={PRIORITY_ITEMS}>
                       <SelectTrigger><SelectValue /></SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="low">Low</SelectItem>
-                        <SelectItem value="medium">Medium</SelectItem>
-                        <SelectItem value="high">High</SelectItem>
-                        <SelectItem value="critical">Critical</SelectItem>
+                        {PRIORITY_ITEMS.map((p) => <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>)}
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label>Assign To</Label>
-                  <Select value={form.assigned_to} onValueChange={(v) => v && setForm({ ...form, assigned_to: v })}>
+                  <Select
+                    value={form.assigned_to}
+                    onValueChange={(v) => v && setForm({ ...form, assigned_to: String(v) })}
+                    items={technicians.map((t) => ({ value: String(t.id), label: `${t.first_name} ${t.last_name}` }))}
+                  >
                     <SelectTrigger><SelectValue placeholder="Unassigned" /></SelectTrigger>
                     <SelectContent>
                       {technicians.map((t) => <SelectItem key={t.id} value={String(t.id)}>{t.first_name} {t.last_name}</SelectItem>)}
@@ -174,25 +193,26 @@ export default function JobsPage() {
             <Input placeholder="Search jobs..." value={search} onChange={(e) => setSearch(e.target.value)} className="w-64" onKeyDown={(e) => e.key === 'Enter' && handleSearch()} />
             <Button variant="outline" size="sm" onClick={handleSearch}><Search className="h-4 w-4" /></Button>
           </div>
-          <Select value={statusFilter} onValueChange={(v) => { if (v) { setStatusFilter(v); setPage(1); } }}>
+          <Select
+            value={statusFilter}
+            onValueChange={(v) => { if (v) { setStatusFilter(String(v)); setPage(1); } }}
+            items={[{ value: 'all', label: 'All Status' }, ...STATUS_ITEMS]}
+          >
             <SelectTrigger className="w-40"><SelectValue placeholder="Status" /></SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Status</SelectItem>
-              <SelectItem value="open">Open</SelectItem>
-              <SelectItem value="assigned">Assigned</SelectItem>
-              <SelectItem value="in_progress">In Progress</SelectItem>
-              <SelectItem value="escalated">Escalated</SelectItem>
-              <SelectItem value="closed">Closed</SelectItem>
+              {STATUS_ITEMS.map((s) => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}
             </SelectContent>
           </Select>
-          <Select value={priorityFilter} onValueChange={(v) => { if (v) { setPriorityFilter(v); setPage(1); } }}>
+          <Select
+            value={priorityFilter}
+            onValueChange={(v) => { if (v) { setPriorityFilter(String(v)); setPage(1); } }}
+            items={[{ value: 'all', label: 'All Priority' }, ...PRIORITY_ITEMS]}
+          >
             <SelectTrigger className="w-40"><SelectValue placeholder="Priority" /></SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Priority</SelectItem>
-              <SelectItem value="low">Low</SelectItem>
-              <SelectItem value="medium">Medium</SelectItem>
-              <SelectItem value="high">High</SelectItem>
-              <SelectItem value="critical">Critical</SelectItem>
+              {PRIORITY_ITEMS.map((p) => <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>)}
             </SelectContent>
           </Select>
           <span className="text-sm text-gray-500">{total} jobs found</span>

@@ -118,7 +118,7 @@ export default function AnalyticsPage() {
             <div className="flex items-center justify-between">
               <CardTitle>Job Volume</CardTitle>
               <div className="flex gap-2">
-                <Select value={period} onValueChange={(v) => v && setPeriod(v)}>
+                <Select value={period} onValueChange={(v) => v && setPeriod(String(v))} items={[{ value: 'daily', label: 'Daily' }, { value: 'weekly', label: 'Weekly' }, { value: 'monthly', label: 'Monthly' }]}>
                   <SelectTrigger className="w-28"><SelectValue /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="daily">Daily</SelectItem>
@@ -126,7 +126,7 @@ export default function AnalyticsPage() {
                     <SelectItem value="monthly">Monthly</SelectItem>
                   </SelectContent>
                 </Select>
-                <Select value={days} onValueChange={(v) => v && setDays(v)}>
+                <Select value={days} onValueChange={(v) => v && setDays(String(v))} items={[{ value: '7', label: '7 days' }, { value: '30', label: '30 days' }, { value: '90', label: '90 days' }]}>
                   <SelectTrigger className="w-28"><SelectValue /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="7">7 days</SelectItem>

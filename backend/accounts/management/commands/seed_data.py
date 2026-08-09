@@ -288,7 +288,7 @@ class Command(BaseCommand):
         notices = [
             {
                 'title': 'System Maintenance Window - April 19',
-                'content': 'The iJOMS system will undergo scheduled maintenance on Saturday, April 19 from 02:00 to 06:00 EAT. '
+                'content': 'The Job Pilot system will undergo scheduled maintenance on Saturday, April 19 from 02:00 to 06:00 EAT. '
                            'Please ensure all critical jobs are updated before the maintenance window. '
                            'The system will be unavailable during this period.',
                 'priority': 'high', 'target_roles': [], 'created_by': director,

@@ -168,7 +168,7 @@ export default function UsersPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label>Role</Label>
-                    <Select value={createForm.role} onValueChange={(v) => v && setCreateForm({ ...createForm, role: v as UserRole })}>
+                    <Select value={createForm.role} onValueChange={(v) => v && setCreateForm({ ...createForm, role: v as UserRole })} items={ALL_ROLES.map((r) => ({ value: r, label: ROLE_LABELS[r] }))}>
                       <SelectTrigger><SelectValue /></SelectTrigger>
                       <SelectContent>
                         {ALL_ROLES.map((r) => <SelectItem key={r} value={r}>{ROLE_LABELS[r]}</SelectItem>)}
@@ -225,14 +225,14 @@ export default function UsersPage() {
               <Input placeholder="Search users..." value={search} onChange={(e) => setSearch(e.target.value)} className="w-64" onKeyDown={(e) => e.key === 'Enter' && handleSearch()} />
               <Button variant="outline" size="sm" onClick={handleSearch}><Search className="h-4 w-4" /></Button>
             </div>
-            <Select value={roleFilter} onValueChange={(v) => { if (v) { setRoleFilter(v); setPage(1); } }}>
+            <Select value={roleFilter} onValueChange={(v) => { if (v) { setRoleFilter(String(v)); setPage(1); } }} items={[{ value: 'all', label: 'All Roles' }, ...ALL_ROLES.map((r) => ({ value: r, label: ROLE_LABELS[r] }))]}>
               <SelectTrigger className="w-48"><SelectValue placeholder="Role" /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Roles</SelectItem>
                 {ALL_ROLES.map((r) => <SelectItem key={r} value={r}>{ROLE_LABELS[r]}</SelectItem>)}
               </SelectContent>
             </Select>
-            <Select value={activeFilter} onValueChange={(v) => { if (v) { setActiveFilter(v); setPage(1); } }}>
+            <Select value={activeFilter} onValueChange={(v) => { if (v) { setActiveFilter(String(v)); setPage(1); } }} items={[{ value: 'all', label: 'All Status' }, { value: 'true', label: 'Active' }, { value: 'false', label: 'Inactive' }]}>
               <SelectTrigger className="w-36"><SelectValue placeholder="Status" /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Status</SelectItem>
@@ -325,7 +325,7 @@ export default function UsersPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Role</Label>
-                  <Select value={editForm.role} onValueChange={(v) => v && setEditForm({ ...editForm, role: v as UserRole })}>
+                  <Select value={editForm.role} onValueChange={(v) => v && setEditForm({ ...editForm, role: v as UserRole })} items={ALL_ROLES.map((r) => ({ value: r, label: ROLE_LABELS[r] }))}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
                       {ALL_ROLES.map((r) => <SelectItem key={r} value={r}>{ROLE_LABELS[r]}</SelectItem>)}
@@ -339,7 +339,7 @@ export default function UsersPage() {
               </div>
               <div className="space-y-2">
                 <Label>Status</Label>
-                <Select value={editForm.is_active ? 'true' : 'false'} onValueChange={(v) => v && setEditForm({ ...editForm, is_active: v === 'true' })}>
+                <Select value={editForm.is_active ? 'true' : 'false'} onValueChange={(v) => v && setEditForm({ ...editForm, is_active: v === 'true' })} items={[{ value: 'true', label: 'Active' }, { value: 'false', label: 'Inactive' }]}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="true">Active</SelectItem>
