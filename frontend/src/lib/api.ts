@@ -55,8 +55,11 @@ api.interceptors.response.use(
       } catch {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
+        localStorage.removeItem('last_activity');
         if (window.location.pathname !== '/login') {
-          window.location.href = '/login';
+          // A dead refresh token means the session lapsed (10-minute
+          // server-side cap) — explain rather than silently bouncing.
+          window.location.href = '/login?expired=1';
         }
       }
     }

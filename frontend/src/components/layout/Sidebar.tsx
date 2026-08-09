@@ -70,7 +70,7 @@ export default function Sidebar() {
           <p className="text-xs text-gray-500">{user.role_display}</p>
         </div>
         <button
-          onClick={logout}
+          onClick={() => logout()}
           className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50"
         >
           <LogOut className="h-5 w-5" />

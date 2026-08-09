@@ -116,10 +116,12 @@ REST_FRAMEWORK = {
     },
 }
 
-# JWT
+# JWT — short lifetimes enforce the 5-minute inactivity timeout server-side.
+# Active users keep rotating tokens (ROTATE_REFRESH_TOKENS) so their session
+# slides; an idle session's refresh token dies within 10 minutes.
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=10),
     'ROTATE_REFRESH_TOKENS': True,
     'AUTH_HEADER_TYPES': ('Bearer',),
 }

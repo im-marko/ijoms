@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import api, { getApiError } from '@/lib/api';
@@ -27,6 +27,19 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showDemo, setShowDemo] = useState(false);
+  const [expired, setExpired] = useState(false);
+
+  useEffect(() => {
+    // window.location (not useSearchParams) avoids the Suspense requirement
+    // on a statically prerendered page; the sessionStorage flag covers
+    // client-side redirects that lose query params.
+    const fromQuery = new URLSearchParams(window.location.search).get('expired');
+    const fromFlag = sessionStorage.getItem('session_expired');
+    if (fromQuery || fromFlag) {
+      setExpired(true);
+      sessionStorage.removeItem('session_expired');
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,6 +92,11 @@ export default function LoginPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
+            {expired && !error && (
+              <div className="rounded-md bg-amber-50 p-3 text-sm text-amber-800">
+                You were signed out after 5 minutes of inactivity. Please sign in again.
+              </div>
+            )}
             {error && (
               <div className="rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</div>
             )}
