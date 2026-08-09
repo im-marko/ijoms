@@ -2,6 +2,7 @@ from rest_framework import generics
 from django_filters import rest_framework as filters
 
 from accounts.permissions import IsManagerOrAbove
+from ijoms.tenancy import CompanyScopedQuerysetMixin
 from .models import AuditLog
 from .serializers import AuditLogSerializer
 
@@ -16,7 +17,7 @@ class AuditLogFilter(filters.FilterSet):
         fields = ['action', 'entity_type', 'user_id', 'start_date', 'end_date']
 
 
-class AuditLogListView(generics.ListAPIView):
+class AuditLogListView(CompanyScopedQuerysetMixin, generics.ListAPIView):
     serializer_class = AuditLogSerializer
     permission_classes = [IsManagerOrAbove]
     queryset = AuditLog.objects.select_related('user').all()

@@ -1,27 +1,20 @@
 from django.contrib.auth import get_user_model
 from rest_framework.test import APITestCase
 
+from accounts.test_utils import make_company, make_user
 from auditlog.models import AuditLog
 from .models import Notice
 
 User = get_user_model()
 
-PASSWORD = 'Compl3x!Passw0rd'
-
-
-def make_user(role, email, username):
-    return User.objects.create_user(
-        username=username, email=email, password=PASSWORD, role=role,
-        first_name=username.capitalize(), last_name='User',
-    )
-
 
 class NoticeboardAPITests(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.supervisor = make_user('supervisor', 'sup@example.com', 'sup')
-        cls.technician = make_user('technician', 'tech@example.com', 'tech')
-        cls.finance = make_user('finance_officer', 'fin@example.com', 'fin')
+        cls.company = make_company('Notice TestCo')
+        cls.supervisor = make_user('supervisor', 'sup@example.com', 'sup', company=cls.company)
+        cls.technician = make_user('technician', 'tech@example.com', 'tech', company=cls.company)
+        cls.finance = make_user('finance_officer', 'fin@example.com', 'fin', company=cls.company)
 
     def test_create_notice_as_supervisor_is_audited(self):
         self.client.force_authenticate(self.supervisor)
@@ -83,7 +76,7 @@ class NoticeboardAPITests(APITestCase):
 
     def test_empty_target_roles_visible_to_all(self):
         Notice.objects.create(
-            title='Everyone', content='All-hands notice.',
+            company=self.company, title='Everyone', content='All-hands notice.',
             created_by=self.supervisor, target_roles=[],
         )
         for user in (self.technician, self.finance, self.supervisor):

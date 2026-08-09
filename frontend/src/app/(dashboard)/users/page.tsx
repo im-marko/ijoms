@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import api, { getApiError } from '@/lib/api';
-import { User, UserRole, PaginatedResponse } from '@/types';
+import { Company, User, UserRole, PaginatedResponse } from '@/types';
 import { ALL_ROLES, ROLE_LABELS } from '@/lib/roles';
 import RequireRole from '@/components/RequireRole';
 import { Button } from '@/components/ui/button';
@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
-import { KeyRound, Pencil, Plus, Search } from 'lucide-react';
+import { Copy, KeyRound, Pencil, Plus, RefreshCw, Search, Ticket } from 'lucide-react';
 import { toast } from 'sonner';
 
 const ROLE_BADGE_COLORS: Record<UserRole, string> = {
@@ -25,7 +25,7 @@ const ROLE_BADGE_COLORS: Record<UserRole, string> = {
 };
 
 const EMPTY_CREATE_FORM = {
-  email: '', username: '', first_name: '', last_name: '',
+  email: '', first_name: '', last_name: '',
   role: 'technician' as UserRole, phone: '', password: '',
 };
 
@@ -47,6 +47,35 @@ export default function UsersPage() {
 
   const [resetUser, setResetUser] = useState<User | null>(null);
   const [newPassword, setNewPassword] = useState('');
+
+  const [company, setCompany] = useState<Company | null>(null);
+  const [regenerating, setRegenerating] = useState(false);
+
+  useEffect(() => {
+    api.get<Company>('/auth/company/')
+      .then((res) => setCompany(res.data))
+      .catch((err) => toast.error(getApiError(err, 'Failed to load company info')));
+  }, []);
+
+  const copyInvite = () => {
+    if (!company?.invite_code) return;
+    navigator.clipboard.writeText(company.invite_code);
+    toast.success('Invite code copied');
+  };
+
+  const regenerateInvite = async () => {
+    if (!window.confirm('Regenerate the invite code? The current code will stop working immediately.')) return;
+    setRegenerating(true);
+    try {
+      const res = await api.post('/auth/company/regenerate-invite/');
+      setCompany((c) => (c ? { ...c, invite_code: res.data.invite_code } : c));
+      toast.success('Invite code regenerated');
+    } catch (err) {
+      toast.error(getApiError(err, 'Failed to regenerate invite code'));
+    } finally {
+      setRegenerating(false);
+    }
+  };
 
   const fetchUsers = async () => {
     const params: Record<string, string | number> = { page, search };
@@ -126,10 +155,6 @@ export default function UsersPage() {
                   <Label>Email</Label>
                   <Input type="email" required value={createForm.email} onChange={(e) => setCreateForm({ ...createForm, email: e.target.value })} />
                 </div>
-                <div className="space-y-2">
-                  <Label>Username</Label>
-                  <Input required value={createForm.username} onChange={(e) => setCreateForm({ ...createForm, username: e.target.value })} />
-                </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label>First Name</Label>
@@ -164,6 +189,34 @@ export default function UsersPage() {
             </DialogContent>
           </Dialog>
         </div>
+
+        {/* Invite code */}
+        <Card>
+          <CardContent className="flex flex-wrap items-center justify-between gap-4 pt-6">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
+                <Ticket className="h-5 w-5 text-blue-600" />
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-900">Company invite code</p>
+                <p className="text-xs text-gray-500">
+                  Share this code so new members can join {company?.name ?? 'your company'} as technicians.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="rounded-md border bg-gray-50 px-3 py-1.5 font-mono text-sm font-semibold tracking-wider">
+                {company?.invite_code ?? '...'}
+              </span>
+              <Button variant="outline" size="sm" onClick={copyInvite} disabled={!company?.invite_code}>
+                <Copy className="mr-1 h-3 w-3" />Copy
+              </Button>
+              <Button variant="outline" size="sm" onClick={regenerateInvite} disabled={regenerating}>
+                <RefreshCw className={`mr-1 h-3 w-3 ${regenerating ? 'animate-spin' : ''}`} />Regenerate
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Filters */}
         <Card>

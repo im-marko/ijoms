@@ -8,6 +8,19 @@ class JobCategorySerializer(serializers.ModelSerializer):
         model = JobCategory
         fields = ['id', 'name', 'sla_hours', 'description', 'is_active']
 
+    def validate_name(self, value):
+        # company is injected by the view at save time, so the unique
+        # (company, name) constraint must be validated here by hand.
+        request = self.context.get('request')
+        company = getattr(getattr(request, 'user', None), 'company', None)
+        if company is not None:
+            qs = JobCategory.objects.filter(company=company, name__iexact=value.strip())
+            if self.instance is not None:
+                qs = qs.exclude(pk=self.instance.pk)
+            if qs.exists():
+                raise serializers.ValidationError('A category with this name already exists.')
+        return value
+
 
 class JobStatusHistorySerializer(serializers.ModelSerializer):
     changed_by_detail = UserSerializer(source='changed_by', read_only=True)
@@ -83,15 +96,22 @@ class JobDetailSerializer(serializers.ModelSerializer):
         return transitions
 
 
-def _active_technicians():
-    from django.contrib.auth import get_user_model
-    return get_user_model().objects.filter(role='technician', is_active=True)
+class ActiveTechnicianField(serializers.PrimaryKeyRelatedField):
+    """Resolves technician pks within the requesting user's company only."""
+
+    def get_queryset(self):
+        from django.contrib.auth import get_user_model
+        request = self.context.get('request')
+        company_id = getattr(getattr(request, 'user', None), 'company_id', None)
+        if company_id is None:
+            return get_user_model().objects.none()
+        return get_user_model().objects.filter(
+            company_id=company_id, role='technician', is_active=True,
+        )
 
 
 class JobCreateSerializer(serializers.ModelSerializer):
-    assigned_to = serializers.PrimaryKeyRelatedField(
-        queryset=_active_technicians(), required=False, allow_null=True,
-    )
+    assigned_to = ActiveTechnicianField(required=False, allow_null=True)
 
     class Meta:
         model = Job
@@ -103,6 +123,7 @@ class JobCreateSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         request_user = self.context['request'].user
         validated_data['created_by'] = request_user
+        validated_data['company'] = request_user.company
         job = Job.objects.create(**validated_data)
         if job.assigned_to:
             job.status = Job.Status.ASSIGNED
@@ -132,10 +153,8 @@ class JobUpdateSerializer(serializers.ModelSerializer):
 class JobStatusUpdateSerializer(serializers.Serializer):
     status = serializers.ChoiceField(choices=Job.Status.choices)
     notes = serializers.CharField(required=False, allow_blank=True, default='')
-    assigned_to = serializers.PrimaryKeyRelatedField(
-        queryset=_active_technicians(), required=False, allow_null=True,
-    )
+    assigned_to = ActiveTechnicianField(required=False, allow_null=True)
 
 
 class JobAssignSerializer(serializers.Serializer):
-    assigned_to = serializers.PrimaryKeyRelatedField(queryset=_active_technicians())
+    assigned_to = ActiveTechnicianField()

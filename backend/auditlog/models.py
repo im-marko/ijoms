@@ -14,6 +14,10 @@ class AuditLog(models.Model):
         ESCALATION = 'escalation', 'Escalation'
         REASSIGNMENT = 'reassignment', 'Reassignment'
 
+    company = models.ForeignKey(
+        'accounts.Company', on_delete=models.SET_NULL,
+        null=True, blank=True, related_name='audit_logs',
+    )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.SET_NULL,
         null=True, blank=True, related_name='audit_logs'
@@ -32,6 +36,7 @@ class AuditLog(models.Model):
             models.Index(fields=['entity_type', 'entity_id']),
             models.Index(fields=['user', 'created_at']),
             models.Index(fields=['action']),
+            models.Index(fields=['company', 'created_at']),
         ]
 
     def __str__(self):

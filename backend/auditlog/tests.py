@@ -4,35 +4,30 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 from rest_framework.test import APITestCase
 
+from accounts.test_utils import make_company, make_user
 from .mixins import log_action
 from .models import AuditLog
 
 User = get_user_model()
 
-PASSWORD = 'Compl3x!Passw0rd'
-
-
-def make_user(role, email, username):
-    return User.objects.create_user(
-        username=username, email=email, password=PASSWORD, role=role,
-        first_name=username.capitalize(), last_name='User',
-    )
-
 
 class AuditLogAPITests(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.om = make_user('operations_manager', 'om@example.com', 'om')
-        cls.technician = make_user('technician', 'tech@example.com', 'tech')
+        cls.company = make_company('Audit TestCo')
+        cls.om = make_user('operations_manager', 'om@example.com', 'om', company=cls.company)
+        cls.technician = make_user('technician', 'tech@example.com', 'tech', company=cls.company)
         AuditLog.objects.create(
-            user=cls.om, action='create', entity_type='Job', entity_id='1'
+            company=cls.company, user=cls.om, action='create',
+            entity_type='Job', entity_id='1',
         )
         AuditLog.objects.create(
-            user=cls.om, action='update', entity_type='Job', entity_id='1'
+            company=cls.company, user=cls.om, action='update',
+            entity_type='Job', entity_id='1',
         )
         AuditLog.objects.create(
-            user=cls.technician, action='login', entity_type='User',
-            entity_id=str(cls.technician.pk),
+            company=cls.company, user=cls.technician, action='login',
+            entity_type='User', entity_id=str(cls.technician.pk),
         )
 
     def test_list_as_operations_manager(self):
@@ -58,8 +53,9 @@ class AuditLogAPITests(APITestCase):
 class LogActionSerializationTests(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.om = make_user('operations_manager', 'om2@example.com', 'om2')
-        cls.technician = make_user('technician', 'tech2@example.com', 'tech2')
+        cls.company = make_company('Audit TestCo 2')
+        cls.om = make_user('operations_manager', 'om2@example.com', 'om2', company=cls.company)
+        cls.technician = make_user('technician', 'tech2@example.com', 'tech2', company=cls.company)
 
     def test_log_action_coerces_model_instances_and_datetimes(self):
         now = timezone.now()

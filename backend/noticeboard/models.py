@@ -9,6 +9,9 @@ class Notice(models.Model):
         HIGH = 'high', 'High'
         CRITICAL = 'critical', 'Critical'
 
+    company = models.ForeignKey(
+        'accounts.Company', on_delete=models.CASCADE, related_name='notices',
+    )
     title = models.CharField(max_length=255)
     content = models.TextField()
     priority = models.CharField(max_length=10, choices=Priority.choices, default=Priority.MEDIUM)

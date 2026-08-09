@@ -1,59 +1,23 @@
-import copy
-
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.test import override_settings
 from rest_framework.test import APITestCase
 
 from auditlog.models import AuditLog
+from .test_utils import PASSWORD, TEST_REST_FRAMEWORK, make_company, make_user
 
 User = get_user_model()
-
-PASSWORD = 'Compl3x!Passw0rd'
-
-# Relax the login/register scoped throttles so test runs never trip them
-# (throttle history lives in the default cache, which survives across tests).
-TEST_REST_FRAMEWORK = copy.deepcopy(settings.REST_FRAMEWORK)
-TEST_REST_FRAMEWORK['DEFAULT_THROTTLE_RATES'] = {
-    'login': '1000/min',
-    'register': '1000/hour',
-}
-
-
-def make_user(role, email, username, **extra):
-    return User.objects.create_user(
-        username=username, email=email, password=PASSWORD, role=role,
-        first_name=username.capitalize(), last_name='User', **extra,
-    )
 
 
 @override_settings(REST_FRAMEWORK=TEST_REST_FRAMEWORK)
 class AccountsAPITests(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.md = make_user('admin', 'md@example.com', 'md')
-        cls.om = make_user('operations_manager', 'om@example.com', 'om')
-        cls.supervisor = make_user('supervisor', 'sup@example.com', 'sup')
-        cls.technician = make_user('technician', 'tech@example.com', 'tech')
-        cls.finance = make_user('finance_officer', 'fin@example.com', 'fin')
-
-    # ------------------------------------------------------------------
-    # Registration
-    # ------------------------------------------------------------------
-    def test_register_forces_technician_role(self):
-        payload = {
-            'email': 'newguy@example.com',
-            'username': 'newguy',
-            'first_name': 'New',
-            'last_name': 'Guy',
-            'password': PASSWORD,
-            'password_confirm': PASSWORD,
-            'role': 'admin',  # must be ignored
-        }
-        response = self.client.post('/api/auth/register/', payload)
-        self.assertEqual(response.status_code, 201, response.data)
-        user = User.objects.get(email='newguy@example.com')
-        self.assertEqual(user.role, 'technician')
+        cls.company = make_company('Acme Services')
+        cls.md = make_user('admin', 'md@example.com', 'md', company=cls.company)
+        cls.om = make_user('operations_manager', 'om@example.com', 'om', company=cls.company)
+        cls.supervisor = make_user('supervisor', 'sup@example.com', 'sup', company=cls.company)
+        cls.technician = make_user('technician', 'tech@example.com', 'tech', company=cls.company)
+        cls.finance = make_user('finance_officer', 'fin@example.com', 'fin', company=cls.company)
 
     # ------------------------------------------------------------------
     # Self-service profile (/me/)
@@ -71,6 +35,14 @@ class AccountsAPITests(APITestCase):
         self.assertEqual(self.technician.first_name, 'Updated')
         self.assertEqual(self.technician.phone, '0771234567')
 
+    def test_me_includes_company_and_password_flags(self):
+        self.client.force_authenticate(self.technician)
+        response = self.client.get('/api/auth/me/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data['company'], self.company.pk)
+        self.assertEqual(response.data['company_name'], self.company.name)
+        self.assertTrue(response.data['has_usable_password'])
+
     # ------------------------------------------------------------------
     # Admin user management
     # ------------------------------------------------------------------
@@ -87,6 +59,7 @@ class AccountsAPITests(APITestCase):
         self.assertEqual(response.status_code, 201, response.data)
         user = User.objects.get(email='newsup@example.com')
         self.assertEqual(user.role, 'supervisor')
+        self.assertEqual(user.company, self.company)
         self.assertTrue(user.check_password(PASSWORD))
 
     def test_non_md_cannot_create_user(self):

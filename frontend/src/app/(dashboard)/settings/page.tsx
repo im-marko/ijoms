@@ -14,7 +14,7 @@ import { toast } from 'sonner';
 export default function SettingsPage() {
   const { refreshUser } = useAuth();
   const [me, setMe] = useState<User | null>(null);
-  const [profile, setProfile] = useState({ first_name: '', last_name: '', username: '', phone: '' });
+  const [profile, setProfile] = useState({ first_name: '', last_name: '', phone: '' });
   const [savingProfile, setSavingProfile] = useState(false);
 
   const [passwords, setPasswords] = useState({ old_password: '', new_password: '', confirm_password: '' });
@@ -28,7 +28,6 @@ export default function SettingsPage() {
         setProfile({
           first_name: res.data.first_name,
           last_name: res.data.last_name,
-          username: res.data.username,
           phone: res.data.phone,
         });
       } catch (err) {
@@ -85,13 +84,17 @@ export default function SettingsPage() {
           <form onSubmit={handleSaveProfile} className="max-w-lg space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Email</Label>
-                <Input disabled value={me?.email || ''} />
+                <Label>Company</Label>
+                <Input disabled value={me?.company_name || '-'} />
               </div>
               <div className="space-y-2">
                 <Label>Role</Label>
                 <Input disabled value={me ? ROLE_LABELS[me.role] || me.role : ''} />
               </div>
+            </div>
+            <div className="space-y-2">
+              <Label>Email</Label>
+              <Input disabled value={me?.email || ''} />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -103,22 +106,26 @@ export default function SettingsPage() {
                 <Input required value={profile.last_name} onChange={(e) => setProfile({ ...profile, last_name: e.target.value })} />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>Username</Label>
-                <Input required value={profile.username} onChange={(e) => setProfile({ ...profile, username: e.target.value })} />
-              </div>
-              <div className="space-y-2">
-                <Label>Phone</Label>
-                <Input value={profile.phone} onChange={(e) => setProfile({ ...profile, phone: e.target.value })} />
-              </div>
+            <div className="space-y-2">
+              <Label>Phone</Label>
+              <Input value={profile.phone} onChange={(e) => setProfile({ ...profile, phone: e.target.value })} />
             </div>
             <Button type="submit" disabled={savingProfile}>{savingProfile ? 'Saving...' : 'Save Changes'}</Button>
           </form>
         </CardContent>
       </Card>
 
-      {/* Change password */}
+      {/* Change password (hidden for Google-only accounts) */}
+      {me?.has_usable_password === false ? (
+        <Card>
+          <CardHeader><CardTitle>Password</CardTitle></CardHeader>
+          <CardContent>
+            <p className="text-sm text-gray-500">
+              You sign in with Google, so there&apos;s no password to manage here.
+            </p>
+          </CardContent>
+        </Card>
+      ) : (
       <Card>
         <CardHeader><CardTitle>Change Password</CardTitle></CardHeader>
         <CardContent>
@@ -141,6 +148,7 @@ export default function SettingsPage() {
           </form>
         </CardContent>
       </Card>
+      )}
     </div>
   );
 }

@@ -18,13 +18,16 @@ def _json_safe(data):
     return json.loads(json.dumps(data, cls=DjangoJSONEncoder, default=str))
 
 
-def log_action(user, action, entity_type, entity_id='', changes=None, request=None):
+def log_action(user, action, entity_type, entity_id='', changes=None, request=None, company=None):
+    if company is None and user is not None:
+        company = user.company
     ip = ''
     user_agent = ''
     if request:
         ip = request.META.get('REMOTE_ADDR', '')
         user_agent = request.META.get('HTTP_USER_AGENT', '')
     AuditLog.objects.create(
+        company=company,
         user=user,
         action=action,
         entity_type=entity_type,

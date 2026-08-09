@@ -9,6 +9,7 @@ interface AuthContextType {
   user: User | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
+  loginWithTokens: (access: string, refresh: string) => Promise<void>;
   logout: () => void;
   refreshUser: () => Promise<void>;
 }
@@ -43,12 +44,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     refreshUser();
   }, []);
 
-  const login = async (email: string, password: string) => {
-    const res = await api.post('/auth/login/', { email, password });
-    localStorage.setItem('access_token', res.data.access);
-    localStorage.setItem('refresh_token', res.data.refresh);
+  const loginWithTokens = async (access: string, refresh: string) => {
+    localStorage.setItem('access_token', access);
+    localStorage.setItem('refresh_token', refresh);
     await refreshUser();
     router.push('/dashboard');
+  };
+
+  const login = async (email: string, password: string) => {
+    const res = await api.post('/auth/login/', { email, password });
+    await loginWithTokens(res.data.access, res.data.refresh);
   };
 
   const logout = () => {
@@ -59,7 +64,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout, refreshUser }}>
+    <AuthContext.Provider value={{ user, loading, login, loginWithTokens, logout, refreshUser }}>
       {children}
     </AuthContext.Provider>
   );

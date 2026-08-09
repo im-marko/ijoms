@@ -7,14 +7,24 @@ from accounts.permissions import IsManagerOrAbove, IsSupervisorOrAbove
 from . import services
 
 
+EMPTY_SUMMARY = {
+    'job_summary': {'total': 0, 'by_status': {}, 'by_priority': {}},
+    'sla_compliance': {'total_closed': 0, 'met_sla': 0, 'breached_sla': 0,
+                       'compliance_rate': 0, 'open_breached': 0},
+}
+
+
 class DashboardSummaryView(APIView):
     """Open to all roles; technicians see stats for their own jobs only."""
 
     def get(self, request):
+        company = request.user.company
+        if company is None:
+            return Response(EMPTY_SUMMARY)
         scope = request.user if request.user.role == 'technician' else None
         return Response({
-            'job_summary': services.get_job_summary(assigned_to=scope),
-            'sla_compliance': services.get_sla_compliance(assigned_to=scope),
+            'job_summary': services.get_job_summary(assigned_to=scope, company=company),
+            'sla_compliance': services.get_sla_compliance(assigned_to=scope, company=company),
         })
 
 
@@ -22,7 +32,9 @@ class TechnicianPerformanceView(APIView):
     permission_classes = [IsManagerOrAbove]
 
     def get(self, request):
-        return Response(services.get_technician_performance())
+        if request.user.company is None:
+            return Response([])
+        return Response(services.get_technician_performance(company=request.user.company))
 
 
 def _int_param(request, name, default, lo=1, hi=365):
@@ -41,7 +53,9 @@ class JobVolumeView(APIView):
         if period not in ('daily', 'weekly', 'monthly'):
             period = 'daily'
         days = _int_param(request, 'days', 30)
-        return Response(services.get_job_volume_over_time(period, days))
+        if request.user.company is None:
+            return Response([])
+        return Response(services.get_job_volume_over_time(period, days, company=request.user.company))
 
 
 class EscalationTrendsView(APIView):
@@ -49,7 +63,9 @@ class EscalationTrendsView(APIView):
 
     def get(self, request):
         days = _int_param(request, 'days', 90)
-        return Response(services.get_escalation_trends(days))
+        if request.user.company is None:
+            return Response([])
+        return Response(services.get_escalation_trends(days, company=request.user.company))
 
 
 class ExportJobsCSVView(APIView):
@@ -64,7 +80,12 @@ class ExportJobsCSVView(APIView):
             'Reference', 'Title', 'Category', 'Priority', 'Status',
             'Assigned To', 'Customer', 'SLA Deadline', 'Created', 'Closed',
         ])
-        jobs = Job.objects.select_related('category', 'assigned_to').all()
+        if request.user.company_id is None:
+            jobs = Job.objects.none()
+        else:
+            jobs = Job.objects.select_related('category', 'assigned_to').filter(
+                company_id=request.user.company_id,
+            )
 
         status_filter = request.query_params.get('status')
         if status_filter:

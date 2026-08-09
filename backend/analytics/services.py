@@ -6,9 +6,12 @@ from django.utils import timezone
 from jobs.models import Job, JobStatusHistory
 
 
-def get_job_summary(assigned_to=None):
-    """Counts of jobs by status and priority, optionally scoped to one assignee."""
+def get_job_summary(assigned_to=None, company=None):
+    """Counts of jobs by status and priority, scoped to a company and
+    optionally one assignee."""
     qs = Job.objects.all()
+    if company is not None:
+        qs = qs.filter(company=company)
     if assigned_to is not None:
         qs = qs.filter(assigned_to=assigned_to)
     by_status = dict(
@@ -20,9 +23,11 @@ def get_job_summary(assigned_to=None):
     return {'total': qs.count(), 'by_status': by_status, 'by_priority': by_priority}
 
 
-def get_sla_compliance(assigned_to=None):
+def get_sla_compliance(assigned_to=None, company=None):
     """Percentage of closed jobs that met SLA, plus open jobs currently past deadline."""
     base = Job.objects.all()
+    if company is not None:
+        base = base.filter(company=company)
     if assigned_to is not None:
         base = base.filter(assigned_to=assigned_to)
     open_breached = (
@@ -47,14 +52,17 @@ def get_sla_compliance(assigned_to=None):
     }
 
 
-def get_technician_performance():
+def get_technician_performance(company=None):
     """Jobs per technician with avg resolution time."""
     from django.contrib.auth import get_user_model
     from django.db.models import DurationField, ExpressionWrapper
     User = get_user_model()
     closed_q = Q(assigned_jobs__status='closed', assigned_jobs__closed_at__isnull=False)
+    tech_qs = User.objects.filter(role='technician', is_active=True)
+    if company is not None:
+        tech_qs = tech_qs.filter(company=company)
     technicians = (
-        User.objects.filter(role='technician', is_active=True)
+        tech_qs
         .annotate(
             total_jobs=Count('assigned_jobs'),
             completed=Count('assigned_jobs', filter=closed_q),
@@ -87,10 +95,12 @@ def get_technician_performance():
     ]
 
 
-def get_job_volume_over_time(period='daily', days=30):
+def get_job_volume_over_time(period='daily', days=30, company=None):
     """Job creation volume grouped by day/week/month."""
     since = timezone.now() - timedelta(days=days)
     qs = Job.objects.filter(created_at__gte=since)
+    if company is not None:
+        qs = qs.filter(company=company)
 
     trunc_fn = {'daily': TruncDate, 'weekly': TruncWeek, 'monthly': TruncMonth}.get(period, TruncDate)
     data = (
@@ -102,11 +112,14 @@ def get_job_volume_over_time(period='daily', days=30):
     return list(data)
 
 
-def get_escalation_trends(days=90):
+def get_escalation_trends(days=90, company=None):
     """Escalation counts over time."""
     since = timezone.now() - timedelta(days=days)
+    qs = JobStatusHistory.objects.filter(to_status='escalated', created_at__gte=since)
+    if company is not None:
+        qs = qs.filter(job__company=company)
     data = (
-        JobStatusHistory.objects.filter(to_status='escalated', created_at__gte=since)
+        qs
         .annotate(date=TruncDate('created_at'))
         .values('date')
         .annotate(count=Count('id'))

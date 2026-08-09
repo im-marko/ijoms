@@ -112,6 +112,7 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         'login': '20/min',
         'register': '10/hour',
+        'google': '20/min',
     },
 }
 
@@ -160,6 +161,9 @@ WHATSAPP_TEMPLATE_LANGUAGE = os.environ.get('WHATSAPP_TEMPLATE_LANGUAGE', 'en_US
 
 # Shared secret for the production SLA cron endpoint (/api/jobs/run-sla-check/)
 CRON_SECRET = os.environ.get('CRON_SECRET', '')
+
+# Google Identity Services (sign-in with Google)
+GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID', '')
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'

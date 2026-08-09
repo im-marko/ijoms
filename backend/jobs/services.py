@@ -14,22 +14,26 @@ ESCALATABLE_STATUSES = [Job.Status.OPEN, Job.Status.ASSIGNED, Job.Status.IN_PROG
 def escalate_overdue_jobs():
     """Escalate every non-closed job past its SLA deadline.
 
-    Returns the list of escalated jobs. Runs as the system (changed_by=None).
+    Notifications stay strictly within each job's company. Returns the list
+    of escalated jobs. Runs as the system (changed_by=None).
     """
     User = get_user_model()
-    overdue = (
+    overdue = list(
         Job.objects.filter(
             status__in=ESCALATABLE_STATUSES,
             sla_deadline__lt=timezone.now(),
         )
-        .select_related('assigned_to', 'created_by', 'category')
+        .select_related('assigned_to', 'created_by', 'category', 'company')
     )
 
-    managers = list(
-        User.objects.filter(
-            role__in=['operations_manager', 'supervisor'], is_active=True,
-        )
-    )
+    # One query for every affected company's managers, grouped by company.
+    company_ids = {job.company_id for job in overdue}
+    managers_by_company = {}
+    for manager in User.objects.filter(
+        role__in=['operations_manager', 'supervisor'],
+        is_active=True, company_id__in=company_ids,
+    ):
+        managers_by_company.setdefault(manager.company_id, []).append(manager)
 
     escalated = []
     for job in overdue:
@@ -46,10 +50,11 @@ def escalate_overdue_jobs():
             entity_id=job.pk,
             changes={'from': old_status, 'to': Job.Status.ESCALATED.value,
                      'reason': 'SLA deadline breached'},
+            company=job.company,
         )
 
         from notifications.services import notify_job_escalated
-        recipients = set(managers)
+        recipients = set(managers_by_company.get(job.company_id, []))
         if job.assigned_to:
             recipients.add(job.assigned_to)
         if job.created_by:

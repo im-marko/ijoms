@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 
 from accounts.permissions import CanViewJobs, CanManageJobs, IsSupervisorOrAbove
 from auditlog.mixins import AuditMixin, log_action
+from ijoms.tenancy import CompanyScopedQuerysetMixin
 from .models import Job, JobCategory, JobStatusHistory
 from .serializers import (
     JobListSerializer, JobDetailSerializer, JobCreateSerializer,
@@ -16,7 +17,7 @@ from .filters import JobFilter
 User = get_user_model()
 
 
-class JobCategoryListCreateView(AuditMixin, generics.ListCreateAPIView):
+class JobCategoryListCreateView(CompanyScopedQuerysetMixin, AuditMixin, generics.ListCreateAPIView):
     queryset = JobCategory.objects.all()
     serializer_class = JobCategorySerializer
     audit_entity_type = 'JobCategory'
@@ -26,16 +27,26 @@ class JobCategoryListCreateView(AuditMixin, generics.ListCreateAPIView):
             return [CanViewJobs()]
         return [IsSupervisorOrAbove()]
 
+    def perform_create(self, serializer):
+        instance = serializer.save(company=self.request.user.company)
+        log_action(
+            user=self.request.user, action='create', entity_type='JobCategory',
+            entity_id=instance.pk, changes=serializer.validated_data,
+            request=self.request,
+        )
+        return instance
 
-class JobListView(generics.ListAPIView):
+
+class JobListView(CompanyScopedQuerysetMixin, generics.ListAPIView):
     serializer_class = JobListSerializer
     permission_classes = [CanViewJobs]
     filterset_class = JobFilter
     search_fields = ['title', 'reference_number', 'customer_name', 'description']
     ordering_fields = ['created_at', 'priority', 'status', 'sla_deadline']
+    queryset = Job.objects.select_related('category', 'assigned_to', 'created_by')
 
     def get_queryset(self):
-        qs = Job.objects.select_related('category', 'assigned_to', 'created_by')
+        qs = super().get_queryset()
         if self.request.user.role == 'technician':
             qs = qs.filter(assigned_to=self.request.user)
         return qs
@@ -47,9 +58,10 @@ class JobCreateView(AuditMixin, generics.CreateAPIView):
     audit_entity_type = 'Job'
 
 
-class JobDetailView(AuditMixin, generics.RetrieveUpdateAPIView):
+class JobDetailView(CompanyScopedQuerysetMixin, AuditMixin, generics.RetrieveUpdateAPIView):
     serializer_class = JobDetailSerializer
     audit_entity_type = 'Job'
+    queryset = Job.objects.select_related('category', 'assigned_to', 'created_by').prefetch_related('status_history')
 
     def get_permissions(self):
         if self.request.method in ('PUT', 'PATCH'):
@@ -62,7 +74,7 @@ class JobDetailView(AuditMixin, generics.RetrieveUpdateAPIView):
         return JobDetailSerializer
 
     def get_queryset(self):
-        qs = Job.objects.select_related('category', 'assigned_to', 'created_by').prefetch_related('status_history')
+        qs = super().get_queryset()
         if self.request.user.role == 'technician':
             qs = qs.filter(assigned_to=self.request.user)
         return qs
@@ -79,7 +91,7 @@ class JobStatusUpdateView(APIView):
 
     def post(self, request, pk):
         try:
-            job = Job.objects.get(pk=pk)
+            job = Job.objects.filter(company_id=request.user.company_id).get(pk=pk)
         except Job.DoesNotExist:
             return Response({'detail': 'Job not found.'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -87,7 +99,7 @@ class JobStatusUpdateView(APIView):
         if request.user.role == 'technician' and job.assigned_to != request.user:
             return Response({'detail': 'Not authorized.'}, status=status.HTTP_403_FORBIDDEN)
 
-        serializer = JobStatusUpdateSerializer(data=request.data)
+        serializer = JobStatusUpdateSerializer(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
 
         new_status = serializer.validated_data['status']
@@ -163,10 +175,11 @@ class RunSlaCheckView(APIView):
             return Response({'detail': 'Forbidden.'}, status=status.HTTP_403_FORBIDDEN)
         from .services import escalate_overdue_jobs
         escalated = escalate_overdue_jobs()
-        return Response({
-            'escalated': len(escalated),
-            'references': [j.reference_number for j in escalated],
-        })
+        by_company = {}
+        for job in escalated:
+            slug = job.company.slug if job.company_id else 'unknown'
+            by_company[slug] = by_company.get(slug, 0) + 1
+        return Response({'escalated': len(escalated), 'by_company': by_company})
 
 
 class JobAssignView(APIView):
@@ -175,11 +188,11 @@ class JobAssignView(APIView):
 
     def post(self, request, pk):
         try:
-            job = Job.objects.get(pk=pk)
+            job = Job.objects.filter(company_id=request.user.company_id).get(pk=pk)
         except Job.DoesNotExist:
             return Response({'detail': 'Job not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-        serializer = JobAssignSerializer(data=request.data)
+        serializer = JobAssignSerializer(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         technician = serializer.validated_data['assigned_to']
 

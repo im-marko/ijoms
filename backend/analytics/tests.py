@@ -1,33 +1,28 @@
 from django.contrib.auth import get_user_model
 from rest_framework.test import APITestCase
 
+from accounts.test_utils import make_company, make_user
 from jobs.models import Job, JobCategory
 
 User = get_user_model()
-
-PASSWORD = 'Compl3x!Passw0rd'
-
-
-def make_user(role, email, username):
-    return User.objects.create_user(
-        username=username, email=email, password=PASSWORD, role=role,
-        first_name=username.capitalize(), last_name='User',
-    )
 
 
 class AnalyticsAPITests(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.om = make_user('operations_manager', 'om@example.com', 'om')
-        cls.supervisor = make_user('supervisor', 'sup@example.com', 'sup')
-        cls.technician = make_user('technician', 'tech@example.com', 'tech')
-        cls.technician2 = make_user('technician', 'tech2@example.com', 'tech2')
-        cls.category = JobCategory.objects.create(name='Electrical', sla_hours=24)
+        cls.company = make_company('Analytics TestCo')
+        cls.om = make_user('operations_manager', 'om@example.com', 'om', company=cls.company)
+        cls.supervisor = make_user('supervisor', 'sup@example.com', 'sup', company=cls.company)
+        cls.technician = make_user('technician', 'tech@example.com', 'tech', company=cls.company)
+        cls.technician2 = make_user('technician', 'tech2@example.com', 'tech2', company=cls.company)
+        cls.category = JobCategory.objects.create(
+            company=cls.company, name='Electrical', sla_hours=24,
+        )
 
         def job(title, **kw):
             defaults = dict(
-                title=title, description='d', category=cls.category,
-                created_by=cls.om, customer_name='Acme',
+                company=cls.company, title=title, description='d',
+                category=cls.category, created_by=cls.om, customer_name='Acme',
             )
             defaults.update(kw)
             return Job.objects.create(**defaults)

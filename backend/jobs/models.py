@@ -5,7 +5,10 @@ from django.utils import timezone
 
 
 class JobCategory(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    company = models.ForeignKey(
+        'accounts.Company', on_delete=models.CASCADE, related_name='job_categories',
+    )
+    name = models.CharField(max_length=100)
     sla_hours = models.PositiveIntegerField(help_text='SLA deadline in hours')
     description = models.TextField(blank=True)
     is_active = models.BooleanField(default=True)
@@ -14,6 +17,9 @@ class JobCategory(models.Model):
     class Meta:
         verbose_name_plural = 'Job categories'
         ordering = ['name']
+        constraints = [
+            models.UniqueConstraint(fields=['company', 'name'], name='uniq_category_per_company'),
+        ]
 
     def __str__(self):
         return self.name
@@ -42,6 +48,9 @@ class Job(models.Model):
         Status.CLOSED: [Status.OPEN],
     }
 
+    company = models.ForeignKey(
+        'accounts.Company', on_delete=models.CASCADE, related_name='jobs',
+    )
     reference_number = models.CharField(max_length=20, unique=True, editable=False)
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -67,8 +76,8 @@ class Job(models.Model):
     class Meta:
         ordering = ['-created_at']
         indexes = [
-            models.Index(fields=['status', 'priority']),
-            models.Index(fields=['assigned_to', 'status']),
+            models.Index(fields=['company', 'status', 'priority']),
+            models.Index(fields=['company', 'assigned_to', 'status']),
             models.Index(fields=['sla_deadline']),
         ]
 

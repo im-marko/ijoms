@@ -2,6 +2,18 @@
 
 A centralized web platform for managing operational jobs, assigning technicians, tracking customer data, and delivering analytics for data-driven decisions.
 
+## Live deployment
+
+| Piece | URL |
+|---|---|
+| **Frontend (Next.js)** | [ijoms.vercel.app](https://ijoms.vercel.app) |
+| **Backend API (Django)** | [ijoms-backend.vercel.app](https://ijoms-backend.vercel.app) |
+
+Both are deployed on Vercel. Sign in on the frontend with any demo account
+listed under [Demo Accounts](#demo-accounts) (password `Test@1234`). The
+backend serves the REST API only (endpoints under `/api/…`, JWT-protected) —
+there is no browsable page at its root.
+
 ## Tech Stack
 
 | Layer | Technology |

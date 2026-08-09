@@ -9,6 +9,17 @@ export interface User {
   phone: string;
   is_active: boolean;
   date_joined: string;
+  company: number | null;
+  company_name: string | null;
+  has_usable_password?: boolean;
+}
+
+export interface Company {
+  id: number;
+  name: string;
+  slug: string;
+  created_at: string;
+  invite_code: string | null;
 }
 
 export type UserRole =

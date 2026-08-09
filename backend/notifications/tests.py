@@ -4,26 +4,19 @@ from django.contrib.auth import get_user_model
 from django.test import override_settings
 from rest_framework.test import APITestCase
 
+from accounts.test_utils import make_company, make_user
 from .models import Notification
 from .services import send_whatsapp_notification
 
 User = get_user_model()
 
-PASSWORD = 'Compl3x!Passw0rd'
-
-
-def make_user(role, email, username, **extra):
-    return User.objects.create_user(
-        username=username, email=email, password=PASSWORD, role=role,
-        first_name=username.capitalize(), last_name='User', **extra,
-    )
-
 
 class NotificationAPITests(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.technician = make_user('technician', 'tech@example.com', 'tech')
-        cls.other = make_user('technician', 'other@example.com', 'other')
+        cls.company = make_company('Notify TestCo')
+        cls.technician = make_user('technician', 'tech@example.com', 'tech', company=cls.company)
+        cls.other = make_user('technician', 'other@example.com', 'other', company=cls.company)
         cls.mine1 = Notification.objects.create(
             recipient=cls.technician, type='in_app', subject='Mine 1',
             message='m', status='sent',
@@ -73,8 +66,10 @@ class NotificationAPITests(APITestCase):
 class WhatsAppServiceTests(APITestCase):
     @classmethod
     def setUpTestData(cls):
+        cls.company = make_company('WA TestCo')
         cls.recipient = make_user(
-            'technician', 'wa@example.com', 'wa', phone='+263 77 123 4567'
+            'technician', 'wa@example.com', 'wa', company=cls.company,
+            phone='+263 77 123 4567',
         )
 
     @override_settings(WHATSAPP_ENABLED=False)

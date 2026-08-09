@@ -31,8 +31,15 @@ export default function Sidebar() {
   return (
     <aside className="flex h-screen w-64 flex-col border-r bg-white">
       <div className="flex h-16 items-center gap-2 border-b px-6">
-        <Briefcase className="h-6 w-6 text-blue-600" />
-        <span className="text-xl font-bold text-blue-600">iJOMS</span>
+        <Briefcase className="h-6 w-6 shrink-0 text-blue-600" />
+        {user.company_name ? (
+          <div className="min-w-0">
+            <p className="truncate text-base font-bold leading-tight text-blue-600">{user.company_name}</p>
+            <p className="text-[10px] font-medium uppercase tracking-wider text-gray-400">iJOMS</p>
+          </div>
+        ) : (
+          <span className="text-xl font-bold text-blue-600">iJOMS</span>
+        )}
       </div>
 
       <nav className="flex-1 space-y-1 p-4">

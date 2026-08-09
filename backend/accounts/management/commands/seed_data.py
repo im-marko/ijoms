@@ -1,13 +1,15 @@
 """
-Seed the iJOMS database with realistic mock data.
-Usage: python manage.py seed_data
+Seed a company with realistic mock data.
+Usage: python manage.py seed_data [--company <slug>]
+Defaults to (creating) the Demo Company.
 """
 import random
 from datetime import timedelta
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 
+from accounts.models import Company
 from jobs.models import Job, JobCategory, JobStatusHistory
 from noticeboard.models import Notice
 from notifications.models import Notification
@@ -17,23 +19,36 @@ User = get_user_model()
 
 
 class Command(BaseCommand):
-    help = 'Seeds the database with mock data for development'
+    help = 'Seeds a company with mock data for development'
+
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--company', default='demo', metavar='SLUG',
+            help='Slug of the company to seed (default: demo, created if missing).',
+        )
 
     def handle(self, *args, **options):
-        self.stdout.write('Seeding iJOMS database...\n')
+        slug = options['company']
+        company = Company.objects.filter(slug=slug).first()
+        if company is None:
+            if slug != 'demo':
+                raise CommandError(f'Company with slug "{slug}" does not exist.')
+            company = Company.objects.create(name='Demo Company', slug='demo')
 
-        self._create_users()
-        self._create_categories()
-        self._create_jobs()
-        self._create_notices()
-        self._create_audit_logs()
+        self.stdout.write(f'Seeding company "{company.name}"...\n')
+
+        self._create_users(company)
+        self._create_categories(company)
+        self._create_jobs(company)
+        self._create_notices(company)
+        self._create_audit_logs(company)
 
         self.stdout.write(self.style.SUCCESS('\nDone! Mock data seeded successfully.'))
         self.stdout.write(self.style.SUCCESS('\nLogin credentials (all passwords: "Test@1234"):'))
-        for u in User.objects.all():
+        for u in User.objects.filter(company=company):
             self.stdout.write(f'  {u.email:<35} role: {u.get_role_display()}')
 
-    def _create_users(self):
+    def _create_users(self, company):
         self.stdout.write('  Creating users...')
         users_data = [
             {'email': 'director@ijoms.com', 'username': 'director', 'first_name': 'James',
@@ -59,31 +74,21 @@ class Command(BaseCommand):
         ]
         for data in users_data:
             if not User.objects.filter(email=data['email']).exists():
-                User.objects.create_user(password='Test@1234', **data)
+                User.objects.create_user(password='Test@1234', company=company, **data)
         self.stdout.write(self.style.SUCCESS(f'  {len(users_data)} users created'))
 
-    def _create_categories(self):
+    def _create_categories(self, company):
         self.stdout.write('  Creating job categories...')
-        categories = [
-            {'name': 'Network Installation', 'sla_hours': 48, 'description': 'New network infrastructure setup and cabling'},
-            {'name': 'Hardware Repair', 'sla_hours': 24, 'description': 'Repair of physical hardware components'},
-            {'name': 'Software Installation', 'sla_hours': 12, 'description': 'Installation and configuration of software systems'},
-            {'name': 'Preventive Maintenance', 'sla_hours': 72, 'description': 'Scheduled maintenance of equipment and systems'},
-            {'name': 'Emergency Repair', 'sla_hours': 4, 'description': 'Critical system failures requiring immediate attention'},
-            {'name': 'Security System', 'sla_hours': 24, 'description': 'CCTV, access control, and alarm system work'},
-            {'name': 'Server Maintenance', 'sla_hours': 8, 'description': 'Server hardware and OS maintenance tasks'},
-            {'name': 'Electrical Work', 'sla_hours': 36, 'description': 'Electrical installations and fault resolution'},
-        ]
-        for cat in categories:
-            JobCategory.objects.get_or_create(name=cat['name'], defaults=cat)
-        self.stdout.write(self.style.SUCCESS(f'  {len(categories)} categories created'))
+        from jobs.defaults import DEFAULT_CATEGORIES, create_default_categories
+        create_default_categories(company)
+        self.stdout.write(self.style.SUCCESS(f'  {len(DEFAULT_CATEGORIES)} categories created'))
 
-    def _create_jobs(self):
+    def _create_jobs(self, company):
         self.stdout.write('  Creating jobs...')
         now = timezone.now()
-        technicians = list(User.objects.filter(role='technician'))
-        supervisors = list(User.objects.filter(role__in=['operations_manager', 'supervisor']))
-        categories = list(JobCategory.objects.all())
+        technicians = list(User.objects.filter(company=company, role='technician'))
+        supervisors = list(User.objects.filter(company=company, role__in=['operations_manager', 'supervisor']))
+        categories = list(JobCategory.objects.filter(company=company))
 
         customers = [
             ('Nairobi Business Park', '+254711111111', 'admin@nbp.co.ke'),
@@ -195,6 +200,7 @@ class Command(BaseCommand):
                 ])
 
             job = Job(
+                company=company,
                 title=f'{title} - {customer[0]}',
                 description=f'Job requested by {customer[0]}. {cat.description}. '
                             f'Contact: {customer[1]}. Priority: {priority}.',
@@ -272,11 +278,11 @@ class Command(BaseCommand):
             )
             JobStatusHistory.objects.filter(pk=h.pk).update(created_at=tr['created_at'])
 
-    def _create_notices(self):
+    def _create_notices(self, company):
         self.stdout.write('  Creating notices...')
-        director = User.objects.filter(role='admin').first()
-        ops = User.objects.filter(role='operations_manager').first()
-        supervisor = User.objects.filter(role='supervisor').first()
+        director = User.objects.filter(company=company, role='admin').first()
+        ops = User.objects.filter(company=company, role='operations_manager').first()
+        supervisor = User.objects.filter(company=company, role='supervisor').first()
         now = timezone.now()
 
         notices = [
@@ -332,14 +338,14 @@ class Command(BaseCommand):
         ]
 
         for n in notices:
-            Notice.objects.get_or_create(title=n['title'], defaults=n)
+            Notice.objects.get_or_create(company=company, title=n['title'], defaults=n)
         self.stdout.write(self.style.SUCCESS(f'  {len(notices)} notices created'))
 
-    def _create_audit_logs(self):
+    def _create_audit_logs(self, company):
         self.stdout.write('  Creating audit log entries...')
         now = timezone.now()
-        users = list(User.objects.all())
-        jobs = list(Job.objects.all()[:30])
+        users = list(User.objects.filter(company=company))
+        jobs = list(Job.objects.filter(company=company)[:30])
 
         actions = [
             ('create', 'Job'), ('update', 'Job'), ('status_change', 'Job'),
@@ -368,6 +374,7 @@ class Command(BaseCommand):
                 entity_id = str(random.randint(1, 6))
 
             entries.append(AuditLog(
+                company=company,
                 user=user,
                 action=action,
                 entity_type=entity_type,
@@ -379,8 +386,8 @@ class Command(BaseCommand):
 
         AuditLog.objects.bulk_create(entries)
 
-        # Spread out created_at timestamps
-        logs = AuditLog.objects.order_by('-pk')[:80]
+        # Spread out created_at timestamps (scoped: never touch other companies' rows)
+        logs = AuditLog.objects.filter(company=company).order_by('-pk')[:80]
         for j, log in enumerate(logs):
             ts = now - timedelta(days=random.randint(0, 60), hours=random.randint(0, 23), minutes=random.randint(0, 59))
             AuditLog.objects.filter(pk=log.pk).update(created_at=ts)
